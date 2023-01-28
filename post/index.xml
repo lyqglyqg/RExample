@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on LYQG blog</title>
+    <link>https://lyqglyqg.github.io/blog/post/</link>
+    <description>Recent content in Posts on LYQG blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 27 Jan 2023 16:52:09 -0600</lastBuildDate><atom:link href="https://lyqglyqg.github.io/blog/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Helloworld</title>
+      <link>https://lyqglyqg.github.io/blog/post/helloworld/</link>
+      <pubDate>Fri, 27 Jan 2023 16:52:09 -0600</pubDate>
+      
+      <guid>https://lyqglyqg.github.io/blog/post/helloworld/</guid>
+      <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-R&#34; data-lang=&#34;R&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;function &lt;span style=&#34;color:#a6e22e&#34;&gt;helloWorld &lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello, World!&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;## This is the very first post!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
