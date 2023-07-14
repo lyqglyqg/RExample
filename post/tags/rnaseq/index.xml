@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RNAseq on LYQG blog</title>
+    <link>https://lyqglyqg.github.io/blog/tags/rnaseq/</link>
+    <description>Recent content in RNAseq on LYQG blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 18 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://lyqglyqg.github.io/blog/tags/rnaseq/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A osteoarthritis study using scRNAseq data</title>
+      <link>https://lyqglyqg.github.io/blog/post/osteoarthrisis/</link>
+      <pubDate>Sat, 18 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://lyqglyqg.github.io/blog/post/osteoarthrisis/</guid>
+      <description>&lt;p&gt;Synovial fibroblasts assume distinct functional identities and secrete R-spondin 2 to drive osteoarthritis&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>UMAP &amp; heatmap replication</title>
+      <link>https://lyqglyqg.github.io/blog/post/umap/</link>
+      <pubDate>Sun, 12 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://lyqglyqg.github.io/blog/post/umap/</guid>
+      <description>&lt;p&gt;Transcriptional proﬁling of mESC-derived tendon and ﬁbrocartilage cell fate switch&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

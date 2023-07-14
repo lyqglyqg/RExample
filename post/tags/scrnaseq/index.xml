@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>scRNAseq on LYQG blog</title>
+    <link>https://lyqglyqg.github.io/blog/tags/scrnaseq/</link>
+    <description>Recent content in scRNAseq on LYQG blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 27 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://lyqglyqg.github.io/blog/tags/scrnaseq/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A single-cell atlas of the multicellular ecosystem of primary and metastatic hepatocellular carcinoma</title>
+      <link>https://lyqglyqg.github.io/blog/post/hcc/</link>
+      <pubDate>Mon, 27 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://lyqglyqg.github.io/blog/post/hcc/</guid>
+      <description>&lt;p&gt;A single-cell atlas of the multicellular ecosystem of primary and metastatic hepatocellular carcinoma&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>scRNAseq analysis reveals Immune Cell Signatures in Alzheimer’s Disease</title>
+      <link>https://lyqglyqg.github.io/blog/post/immunead/</link>
+      <pubDate>Tue, 21 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://lyqglyqg.github.io/blog/post/immunead/</guid>
+      <description>&lt;p&gt;Single-Cell RNA Sequencing of Peripheral Blood Reveals Immune Cell Signatures in Alzheimer’s Disease&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
