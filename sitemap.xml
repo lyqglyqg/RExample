@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lyqglyqg.github.io/blog/post/wk11/</loc>
+    <lastmod>2023-07-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lyqglyqg.github.io/blog/about/</loc>
     <lastmod>2017-08-28T21:41:52+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -9,34 +16,239 @@
   </url>
   
   <url>
-    <loc>https://lyqglyqg.github.io/blog/post/helloworld/</loc>
-    <lastmod>2023-01-27T16:52:09-06:00</lastmod>
+    <loc>https://lyqglyqg.github.io/blog/tags/alzheimers-disease/</loc>
+    <lastmod>2023-07-14T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://lyqglyqg.github.io/blog/</loc>
-    <lastmod>2023-01-27T16:52:09-06:00</lastmod>
+    <loc>https://lyqglyqg.github.io/blog/categories/alzheimers-disease/</loc>
+    <lastmod>2023-07-14T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://lyqglyqg.github.io/blog/post/</loc>
-    <lastmod>2023-01-27T16:52:09-06:00</lastmod>
+    <loc>https://lyqglyqg.github.io/blog/tags/brain-connectome/</loc>
+    <lastmod>2023-07-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/categories/brain-connectome/</loc>
+    <lastmod>2023-07-14T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lyqglyqg.github.io/blog/categories/</loc>
+    <lastmod>2023-07-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/</loc>
+    <lastmod>2023-07-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/tags/positron-emission-tomography/</loc>
+    <lastmod>2023-07-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/categories/positron-emission-tomography/</loc>
+    <lastmod>2023-07-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/post/</loc>
+    <lastmod>2023-07-14T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lyqglyqg.github.io/blog/tags/</loc>
+    <lastmod>2023-07-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/post/hcc/</loc>
+    <lastmod>2023-02-27T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/categories/ahepatocellular-carcinoma/</loc>
+    <lastmod>2023-02-27T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/tags/hepatocellular-carcinoma/</loc>
+    <lastmod>2023-02-27T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/tags/r/</loc>
+    <lastmod>2023-02-27T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/categories/r/</loc>
+    <lastmod>2023-02-27T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/tags/scrnaseq/</loc>
+    <lastmod>2023-02-27T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/categories/scrnaseq/</loc>
+    <lastmod>2023-02-27T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/tags/immune-cell-signatures/</loc>
+    <lastmod>2023-02-21T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/categories/immune-cell-signatures/</loc>
+    <lastmod>2023-02-21T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/post/immunead/</loc>
+    <lastmod>2023-02-21T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/post/osteoarthrisis/</loc>
+    <lastmod>2023-02-18T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/tags/osteoarthritis/</loc>
+    <lastmod>2023-02-18T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/categories/osteoarthritis/</loc>
+    <lastmod>2023-02-18T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/tags/rnaseq/</loc>
+    <lastmod>2023-02-18T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/categories/rnaseq/</loc>
+    <lastmod>2023-02-18T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/tags/transcript-profile/</loc>
+    <lastmod>2023-02-12T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/categories/transcript-profile/</loc>
+    <lastmod>2023-02-12T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/post/umap/</loc>
+    <lastmod>2023-02-12T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/post/brainstat/</loc>
+    <lastmod>2023-02-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/tags/neuroimaing/</loc>
+    <lastmod>2023-02-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/categories/neuroimaing/</loc>
+    <lastmod>2023-02-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/tags/python/</loc>
+    <lastmod>2023-02-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/categories/python/</loc>
+    <lastmod>2023-02-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lyqglyqg.github.io/blog/post/helloworld/</loc>
+    <lastmod>2023-01-27T16:52:09-06:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
