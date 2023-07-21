@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://lyqglyqg.github.io/blog/sitemap.xml
+Sitemap: https://lyqglyqg.github.io/AIML_workshop/sitemap.xml
