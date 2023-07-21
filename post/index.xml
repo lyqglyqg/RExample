@@ -1,19 +1,76 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on AIML_workshop</title>
-    <link>https://lyqglyqg.github.io/AIML_workshop/post/</link>
-    <description>Recent content in Posts on AIML_workshop</description>
+    <title>Posts on LYQG blog</title>
+    <link>https://lyqglyqg.github.io/blog/post/</link>
+    <description>Recent content in Posts on LYQG blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 14 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://lyqglyqg.github.io/AIML_workshop/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 14 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://lyqglyqg.github.io/blog/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Analyzing neuroimaging data using ML/DL methods in R</title>
-      <link>https://lyqglyqg.github.io/AIML_workshop/post/wk11/</link>
+      <link>https://lyqglyqg.github.io/blog/post/wk11/</link>
       <pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://lyqglyqg.github.io/AIML_workshop/post/wk11/</guid>
+      <guid>https://lyqglyqg.github.io/blog/post/wk11/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>A single-cell atlas of the multicellular ecosystem of primary and metastatic hepatocellular carcinoma</title>
+      <link>https://lyqglyqg.github.io/blog/post/hcc/</link>
+      <pubDate>Mon, 27 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://lyqglyqg.github.io/blog/post/hcc/</guid>
+      <description>&lt;p&gt;A single-cell atlas of the multicellular ecosystem of primary and metastatic hepatocellular carcinoma&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>scRNAseq analysis reveals Immune Cell Signatures in Alzheimer’s Disease</title>
+      <link>https://lyqglyqg.github.io/blog/post/immunead/</link>
+      <pubDate>Tue, 21 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://lyqglyqg.github.io/blog/post/immunead/</guid>
+      <description>&lt;p&gt;Single-Cell RNA Sequencing of Peripheral Blood Reveals Immune Cell Signatures in Alzheimer’s Disease&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>A osteoarthritis study using scRNAseq data</title>
+      <link>https://lyqglyqg.github.io/blog/post/osteoarthrisis/</link>
+      <pubDate>Sat, 18 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://lyqglyqg.github.io/blog/post/osteoarthrisis/</guid>
+      <description>&lt;p&gt;Synovial fibroblasts assume distinct functional identities and secrete R-spondin 2 to drive osteoarthritis&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>UMAP &amp; heatmap replication</title>
+      <link>https://lyqglyqg.github.io/blog/post/umap/</link>
+      <pubDate>Sun, 12 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://lyqglyqg.github.io/blog/post/umap/</guid>
+      <description>&lt;p&gt;Transcriptional proﬁling of mESC-derived tendon and ﬁbrocartilage cell fate switch&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>BrainStat</title>
+      <link>https://lyqglyqg.github.io/blog/post/brainstat/</link>
+      <pubDate>Fri, 03 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://lyqglyqg.github.io/blog/post/brainstat/</guid>
+      <description>&lt;p&gt;BrainStat&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Helloworld</title>
+      <link>https://lyqglyqg.github.io/blog/post/helloworld/</link>
+      <pubDate>Fri, 27 Jan 2023 16:52:09 -0600</pubDate>
+      
+      <guid>https://lyqglyqg.github.io/blog/post/helloworld/</guid>
+      <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-R&#34; data-lang=&#34;R&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;function &lt;span style=&#34;color:#a6e22e&#34;&gt;helloWorld &lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello, World!&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;## This is the very first post!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
   </channel>

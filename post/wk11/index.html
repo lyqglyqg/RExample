@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Analyzing neuroimaging data using R - LYQG blog</title>
+  <title>Analyzing neuroimaging data using ML/DL methods in R - LYQG blog</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -61,18 +61,18 @@
 
 
 
-<meta property="og:title" content="Analyzing neuroimaging data using R" />
+<meta property="og:title" content="Analyzing neuroimaging data using ML/DL methods in R" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lyqglyqg.github.io/blog/post/wk11/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2023-07-14T00:00:00+00:00" />
 <meta property="article:modified_time" content="2023-07-14T00:00:00+00:00" />
-<meta itemprop="name" content="Analyzing neuroimaging data using R">
+<meta itemprop="name" content="Analyzing neuroimaging data using ML/DL methods in R">
 <meta itemprop="description" content=""><meta itemprop="datePublished" content="2023-07-14T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2023-07-14T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1248">
+<meta itemprop="wordCount" content="3179">
 <meta itemprop="keywords" content="Alzheimer&#39;s disease,brain connectome,positron emission tomography," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Analyzing neuroimaging data using R"/>
+<meta name="twitter:title" content="Analyzing neuroimaging data using ML/DL methods in R"/>
 <meta name="twitter:description" content=""/>
 
 <!--[if lte IE 9]>
@@ -155,7 +155,7 @@
           <ul class="mobile-submenu-list">
             
               <li>
-                <a href="https://lyqglyqg.github.io/blog/post/wk11/">Analyzing neuroimaging data using R</a>
+                <a href="https://lyqglyqg.github.io/blog/post/wk11/">Analyzing neuroimaging data using ML/DL methods in R</a>
               </li>
             
           </ul>
@@ -318,7 +318,7 @@
           <ul class="submenu">
             
               <li class="submenu-item">
-                <a href="https://lyqglyqg.github.io/blog/post/wk11/">Analyzing neuroimaging data using R</a>
+                <a href="https://lyqglyqg.github.io/blog/post/wk11/">Analyzing neuroimaging data using ML/DL methods in R</a>
               </li>
             
           </ul>
@@ -344,7 +344,7 @@
           <article class="post bg-white">
     
     <header class="post-header">
-      <h1 class="post-title">Analyzing neuroimaging data using R</h1>
+      <h1 class="post-title">Analyzing neuroimaging data using ML/DL methods in R</h1>
       
 
       <div class="post-meta">
@@ -392,14 +392,49 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
+    <li><a href="#demonstration-of-replicating-results-of-a-paper-using-publicly-available-neuroimaging-data">Demonstration of replicating results of a paper using publicly available neuroimaging data.</a>
+      <ul>
+        <li><a href="#data-ingestion"><code>Data ingestion</code></a></li>
+        <li><a href="#data-visualization"><code>Data visualization</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#demonstration-of-analyzing-neuroimaging-data-using-mldl-methods">Demonstration of analyzing neuroimaging data using ML/DL methods.</a>
+      <ul>
+        <li><a href="#model-building-and-model-selection"><code>Model building and model selection</code></a></li>
+        <li><a href="#model-validation"><code>Model validation</code></a></li>
+      </ul>
+    </li>
     <li><a href="#figures-to-replicate-include">Figures to replicate include:</a></li>
     <li><a href="#data-to-use">Data to use</a></li>
-    <li><a href="#analysis-i-heatmap-of-hotspots-in-the-brain-that-differentiate-ad-and-nc">Analysis I: Heatmap of hotspots in the brain that differentiate AD and NC</a></li>
-    <li><a href="#analysis-ii-region-level-connectomic-analysis-for-ad-and-nc">Analysis II: region-level connectomic analysis for AD and NC</a>
+    <li><a href="#part-i-1-ingesting-neuroimaging-data">PART I-1. Ingesting neuroimaging data</a>
+      <ul>
+        <li><a href="#loading-and-visulizing-neuroimaging-data">Loading and visulizing neuroimaging data</a></li>
+        <li><a href="#brain-regions-of-interest">Brain regions of interest</a></li>
+      </ul>
+    </li>
+    <li><a href="#part-i-2-data-visulization-and-np-paper-figure-replication">PART I-2. Data visulization and NP paper figure replication</a></li>
+    <li><a href="#load-in-a-reformatted-adni-dataset">Load in a reformatted ADNI dataset</a></li>
+    <li><a href="#heatmap-of-hotspots-in-the-brain-that-differentiate-ad-and-nc">Heatmap of hotspots in the brain that differentiate AD and NC</a></li>
+    <li><a href="#region-level-connectomic-analysis-for-ad-and-nc">Region-level connectomic analysis for AD and NC</a>
       <ul>
         <li><a href="#plot-the-connection-levelplots">Plot the connection levelplots</a></li>
         <li><a href="#plot-the-3d-brain-connection-plots">Plot the 3D brain connection plots</a></li>
         <li><a href="#plot-the-chord-diagrams-for-ad-and-nc">Plot the chord diagrams for AD and NC</a></li>
+      </ul>
+    </li>
+    <li><a href="#part-ii-1-predictive-mldl-models-for-neuroimaging-data-analysis">PART II-1. Predictive ML/DL models for neuroimaging data analysis</a>
+      <ul>
+        <li><a href="#1-lasso-model">1. Lasso model</a></li>
+        <li><a href="#2-knn">2. KNN</a></li>
+        <li><a href="#3-linear-discriminant-analysis-lda">3. Linear discriminant analysis (LDA)</a></li>
+        <li><a href="#4-xgboost">4. XGboost</a></li>
+        <li><a href="#5-neural-network">5. Neural network</a></li>
+      </ul>
+    </li>
+    <li><a href="#part-ii-2-predictive-model-validation">PART II-2. Predictive model validation</a>
+      <ul>
+        <li><a href="#1-model-validation-via-independent-datasets">1. Model validation via independent datasets</a></li>
+        <li><a href="#2-cross-validation">2. Cross validation</a></li>
       </ul>
     </li>
   </ul>
@@ -410,7 +445,17 @@
 
     
     <div class="post-content">
-      <p>In this week&rsquo;s lecture, we are going to  use <code>R</code> to replicate some results and figures in an article published on &ldquo;Nature Protocols&rdquo; (NP).</p>
+      <blockquote>
+<h2 id="demonstration-of-replicating-results-of-a-paper-using-publicly-available-neuroimaging-data">Demonstration of replicating results of a paper using publicly available neuroimaging data.</h2>
+<h3 id="data-ingestion"><code>Data ingestion</code></h3>
+<h3 id="data-visualization"><code>Data visualization</code></h3>
+</blockquote>
+<blockquote>
+<h2 id="demonstration-of-analyzing-neuroimaging-data-using-mldl-methods">Demonstration of analyzing neuroimaging data using ML/DL methods.</h2>
+<h3 id="model-building-and-model-selection"><code>Model building and model selection</code></h3>
+<h3 id="model-validation"><code>Model validation</code></h3>
+</blockquote>
+<p>First, we use <code>R</code> to replicate some results and figures in an article published on &ldquo;Nature Protocols&rdquo; (NP).</p>
 <p><img src="NP_paper.png" alt="paper_header"></p>
 <h2 id="figures-to-replicate-include">Figures to replicate include:</h2>
 <p>First, we will replicate a heatmap of voxel-level neuroimaging features that can differentiate Alzheimer&rsquo;s diseased (AD) patients to normal control (NC) people like below.
@@ -419,6 +464,60 @@
 <img src="NP_paper_fig.png" width="70%" height="70%"></p>
 <h2 id="data-to-use">Data to use</h2>
 <p>We are going to use Alzheimer&rsquo;s Disease Neuroimaging Initiative (ADNI) positron emission tomography (PET) imaging scans from 53 AD patients and 72 NC people. Each imaging scan is a 3D array of dimension 91 x 109 x 91 in the dataset. Each brain scan contains 185,405 effective template voxels, grouped in 116 ROIs. The ROI numbers and corresponding brain region names can be find <a href="ROI.txt">here</a></p>
+<h2 id="part-i-1-ingesting-neuroimaging-data">PART I-1. Ingesting neuroimaging data</h2>
+<p><code>Neuroconductor</code> is an open-source platform for analysing neuroimaging (and other) data. It hosts multiple packages to analyse data using different software. We will mostly use its base library <code>neurobase</code>. Run the following to install the <code>neurobase</code> package</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">source</span>(<span style="color:#e6db74">&#34;https://neuroconductor.org/neurocLite.R&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">neuro_install</span>(<span style="color:#e6db74">&#34;neurobase&#34;</span>, release <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;stable&#34;</span>)
+</span></span></code></pre></div><h3 id="loading-and-visulizing-neuroimaging-data">Loading and visulizing neuroimaging data</h3>
+<p>The function <code>readnii</code> reads in a time series of brain imaging scans for one subject &ndash; sub-10159 &ndash; in file &ldquo;sub-10159_task-rest_bold_space-MNI152NLin2009cAsym_preproc.nii.gz&rdquo; as a 4-D array.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(neurobase)
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">readnii</span>(<span style="color:#e6db74">&#34;sub-10159_task-rest_bold_space-MNI152NLin2009cAsym_preproc.nii.gz&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dim</span>(data)
+</span></span></code></pre></div><img src="Screenshot1.png">
+<p>Each brain imaging scan is of 3-D dimension 65 x 77 x 49, corresponding to the coronal, sagittal, and horizontal planes of the brain.</p>
+<img src="Screenshot2.png"> 
+<p>And the series contains 152 scans.</p>
+<p>We can use <code>check_nifti</code> function to check the details of the scans. Those information is stored in the &ldquo;header&rdquo; of each imaging file. For example, the <code>Pixel Dimension: 3 x 3 x 4 x 2</code> tells us that the size of each voxel in space is 3 x 3 x 4 mm. The last number is dimension in time: a scan is taken every 2 seconds.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">check_nifti</span>(data)
+</span></span></code></pre></div><img src="Screenshot3.png"> 
+<p>To visualize the <code>nifti</code> images, we can use the <code>orthographic</code> function. It will only show the 3D scan at one time point. R will automatically show the first timepoint.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">orthographic</span>(data)
+</span></span></code></pre></div><img src="orthographic.png"> 
+<p>The argument <code>xyz</code> allows us to specify where to draw the cross-lines.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">orthographic</span>(data,xyz<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">20</span>,<span style="color:#ae81ff">20</span>,<span style="color:#ae81ff">30</span>))
+</span></span></code></pre></div><img src="orthographic_202030.png"> 
+<h3 id="brain-regions-of-interest">Brain regions of interest</h3>
+<p>One branch of research interest in neuroimaging studies is to investigate functions of different regions of interest (ROIs) of the brain and connections between them (the so called <code>brain connectome</code> studies). We next do a simple analysis on this by looking at the correlations between the average signal in those brain parcels.</p>
+<p>First load the necessary libraries (You will need to install them first! Please google installation of each of these packages).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(RColorBrewer)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(scales)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(lattice)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(Rcmdr)
+</span></span></code></pre></div><p>Let us then load the anatomical image for subject <code>sub-10159</code> and plot it using the &lsquo;ortho2` function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>sub10159_anat <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">readnii</span>(<span style="color:#e6db74">&#34;sub-10159_T1w_space-MNI152NLin2009cAsym_preproc.nii.gz&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ortho2</span>(sub10159_anat)
+</span></span></code></pre></div><img src="ortho2.png"> 
+<p>Next, we read in the atlas that separate the brain into 102 ROIs.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>atlas <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">readnii</span>(<span style="color:#e6db74">&#34;mni_icbm152_CerebrA_tal_nlin_sym_09c.nii&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dim</span>(atlas)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(<span style="color:#a6e22e">as.vector</span>(atlas))
+</span></span></code></pre></div><p>The table from the last syntax line above tells how many voxels are there in each ROI. &ldquo;0&rdquo; means voxels outside the brain template.
+<img src="Screenshot5.png"></p>
+<p>One can overlay the 3D brain imaging with the ROI template.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>rf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">colorRampPalette</span>(<span style="color:#a6e22e">rev</span>(<span style="color:#a6e22e">brewer.pal</span>(<span style="color:#ae81ff">102</span>,<span style="color:#e6db74">&#39;Spectral&#39;</span>)))
+</span></span><span style="display:flex;"><span>cols <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rf</span>(<span style="color:#ae81ff">102</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ortho2</span>(sub10159_anat,atlas,col.y<span style="color:#f92672">=</span><span style="color:#a6e22e">alpha</span>(<span style="color:#a6e22e">sample</span>(cols),<span style="color:#ae81ff">0.5</span>))
+</span></span></code></pre></div><img src="atlas.png"> 
+<p>One can extract and plot a certain brain region.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>broca <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ifelse</span>(atlas<span style="color:#f92672">==</span><span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ortho2</span>(sub10159_anat,broca,xyz<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">150</span>,<span style="color:#ae81ff">100</span>,<span style="color:#ae81ff">60</span>))
+</span></span></code></pre></div><img src="ROI28.png"> 
+<h2 id="part-i-2-data-visulization-and-np-paper-figure-replication">PART I-2. Data visulization and NP paper figure replication</h2>
+<h2 id="load-in-a-reformatted-adni-dataset">Load in a reformatted ADNI dataset</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">load</span>(<span style="color:#e6db74">&#34;ADNIdata.RData&#34;</span>)
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">ls</span>()
 </span></span><span style="display:flex;"><span>[1] <span style="color:#e6db74">&#34;info&#34;</span> <span style="color:#e6db74">&#34;mask&#34;</span> <span style="color:#e6db74">&#34;PET&#34;</span> 
@@ -485,7 +584,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">dim</span>(PET)
 </span></span><span style="display:flex;"><span>[1]    <span style="color:#ae81ff">125</span> <span style="color:#ae81ff">185405</span>
-</span></span></code></pre></div><h2 id="analysis-i-heatmap-of-hotspots-in-the-brain-that-differentiate-ad-and-nc">Analysis I: Heatmap of hotspots in the brain that differentiate AD and NC</h2>
+</span></span></code></pre></div><h2 id="heatmap-of-hotspots-in-the-brain-that-differentiate-ad-and-nc">Heatmap of hotspots in the brain that differentiate AD and NC</h2>
 <p>Calculate the Zscore for comparing the means between AD and NC for each voxel.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>Zscore.v <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">apply</span>(PET, <span style="color:#ae81ff">2</span>, <span style="color:#a6e22e">function</span>(x)((<span style="color:#a6e22e">mean</span>(x[1<span style="color:#f92672">:</span><span style="color:#ae81ff">53</span>])<span style="color:#f92672">-</span><span style="color:#a6e22e">mean</span>(x[54<span style="color:#f92672">:</span><span style="color:#ae81ff">125</span>]))<span style="color:#f92672">/</span><span style="color:#a6e22e">sd</span>(x)))
 </span></span><span style="display:flex;"><span>
@@ -597,7 +696,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">image.plot</span>(sAtlas, add<span style="color:#f92672">=</span><span style="color:#66d9ef">TRUE</span>, col<span style="color:#f92672">=</span>ColorValue[<span style="color:#ae81ff">-1</span>], lab.breaks<span style="color:#f92672">=</span><span style="color:#a6e22e">names</span>(<span style="color:#a6e22e">table</span>(ROI)))
 </span></span></code></pre></div><p><img src="ROI.png" alt="ROImap"></p>
 <p>From the brain heapmap and ROI map, we can see that <strong>both left and right Cerebelum (ROIs 9301 &amp; 9302) cortices are very significant in differentiating AD and NC. There are also differentiating hotspots in cortices Insula (ROIs 3001 &amp; 3002) and Rectus(ROIs 2701 &amp; 2702).</strong></p>
-<h2 id="analysis-ii-region-level-connectomic-analysis-for-ad-and-nc">Analysis II: region-level connectomic analysis for AD and NC</h2>
+<h2 id="region-level-connectomic-analysis-for-ad-and-nc">Region-level connectomic analysis for AD and NC</h2>
 <p>First, calculate the means within each ROI for AD and NC, respectively.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>ROI_means_AD <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">NULL</span>
 </span></span><span style="display:flex;"><span>ROI_means_NC <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">NULL</span>
@@ -689,6 +788,425 @@
 <img src="chordgram_NC.png"> 
 </figure>
 <hr>
+<h2 id="part-ii-1-predictive-mldl-models-for-neuroimaging-data-analysis">PART II-1. Predictive ML/DL models for neuroimaging data analysis</h2>
+<p>We used ROI level imaging data for AD/NC classification/prediction.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">dim</span>(ROI_means_AD)
+</span></span><span style="display:flex;"><span>[1]  <span style="color:#ae81ff">53</span> <span style="color:#ae81ff">116</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dim</span>(ROI_means_NC)
+</span></span><span style="display:flex;"><span>[1]  <span style="color:#ae81ff">72</span> <span style="color:#ae81ff">116</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">125</span>)
+</span></span><span style="display:flex;"><span>y[1<span style="color:#f92672">:</span><span style="color:#ae81ff">53</span>] <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>X.m <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rbind</span>(ROI_means_AD, ROI_means_NC)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dim</span>(X.m)
+</span></span><span style="display:flex;"><span>[1] <span style="color:#ae81ff">125</span> <span style="color:#ae81ff">116</span>
+</span></span></code></pre></div><hr>
+<h3 id="1-lasso-model">1. Lasso model</h3>
+<figure>
+<img src="lasso.png"> 
+</figure>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>temp.lasso.cvfit <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cv.glmnet</span>(x<span style="color:#f92672">=</span>X.m,y<span style="color:#f92672">=</span>y, family <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;binomial&#34;</span>, type.measure <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;class&#34;</span>, alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>lamb <span style="color:#f92672">&lt;-</span> temp.lasso.cvfit<span style="color:#f92672">$</span>lambda.min
+</span></span><span style="display:flex;"><span>temp.lasso <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">glmnet</span>(x<span style="color:#f92672">=</span>X.m,y<span style="color:#f92672">=</span>y, alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, lambda<span style="color:#f92672">=</span>lamb, family <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;binomial&#34;</span>)
+</span></span><span style="display:flex;"><span>pred.lasso <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">predict</span>(temp.lasso, s<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;lambda.min&#39;</span>, newx<span style="color:#f92672">=</span>X.m, type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;response&#34;</span>)
+</span></span><span style="display:flex;"><span>pred.lasso01 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">predict</span>(temp.lasso, s<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;lambda.min&#39;</span>, newx<span style="color:#f92672">=</span>X.m, type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;class&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(caret)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">confusionMatrix</span>(<span style="color:#a6e22e">as.factor</span>(y), <span style="color:#a6e22e">as.factor</span>(pred.lasso01))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Confusion Matrix and Statistics
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>          Reference
+</span></span><span style="display:flex;"><span>Prediction  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">72</span>  <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">53</span>
+</span></span><span style="display:flex;"><span>                                     
+</span></span><span style="display:flex;"><span>               Accuracy <span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>          
+</span></span><span style="display:flex;"><span>                 <span style="color:#ae81ff">95</span>% CI <span style="color:#f92672">:</span> (<span style="color:#ae81ff">0.9709</span>, <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    No Information Rate <span style="color:#f92672">:</span> <span style="color:#ae81ff">0.576</span>      
+</span></span><span style="display:flex;"><span>    P<span style="color:#f92672">-</span>Value [Acc <span style="color:#f92672">&gt;</span> NIR] <span style="color:#f92672">:</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2.2e-16</span>  
+</span></span><span style="display:flex;"><span>                                     
+</span></span><span style="display:flex;"><span>                  Kappa <span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>          
+</span></span><span style="display:flex;"><span>                                     
+</span></span><span style="display:flex;"><span> Mcnemar<span style="color:#e6db74">&#39;s Test P-Value : NA         
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                                     
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            Sensitivity : 1.000      
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            Specificity : 1.000      
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">         Pos Pred Value : 1.000      
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">         Neg Pred Value : 1.000      
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">             Prevalence : 0.576      
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">         Detection Rate : 0.576      
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   Detection Prevalence : 0.576      
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      Balanced Accuracy : 1.000      
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                                     
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       &#39;</span>Positive<span style="color:#e6db74">&#39;</span><span style="color:#960050;background-color:#1e0010"> Class : 0          </span>
+</span></span></code></pre></div><p>Look at which ROI&rsquo;s are selected as the predictive ROI for AD/NC classification.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> beta_hat <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.vector</span>(temp.lasso<span style="color:#f92672">$</span>beta[,<span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">names</span>(beta_hat) <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#34;ROI&#34;</span>, <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">116</span>), sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> beta_hat
+</span></span><span style="display:flex;"><span>       ROI1        ROI2        ROI3        ROI4        ROI5        ROI6 
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>  <span style="color:#ae81ff">11.2834825</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span> 
+</span></span><span style="display:flex;"><span>       ROI7        ROI8        ROI9       ROI10       ROI11       ROI12 
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">4.0562152</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">3.5390322</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">5.0257354</span> 
+</span></span><span style="display:flex;"><span>      ROI13       ROI14       ROI15       ROI16       ROI17       ROI18 
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">1.4599871</span>   <span style="color:#ae81ff">0.0000000</span>  <span style="color:#ae81ff">16.3521690</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">1.4090088</span> 
+</span></span><span style="display:flex;"><span>      ROI19       ROI20       ROI21       ROI22       ROI23       ROI24 
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">1.8918206</span>   <span style="color:#ae81ff">8.2886784</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span> 
+</span></span><span style="display:flex;"><span>      ROI25       ROI26       ROI27       ROI28       ROI29       ROI30 
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span> <span style="color:#ae81ff">-23.0549599</span> <span style="color:#ae81ff">-17.6783982</span>   <span style="color:#ae81ff">0.0000000</span> 
+</span></span><span style="display:flex;"><span>      ROI31       ROI32       ROI33       ROI34       ROI35       ROI36 
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>  <span style="color:#ae81ff">-1.7228266</span>   <span style="color:#ae81ff">0.0000000</span>  <span style="color:#ae81ff">-9.1364817</span> 
+</span></span><span style="display:flex;"><span>      ROI37       ROI38       ROI39       ROI40       ROI41       ROI42 
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">-9.7847000</span>   <span style="color:#ae81ff">0.0000000</span> <span style="color:#ae81ff">-32.9475738</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span> 
+</span></span><span style="display:flex;"><span>      ROI43       ROI44       ROI45       ROI46       ROI47       ROI48 
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>  <span style="color:#ae81ff">16.6703849</span> 
+</span></span><span style="display:flex;"><span>      ROI49       ROI50       ROI51       ROI52       ROI53       ROI54 
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">-0.5371030</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">4.6004862</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span> 
+</span></span><span style="display:flex;"><span>      ROI55       ROI56       ROI57       ROI58       ROI59       ROI60 
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.1106223</span>  <span style="color:#ae81ff">27.6758996</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">8.8117034</span> 
+</span></span><span style="display:flex;"><span>      ROI61       ROI62       ROI63       ROI64       ROI65       ROI66 
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">-16.7934707</span>  <span style="color:#ae81ff">-1.0258150</span>   <span style="color:#ae81ff">8.5639771</span>  <span style="color:#ae81ff">-3.7309900</span>   <span style="color:#ae81ff">0.0000000</span> <span style="color:#ae81ff">-23.0580959</span> 
+</span></span><span style="display:flex;"><span>      ROI67       ROI68       ROI69       ROI70       ROI71       ROI72 
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">0.0000000</span>  <span style="color:#ae81ff">-9.3551591</span>   <span style="color:#ae81ff">7.1754490</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span> 
+</span></span><span style="display:flex;"><span>      ROI73       ROI74       ROI75       ROI76       ROI77       ROI78 
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">7.3113457</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">6.5755033</span>   <span style="color:#ae81ff">0.2252385</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.6747557</span> 
+</span></span><span style="display:flex;"><span>      ROI79       ROI80       ROI81       ROI82       ROI83       ROI84 
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span> 
+</span></span><span style="display:flex;"><span>      ROI85       ROI86       ROI87       ROI88       ROI89       ROI90 
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span> 
+</span></span><span style="display:flex;"><span>      ROI91       ROI92       ROI93       ROI94       ROI95       ROI96 
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">3.9549139</span>   <span style="color:#ae81ff">3.0406333</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">1.1476977</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span> 
+</span></span><span style="display:flex;"><span>      ROI97       ROI98       ROI99      ROI100      ROI101      ROI102 
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span> 
+</span></span><span style="display:flex;"><span>     ROI103      ROI104      ROI105      ROI106      ROI107      ROI108 
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span> 
+</span></span><span style="display:flex;"><span>     ROI109      ROI110      ROI111      ROI112      ROI113      ROI114 
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">2.6401216</span>  <span style="color:#ae81ff">23.3079212</span>   <span style="color:#ae81ff">0.0000000</span>  <span style="color:#ae81ff">-7.0365297</span>   <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.0000000</span> 
+</span></span><span style="display:flex;"><span>     ROI115      ROI116 
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">0.0000000</span>   <span style="color:#ae81ff">0.8033363</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">which</span>(<span style="color:#a6e22e">abs</span>(beta_hat)<span style="color:#f92672">!=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>  ROI3   ROI8  ROI10  ROI12  ROI14  ROI16  ROI18  ROI21  ROI22  ROI28  ROI29 
+</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">3</span>      <span style="color:#ae81ff">8</span>     <span style="color:#ae81ff">10</span>     <span style="color:#ae81ff">12</span>     <span style="color:#ae81ff">14</span>     <span style="color:#ae81ff">16</span>     <span style="color:#ae81ff">18</span>     <span style="color:#ae81ff">21</span>     <span style="color:#ae81ff">22</span>     <span style="color:#ae81ff">28</span>     <span style="color:#ae81ff">29</span> 
+</span></span><span style="display:flex;"><span> ROI34  ROI36  ROI37  ROI39  ROI48  ROI49  ROI52  ROI57  ROI58  ROI60  ROI61 
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">34</span>     <span style="color:#ae81ff">36</span>     <span style="color:#ae81ff">37</span>     <span style="color:#ae81ff">39</span>     <span style="color:#ae81ff">48</span>     <span style="color:#ae81ff">49</span>     <span style="color:#ae81ff">52</span>     <span style="color:#ae81ff">57</span>     <span style="color:#ae81ff">58</span>     <span style="color:#ae81ff">60</span>     <span style="color:#ae81ff">61</span> 
+</span></span><span style="display:flex;"><span> ROI62  ROI63  ROI64  ROI66  ROI68  ROI69  ROI73  ROI75  ROI76  ROI78  ROI91 
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">62</span>     <span style="color:#ae81ff">63</span>     <span style="color:#ae81ff">64</span>     <span style="color:#ae81ff">66</span>     <span style="color:#ae81ff">68</span>     <span style="color:#ae81ff">69</span>     <span style="color:#ae81ff">73</span>     <span style="color:#ae81ff">75</span>     <span style="color:#ae81ff">76</span>     <span style="color:#ae81ff">78</span>     <span style="color:#ae81ff">91</span> 
+</span></span><span style="display:flex;"><span> ROI92  ROI94 ROI109 ROI110 ROI112 ROI116 
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">92</span>     <span style="color:#ae81ff">94</span>    <span style="color:#ae81ff">109</span>    <span style="color:#ae81ff">110</span>    <span style="color:#ae81ff">112</span>    <span style="color:#ae81ff">116</span> 
+</span></span></code></pre></div><p>Find the important ROIs names from the dictionary.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> region_code
+</span></span><span style="display:flex;"><span>     V1   V2                   V3
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>     <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2001</span>         Precentral_L
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>     <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">2002</span>         Precentral_R
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>     <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">2101</span>        Frontal_Sup_L
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>     <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">2102</span>        Frontal_Sup_R
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>     <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">2111</span>    Frontal_Sup_Orb_L
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>     <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">2112</span>    Frontal_Sup_Orb_R
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>     <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">2201</span>        Frontal_Mid_L
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>     <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">2202</span>        Frontal_Mid_R
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">9</span>     <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">2211</span>    Frontal_Mid_Orb_L
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10</span>   <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">2212</span>    Frontal_Mid_Orb_R
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">11</span>   <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">2301</span>   Frontal_Inf_Oper_L
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">12</span>   <span style="color:#ae81ff">12</span> <span style="color:#ae81ff">2302</span>   Frontal_Inf_Oper_R
+</span></span></code></pre></div><hr>
+<h3 id="2-knn">2. KNN</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(caret)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(pROC)
+</span></span><span style="display:flex;"><span>ctrl <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">trainControl</span>(method<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;repeatedcv&#34;</span>,repeats <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>) 
+</span></span><span style="display:flex;"><span>model_knn <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">train</span>(<span style="color:#a6e22e">as.data.frame</span>(X.m), <span style="color:#a6e22e">unlist</span>(y), method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;knn&#34;</span>,
+</span></span><span style="display:flex;"><span>      preProcess <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;center&#34;</span>,<span style="color:#e6db74">&#34;scale&#34;</span>), trControl <span style="color:#f92672">=</span> ctrl,
+</span></span><span style="display:flex;"><span>      tuneLength <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pred.knn <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">predict</span>(model_knn, X.m)<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">confusionMatrix</span>(<span style="color:#a6e22e">factor</span>(pred.knn), <span style="color:#a6e22e">factor</span>(y))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Confusion Matrix and Statistics</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>          Reference
+</span></span><span style="display:flex;"><span>Prediction  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">67</span> <span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>                                          
+</span></span><span style="display:flex;"><span>               Accuracy <span style="color:#f92672">:</span> <span style="color:#ae81ff">0.752</span>           
+</span></span><span style="display:flex;"><span>                 <span style="color:#ae81ff">95</span>% CI <span style="color:#f92672">:</span> (<span style="color:#ae81ff">0.6668</span>, <span style="color:#ae81ff">0.8249</span>)
+</span></span><span style="display:flex;"><span>    No Information Rate <span style="color:#f92672">:</span> <span style="color:#ae81ff">0.576</span>           
+</span></span><span style="display:flex;"><span>    P<span style="color:#f92672">-</span>Value [Acc <span style="color:#f92672">&gt;</span> NIR] <span style="color:#f92672">:</span> <span style="color:#ae81ff">3.13e-05</span>        
+</span></span><span style="display:flex;"><span>                                          
+</span></span><span style="display:flex;"><span>                  Kappa <span style="color:#f92672">:</span> <span style="color:#ae81ff">0.4643</span>          
+</span></span><span style="display:flex;"><span>                                          
+</span></span><span style="display:flex;"><span> Mcnemar<span style="color:#e6db74">&#39;s Test P-Value : 0.000328        
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                                          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            Sensitivity : 0.9306          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            Specificity : 0.5094          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">         Pos Pred Value : 0.7204          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">         Neg Pred Value : 0.8438          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">             Prevalence : 0.5760          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">         Detection Rate : 0.5360          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   Detection Prevalence : 0.7440          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      Balanced Accuracy : 0.7200          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                                          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       &#39;</span>Positive<span style="color:#e6db74">&#39;</span><span style="color:#960050;background-color:#1e0010"> Class : 0               </span>
+</span></span></code></pre></div><hr>
+<h3 id="3-linear-discriminant-analysis-lda">3. Linear discriminant analysis (LDA)</h3>
+<figure>
+<img src="LDA.png"> 
+</figure>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(MASS)
+</span></span><span style="display:flex;"><span>model.lda <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lda</span>(y <span style="color:#f92672">~</span> X.m)
+</span></span><span style="display:flex;"><span>pred.lda <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">predict</span>(model.lda, <span style="color:#a6e22e">as.data.frame</span>(X.m), type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;classification&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">confusionMatrix</span>(pred.lda<span style="color:#f92672">$</span>class, <span style="color:#a6e22e">factor</span>(y))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Confusion Matrix and Statistics</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#          Reference</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Prediction  0  1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#         0 72  0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#         1  0 53</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#                                     </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#               Accuracy : 1          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#                 95% CI : (0.9709, 1)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    No Information Rate : 0.576      </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    P-Value [Acc &gt; NIR] : &lt; 2.2e-16  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#                                     </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#                  Kappa : 1          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#                                     </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Mcnemar&#39;s Test P-Value : NA         </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#                                     </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#            Sensitivity : 1.000      </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#            Specificity : 1.000      </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#         Pos Pred Value : 1.000      </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#         Neg Pred Value : 1.000      </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#             Prevalence : 0.576      </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#         Detection Rate : 0.576      </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   Detection Prevalence : 0.576      </span>
+</span></span></code></pre></div><hr>
+<h3 id="4-xgboost">4. XGboost</h3>
+<figure>
+<img src="XGboost.png"> 
+</figure>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(xgboost)
+</span></span><span style="display:flex;"><span>label_tr_xgb <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">unlist</span>(y))
+</span></span><span style="display:flex;"><span>xgb_train <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">xgb.DMatrix</span>(data<span style="color:#f92672">=</span><span style="color:#a6e22e">as.matrix</span>(X.m, nrow<span style="color:#f92672">=</span><span style="color:#a6e22e">nrow</span>(X.m)),
+</span></span><span style="display:flex;"><span>                         label<span style="color:#f92672">=</span>label_tr_xgb)
+</span></span><span style="display:flex;"><span>model_xgb <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">xgboost</span>(data<span style="color:#f92672">=</span> xgb_train, nrounds<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>                     objective <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;binary:logistic&#34;</span>, class<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>                     nfold<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, set.seed<span style="color:#f92672">=</span><span style="color:#ae81ff">2022</span>)
+</span></span><span style="display:flex;"><span>xgbpred<span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">predict</span>(model_xgb, xgb_train)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">confusionMatrix</span>(<span style="color:#a6e22e">as.factor</span>(<span style="color:#a6e22e">as.numeric</span>(xgbpred<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0.5</span>)), <span style="color:#a6e22e">factor</span>(y))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Confusion Matrix and Statistics
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>          Reference
+</span></span><span style="display:flex;"><span>Prediction  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">72</span>  <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">53</span>
+</span></span><span style="display:flex;"><span>                                     
+</span></span><span style="display:flex;"><span>               Accuracy <span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>          
+</span></span><span style="display:flex;"><span>                 <span style="color:#ae81ff">95</span>% CI <span style="color:#f92672">:</span> (<span style="color:#ae81ff">0.9709</span>, <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    No Information Rate <span style="color:#f92672">:</span> <span style="color:#ae81ff">0.576</span>      
+</span></span><span style="display:flex;"><span>    P<span style="color:#f92672">-</span>Value [Acc <span style="color:#f92672">&gt;</span> NIR] <span style="color:#f92672">:</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2.2e-16</span>  
+</span></span><span style="display:flex;"><span>                                     
+</span></span><span style="display:flex;"><span>                  Kappa <span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>          
+</span></span><span style="display:flex;"><span>                                     
+</span></span><span style="display:flex;"><span> Mcnemar<span style="color:#e6db74">&#39;s Test P-Value : NA         
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                                     
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            Sensitivity : 1.000      
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            Specificity : 1.000      
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">         Pos Pred Value : 1.000      
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">         Neg Pred Value : 1.000      
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">             Prevalence : 0.576      
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">         Detection Rate : 0.576      
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   Detection Prevalence : 0.576      
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      Balanced Accuracy : 1.000      
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                                     
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       &#39;</span>Positive<span style="color:#e6db74">&#39;</span><span style="color:#960050;background-color:#1e0010"> Class : 0          </span>
+</span></span></code></pre></div><hr>
+<h3 id="5-neural-network">5. Neural network</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">#install.packages(c(&#39;neuralnet&#39;,&#39;keras&#39;,&#39;tensorflow&#39;),dependencies = T)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(tidyverse)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(neuralnet)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">colnames</span>(X.m) <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#34;ROI&#34;</span>, <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">116</span>), sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>Dat <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.data.frame</span>(<span style="color:#a6e22e">cbind</span>(y, X.m))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> <span style="color:#a6e22e">neuralnet</span>(
+</span></span><span style="display:flex;"><span>    y<span style="color:#f92672">~</span> .,
+</span></span><span style="display:flex;"><span>data<span style="color:#f92672">=</span>Dat,
+</span></span><span style="display:flex;"><span>hidden<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>linear.output <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>nnpred <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">predict</span>(model, X.m)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">confusionMatrix</span>(<span style="color:#a6e22e">as.factor</span>(<span style="color:#a6e22e">as.numeric</span>(nnpred<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0.5</span>)), <span style="color:#a6e22e">factor</span>(y))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Confusion Matrix and Statistics
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>          Reference
+</span></span><span style="display:flex;"><span>Prediction  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">70</span>  <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>                                          
+</span></span><span style="display:flex;"><span>               Accuracy <span style="color:#f92672">:</span> <span style="color:#ae81ff">0.968</span>           
+</span></span><span style="display:flex;"><span>                 <span style="color:#ae81ff">95</span>% CI <span style="color:#f92672">:</span> (<span style="color:#ae81ff">0.9201</span>, <span style="color:#ae81ff">0.9912</span>)
+</span></span><span style="display:flex;"><span>    No Information Rate <span style="color:#f92672">:</span> <span style="color:#ae81ff">0.576</span>           
+</span></span><span style="display:flex;"><span>    P<span style="color:#f92672">-</span>Value [Acc <span style="color:#f92672">&gt;</span> NIR] <span style="color:#f92672">:</span> <span style="color:#f92672">&lt;</span><span style="color:#ae81ff">2e-16</span>          
+</span></span><span style="display:flex;"><span>                                          
+</span></span><span style="display:flex;"><span>                  Kappa <span style="color:#f92672">:</span> <span style="color:#ae81ff">0.9345</span>          
+</span></span><span style="display:flex;"><span>                                          
+</span></span><span style="display:flex;"><span> Mcnemar<span style="color:#e6db74">&#39;s Test P-Value : 1               
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                                          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            Sensitivity : 0.9722          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            Specificity : 0.9623          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">         Pos Pred Value : 0.9722          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">         Neg Pred Value : 0.9623          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">             Prevalence : 0.5760          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">         Detection Rate : 0.5600          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   Detection Prevalence : 0.5760          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      Balanced Accuracy : 0.9672          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                                          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       &#39;</span>Positive<span style="color:#e6db74">&#39;</span><span style="color:#960050;background-color:#1e0010"> Class : 0               </span>
+</span></span></code></pre></div><figure>
+<img src="neuralnet.png"> 
+</figure>
+<h2 id="part-ii-2-predictive-model-validation">PART II-2. Predictive model validation</h2>
+<h3 id="1-model-validation-via-independent-datasets">1. Model validation via independent datasets</h3>
+<p>Need to collect independent test dataset when collecting the traning data. Or get the test data from other data cohorts.</p>
+<h3 id="2-cross-validation">2. Cross validation</h3>
+<figure>
+<img src="CV.png"> 
+</figure>
+<p>A self-implemented R function for cross validation for Lasso model.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Lasso.cv <span style="color:#f92672">&lt;-</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">function</span>(X, Y, fold<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, seed<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, lamb)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  n<span style="color:#f92672">=</span><span style="color:#a6e22e">nrow</span>(X)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">############################### set seed and generate cross validation seperations</span>
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">set.seed</span>(seed)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> index.cv<span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">vector</span>(mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;list&#39;</span>, length<span style="color:#f92672">=</span>fold)
+</span></span><span style="display:flex;"><span> f.n<span style="color:#f92672">=</span><span style="color:#a6e22e">floor</span>(n<span style="color:#f92672">/</span>fold)
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">for</span>(k in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>){
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    index_set_k <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">which</span>(Y<span style="color:#f92672">==</span>(k<span style="color:#ae81ff">-1</span>))
+</span></span><span style="display:flex;"><span>    ran.order_set_k <span style="color:#f92672">=</span><span style="color:#a6e22e">sample</span>(index_set_k, <span style="color:#a6e22e">length</span>(index_set_k), replace<span style="color:#f92672">=</span>F)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">if</span>( <span style="color:#a6e22e">length</span>(index_set_k) <span style="color:#f92672">&lt;</span> fold){
+</span></span><span style="display:flex;"><span>    	err <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sprintf</span>(<span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#34;There are less than &#34;</span>, fold, <span style="color:#e6db74">&#34;samples in class &#34;</span>, k, sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>))
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    f.nk <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">floor</span>(<span style="color:#a6e22e">length</span>(index_set_k)<span style="color:#f92672">/</span>fold) 
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">for </span>(f in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>(fold<span style="color:#ae81ff">-1</span>)){  
+</span></span><span style="display:flex;"><span>     index.cv[[f]]<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">c</span>(index.cv[[f]], ran.order_set_k<span style="color:#a6e22e">[</span>(f<span style="color:#ae81ff">-1</span>)<span style="color:#f92672">*</span>f.nk<span style="color:#ae81ff">+1</span><span style="color:#f92672">:</span>f.nk])
+</span></span><span style="display:flex;"><span>    } 
+</span></span><span style="display:flex;"><span>    index.cv[[fold]]<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">c</span>(index.cv[[fold]], ran.order_set_k<span style="color:#a6e22e">[</span>((fold<span style="color:#ae81ff">-1</span>)<span style="color:#f92672">*</span>f.nk<span style="color:#ae81ff">+1</span>)<span style="color:#f92672">:</span><span style="color:#a6e22e">length</span>(index_set_k)])
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">################################ begin cross validation</span>
+</span></span><span style="display:flex;"><span> err.cv <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">NULL</span>
+</span></span><span style="display:flex;"><span> err.tot <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> Y.test.arr <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">NULL</span>
+</span></span><span style="display:flex;"><span> Y.pred.arr <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">NULL</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">for</span>(f in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>fold)
+</span></span><span style="display:flex;"><span>  {  <span style="color:#a6e22e">print</span>(<span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#34;fold=&#34;</span>,f))   
+</span></span><span style="display:flex;"><span>     index.cur.cv<span style="color:#f92672">&lt;-</span>index.cv[[f]]   
+</span></span><span style="display:flex;"><span>     X.m<span style="color:#f92672">&lt;-</span>X[<span style="color:#f92672">-</span>(index.cur.cv),]   
+</span></span><span style="display:flex;"><span>     Y.m<span style="color:#f92672">&lt;-</span>Y[<span style="color:#f92672">-</span>(index.cur.cv)]   
+</span></span><span style="display:flex;"><span>     X.t<span style="color:#f92672">&lt;-</span>X[index.cur.cv,]   
+</span></span><span style="display:flex;"><span>     Y.t<span style="color:#f92672">&lt;-</span>Y[index.cur.cv] 
+</span></span><span style="display:flex;"><span>     
+</span></span><span style="display:flex;"><span>     Y.test.arr[[f]] <span style="color:#f92672">&lt;-</span> Y.t
+</span></span><span style="display:flex;"><span>     
+</span></span><span style="display:flex;"><span>     mod.train  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">glmnet</span>(x<span style="color:#f92672">=</span>X.m, y<span style="color:#f92672">=</span>Y.m, alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, lambda<span style="color:#f92672">=</span>lamb, family <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;binomial&#34;</span>)
+</span></span><span style="display:flex;"><span>     pred.y.t <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">predict</span>(mod.train, s<span style="color:#f92672">=</span>lamb, newx<span style="color:#f92672">=</span>X.t, type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;class&#34;</span>))
+</span></span><span style="display:flex;"><span>     
+</span></span><span style="display:flex;"><span>      
+</span></span><span style="display:flex;"><span>     err.cv.c <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">length</span>(<span style="color:#a6e22e">which</span>(pred.y.t <span style="color:#f92672">!=</span> Y.t)) 
+</span></span><span style="display:flex;"><span>     err.cv<span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(err.cv, err.cv.c)
+</span></span><span style="display:flex;"><span>     err.tot <span style="color:#f92672">&lt;-</span> err.tot <span style="color:#f92672">+</span> err.cv.c
+</span></span><span style="display:flex;"><span>       
+</span></span><span style="display:flex;"><span>     Y.pred.arr[[f]] <span style="color:#f92672">&lt;-</span> pred.y.t
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>   }<span style="color:#75715e">###end fold loop</span>
+</span></span><span style="display:flex;"><span>   
+</span></span><span style="display:flex;"><span>   result<span style="color:#f92672">=</span><span style="color:#a6e22e">list</span>(err.tot<span style="color:#f92672">=</span>err.tot, err.cv<span style="color:#f92672">=</span>err.cv, Y.pred.arr<span style="color:#f92672">=</span>Y.pred.arr, Y.test.arr<span style="color:#f92672">=</span>Y.test.arr) 
+</span></span><span style="display:flex;"><span>   
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">return</span>(result)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>cv.tmp <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">Lasso.cv</span>(X.m, y, lamb<span style="color:#f92672">=</span><span style="color:#ae81ff">0.0035</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[1] <span style="color:#e6db74">&#34;fold= 1&#34;</span>
+</span></span><span style="display:flex;"><span>[1] <span style="color:#e6db74">&#34;fold= 2&#34;</span>
+</span></span><span style="display:flex;"><span>[1] <span style="color:#e6db74">&#34;fold= 3&#34;</span>
+</span></span><span style="display:flex;"><span>[1] <span style="color:#e6db74">&#34;fold= 4&#34;</span>
+</span></span><span style="display:flex;"><span>[1] <span style="color:#e6db74">&#34;fold= 5&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> cv.tmp
+</span></span><span style="display:flex;"><span><span style="color:#f92672">$</span>err.tot
+</span></span><span style="display:flex;"><span>[1] <span style="color:#ae81ff">32</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">$</span>err.cv
+</span></span><span style="display:flex;"><span>[1] <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">$</span>Y.pred.arr
+</span></span><span style="display:flex;"><span><span style="color:#f92672">$</span>Y.pred.arr[[1]]
+</span></span><span style="display:flex;"><span> [1] <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">$</span>Y.pred.arr[[2]]
+</span></span><span style="display:flex;"><span> [1] <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">$</span>Y.pred.arr[[3]]
+</span></span><span style="display:flex;"><span> [1] <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">$</span>Y.pred.arr[[4]]
+</span></span><span style="display:flex;"><span> [1] <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">$</span>Y.pred.arr[[5]]
+</span></span><span style="display:flex;"><span> [1] <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">$</span>Y.test.arr
+</span></span><span style="display:flex;"><span><span style="color:#f92672">$</span>Y.test.arr[[1]]
+</span></span><span style="display:flex;"><span> [1] <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">$</span>Y.test.arr[[2]]
+</span></span><span style="display:flex;"><span> [1] <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">$</span>Y.test.arr[[3]]
+</span></span><span style="display:flex;"><span> [1] <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">$</span>Y.test.arr[[4]]
+</span></span><span style="display:flex;"><span> [1] <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">$</span>Y.test.arr[[5]]
+</span></span><span style="display:flex;"><span> [1] <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>Notice that the cross validation error is 32 out of 125. Remember the prediction error on the training data was 0 (overfitting).</p>
     </div>
 
     
