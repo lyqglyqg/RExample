@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Elastic Net on Example R codes for BIOS 850 &amp; 880</title>
-    <link>http://localhost:45315/blog/categories/elastic-net/</link>
+    <link>http://localhost:34193/RExample/categories/elastic-net/</link>
     <description>Recent content in Elastic Net on Example R codes for BIOS 850 &amp; 880</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Wed, 29 May 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:45315/blog/categories/elastic-net/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:34193/RExample/categories/elastic-net/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Elastic Net</title>
-      <link>http://localhost:45315/blog/post/en/</link>
+      <link>http://localhost:34193/RExample/post/en/</link>
       <pubDate>Wed, 29 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/post/en/</guid>
+      <guid>http://localhost:34193/RExample/post/en/</guid>
       <description></description>
     </item>
   </channel>

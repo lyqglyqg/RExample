@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" itemscope itemtype="http://schema.org/WebPage">
-<head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=45315&amp;path=blog/livereload" data-no-instant defer></script>
+<head><script src="/RExample/livereload.js?mindelay=10&amp;v=2&amp;port=34193&amp;path=RExample/livereload" data-no-instant defer></script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Principle component analysis (PCA) - Example R codes for BIOS 850 &amp; 880</title>
@@ -32,19 +32,16 @@
 
 
 
-<meta name="generator" content="Hugo 0.126.1" />
+<meta name="generator" content="Hugo 0.126.2" />
 
 
-<link rel="canonical" href="http://localhost:45315/blog/post/pca/" />
-
-
-
-
-
-<link rel="icon" href="/blog/favicon.ico" />
+<link rel="canonical" href="http://localhost:34193/RExample/post/pca/" />
 
 
 
+
+
+<link rel="icon" href="/RExample/favicon.ico" />
 
 
 
@@ -53,7 +50,10 @@
 
 
 
-<link rel="stylesheet" href="/blog/sass/jane.min.de22abc00de44766eebd1054fd9e0b254b071f89d5019044f893c484a9249a8d.css" integrity="sha256-3iKrwA3kR2buvRBU/Z4LJUsHH4nVAZBE&#43;JPEhKkkmo0=" media="screen" crossorigin="anonymous">
+
+
+
+<link rel="stylesheet" href="/RExample/sass/jane.min.de22abc00de44766eebd1054fd9e0b254b071f89d5019044f893c484a9249a8d.css" integrity="sha256-3iKrwA3kR2buvRBU/Z4LJUsHH4nVAZBE&#43;JPEhKkkmo0=" media="screen" crossorigin="anonymous">
 
 
 
@@ -61,7 +61,7 @@
 
 
 
-<meta property="og:url" content="http://localhost:45315/blog/post/pca/">
+<meta property="og:url" content="http://localhost:34193/RExample/post/pca/">
   <meta property="og:site_name" content="Example R codes for BIOS 850 &amp; 880">
   <meta property="og:title" content="Principle component analysis (PCA)">
   <meta property="og:description" content="Example R codes for BIOS 850 &amp; 880">
@@ -112,42 +112,42 @@
         
           
           
-            <a class="menu-item-link" href="http://localhost:45315/blog/">Home</a>
+            <a class="menu-item-link" href="http://localhost:34193/RExample/">Home</a>
           
         
       </li><li class="mobile-menu-item">
         
           
           
-            <a class="menu-item-link" href="http://localhost:45315/blog/post/">Archives</a>
+            <a class="menu-item-link" href="http://localhost:34193/RExample/post/">Archives</a>
           
         
       </li><li class="mobile-menu-item">
         
           
           
-            <a class="menu-item-link" href="http://localhost:45315/blog/tags/">Tags</a>
+            <a class="menu-item-link" href="http://localhost:34193/RExample/tags/">Tags</a>
           
         
       </li><li class="mobile-menu-item">
         
           
           
-            <a class="menu-item-link" href="http://localhost:45315/blog/categories/">Categories</a>
+            <a class="menu-item-link" href="http://localhost:34193/RExample/categories/">Categories</a>
           
         
       </li><li class="mobile-menu-item">
         
           
           
-            <a class="menu-item-link" href="http://localhost:45315/blog/about/">About</a>
+            <a class="menu-item-link" href="http://localhost:34193/RExample/about/">About</a>
           
         
       </li><li class="mobile-menu-item">
         
           
           
-            <a class="menu-item-link" href="http://localhost:45315/blog/">external-link</a>
+            <a class="menu-item-link" href="http://localhost:34193/RExample/">external-link</a>
           
         
       </li><li class="mobile-menu-item">
@@ -155,62 +155,62 @@
           
           <div class="mobile-menu-parent">
             <span class="mobile-submenu-open"></span>
-            <a href="http://localhost:45315/blog/">
+            <a href="http://localhost:34193/RExample/">
               docs
             </a>
           </div>
           <ul class="mobile-submenu-list">
             
               <li>
-                <a href="http://localhost:45315/blog/post/ab/">AdaBoost</a>
+                <a href="http://localhost:34193/RExample/post/ab/">AdaBoost</a>
               </li>
             
               <li>
-                <a href="http://localhost:45315/blog/post/bcart/">Bagged Classification And Regression Trees（Bagged CART)</a>
+                <a href="http://localhost:34193/RExample/post/bcart/">Bagged Classification And Regression Trees（Bagged CART)</a>
               </li>
             
               <li>
-                <a href="http://localhost:45315/blog/post/ct/">Classification trees</a>
+                <a href="http://localhost:34193/RExample/post/ct/">Classification trees</a>
               </li>
             
               <li>
-                <a href="http://localhost:45315/blog/post/ca/">Cluster analysis</a>
+                <a href="http://localhost:34193/RExample/post/ca/">Cluster analysis</a>
               </li>
             
               <li>
-                <a href="http://localhost:45315/blog/post/en/">Elastic Net</a>
+                <a href="http://localhost:34193/RExample/post/en/">Elastic Net</a>
               </li>
             
               <li>
-                <a href="http://localhost:45315/blog/post/gb/">Gradient boosting</a>
+                <a href="http://localhost:34193/RExample/post/gb/">Gradient boosting</a>
               </li>
             
               <li>
-                <a href="http://localhost:45315/blog/post/gbm/">Gradient Boosting Machine（GBM)</a>
+                <a href="http://localhost:34193/RExample/post/gbm/">Gradient Boosting Machine（GBM)</a>
               </li>
             
               <li>
-                <a href="http://localhost:45315/blog/post/knn/">K Nearest Neighbors (KNN)</a>
+                <a href="http://localhost:34193/RExample/post/knn/">K Nearest Neighbors (KNN)</a>
               </li>
             
               <li>
-                <a href="http://localhost:45315/blog/post/nb/">Naive Bayes</a>
+                <a href="http://localhost:34193/RExample/post/nb/">Naive Bayes</a>
               </li>
             
               <li>
-                <a href="http://localhost:45315/blog/post/nn/">Neural network</a>
+                <a href="http://localhost:34193/RExample/post/nn/">Neural network</a>
               </li>
             
               <li>
-                <a href="http://localhost:45315/blog/post/rf/">Random forest</a>
+                <a href="http://localhost:34193/RExample/post/rf/">Random forest</a>
               </li>
             
               <li>
-                <a href="http://localhost:45315/blog/post/rt/">Regression trees</a>
+                <a href="http://localhost:34193/RExample/post/rt/">Regression trees</a>
               </li>
             
               <li>
-                <a href="http://localhost:45315/blog/post/svm/">Support vector machine (SVM)</a>
+                <a href="http://localhost:34193/RExample/post/svm/">Support vector machine (SVM)</a>
               </li>
             
           </ul>
@@ -304,7 +304,7 @@
         
           
           
-            <a class="menu-item-link" href="http://localhost:45315/blog/">Home</a>
+            <a class="menu-item-link" href="http://localhost:34193/RExample/">Home</a>
           
 
         
@@ -315,7 +315,7 @@
         
           
           
-            <a class="menu-item-link" href="http://localhost:45315/blog/post/">Archives</a>
+            <a class="menu-item-link" href="http://localhost:34193/RExample/post/">Archives</a>
           
 
         
@@ -326,7 +326,7 @@
         
           
           
-            <a class="menu-item-link" href="http://localhost:45315/blog/tags/">Tags</a>
+            <a class="menu-item-link" href="http://localhost:34193/RExample/tags/">Tags</a>
           
 
         
@@ -337,7 +337,7 @@
         
           
           
-            <a class="menu-item-link" href="http://localhost:45315/blog/categories/">Categories</a>
+            <a class="menu-item-link" href="http://localhost:34193/RExample/categories/">Categories</a>
           
 
         
@@ -348,7 +348,7 @@
         
           
           
-            <a class="menu-item-link" href="http://localhost:45315/blog/about/">About</a>
+            <a class="menu-item-link" href="http://localhost:34193/RExample/about/">About</a>
           
 
         
@@ -359,7 +359,7 @@
         
           
           
-            <a class="menu-item-link" href="http://localhost:45315/blog/">external-link</a>
+            <a class="menu-item-link" href="http://localhost:34193/RExample/">external-link</a>
           
 
         
@@ -369,59 +369,59 @@
         <li class="menu-item">
         
           
-          <a class="menu-item-link menu-parent" href="http://localhost:45315/blog/">docs</a>
+          <a class="menu-item-link menu-parent" href="http://localhost:34193/RExample/">docs</a>
           <ul class="submenu">
             
               <li class="submenu-item">
-                <a href="http://localhost:45315/blog/post/ab/">AdaBoost</a>
+                <a href="http://localhost:34193/RExample/post/ab/">AdaBoost</a>
               </li>
             
               <li class="submenu-item">
-                <a href="http://localhost:45315/blog/post/bcart/">Bagged Classification And Regression Trees（Bagged CART)</a>
+                <a href="http://localhost:34193/RExample/post/bcart/">Bagged Classification And Regression Trees（Bagged CART)</a>
               </li>
             
               <li class="submenu-item">
-                <a href="http://localhost:45315/blog/post/ct/">Classification trees</a>
+                <a href="http://localhost:34193/RExample/post/ct/">Classification trees</a>
               </li>
             
               <li class="submenu-item">
-                <a href="http://localhost:45315/blog/post/ca/">Cluster analysis</a>
+                <a href="http://localhost:34193/RExample/post/ca/">Cluster analysis</a>
               </li>
             
               <li class="submenu-item">
-                <a href="http://localhost:45315/blog/post/en/">Elastic Net</a>
+                <a href="http://localhost:34193/RExample/post/en/">Elastic Net</a>
               </li>
             
               <li class="submenu-item">
-                <a href="http://localhost:45315/blog/post/gb/">Gradient boosting</a>
+                <a href="http://localhost:34193/RExample/post/gb/">Gradient boosting</a>
               </li>
             
               <li class="submenu-item">
-                <a href="http://localhost:45315/blog/post/gbm/">Gradient Boosting Machine（GBM)</a>
+                <a href="http://localhost:34193/RExample/post/gbm/">Gradient Boosting Machine（GBM)</a>
               </li>
             
               <li class="submenu-item">
-                <a href="http://localhost:45315/blog/post/knn/">K Nearest Neighbors (KNN)</a>
+                <a href="http://localhost:34193/RExample/post/knn/">K Nearest Neighbors (KNN)</a>
               </li>
             
               <li class="submenu-item">
-                <a href="http://localhost:45315/blog/post/nb/">Naive Bayes</a>
+                <a href="http://localhost:34193/RExample/post/nb/">Naive Bayes</a>
               </li>
             
               <li class="submenu-item">
-                <a href="http://localhost:45315/blog/post/nn/">Neural network</a>
+                <a href="http://localhost:34193/RExample/post/nn/">Neural network</a>
               </li>
             
               <li class="submenu-item">
-                <a href="http://localhost:45315/blog/post/rf/">Random forest</a>
+                <a href="http://localhost:34193/RExample/post/rf/">Random forest</a>
               </li>
             
               <li class="submenu-item">
-                <a href="http://localhost:45315/blog/post/rt/">Regression trees</a>
+                <a href="http://localhost:34193/RExample/post/rt/">Regression trees</a>
               </li>
             
               <li class="submenu-item">
-                <a href="http://localhost:45315/blog/post/svm/">Support vector machine (SVM)</a>
+                <a href="http://localhost:34193/RExample/post/svm/">Support vector machine (SVM)</a>
               </li>
             
           </ul>
@@ -470,7 +470,7 @@
     
 
     <div class="post-meta-category">
-        <a href="http://localhost:45315/blog/categories/pca/"> PCA </a>
+        <a href="http://localhost:34193/RExample/categories/pca/"> PCA </a>
           
       </div>
 
@@ -538,7 +538,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ lpsa   : num  -0.431 -0.163 -0.163 -0.163 0.372 ...</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ train  : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">corPlot</span>(prostate, gr <span style="color:#f92672">=</span> <span style="color:#a6e22e">colorRampPalette</span>(<span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;#2171B5&#34;</span>, <span style="color:#e6db74">&#34;white&#34;</span>, <span style="color:#e6db74">&#34;#B52127&#34;</span>)))
-</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/pca/640.webp"></p>
+</span></span></code></pre></div><p><img alt="Fig1" src="/RExample/post/pca/640.webp"></p>
 <h2 id="3-build-a-logistic-regression-model">3. Build a logistic regression model</h2>
 <p>We first build a logistic regression model using train as the dependent variable and all other variables as independent variables. We will construct the model and calculate the Variance Inflation Factor (VIF) and Generalized Variance Inflation Factor (GVIF) for linear, generalized linear, and other regression models to examine the linear relationships between the independent variables. We find that the VIF values are all greater than 2, indicating that the relationships between the variables are very tight, as shown below:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>fit <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">glm</span>(train <span style="color:#f92672">~</span> ., family <span style="color:#f92672">=</span> <span style="color:#a6e22e">binomial</span>(link <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;logit&#34;</span>), data <span style="color:#f92672">=</span> prostate)
@@ -579,13 +579,13 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e">##     lpsa </span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">## 2.876862</span>
 </span></span><span style="display:flex;"><span>forestmodel<span style="color:#f92672">::</span><span style="color:#a6e22e">forest_model</span>(fit)
-</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/pca/641.webp"></p>
+</span></span></code></pre></div><p><img alt="Fig1" src="/RExample/post/pca/641.webp"></p>
 <h2 id="4-pca">4. PCA</h2>
 <p>To address the issue of insignificant results, we need to perform dimensionality reduction by selecting the most important variables that significantly influence the dependent variable. We will use Principal Component Analysis (PCA) to obtain the principal components. We can create a scree plot to determine the number of principal components to retain. We will use Cattell&rsquo;s scree test, which shows the relationship between eigenvalues and the number of principal components. The general principle is to retain principal components with eigenvalues greater than 1 and greater than the eigenvalues obtained from parallel analysis. We observe that three principal components meet this criterion, as shown below.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">fa.parallel</span>(prostate[, <span style="color:#ae81ff">-10</span>], fa <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;pc&#34;</span>, n.iter <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>, show.legend <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>, main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Scree plot with parallel analysis&#34;</span>)  <span style="color:#75715e">#判断主成分个数</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">## Parallel analysis suggests that the number of factors =  NA  and the number of components =  2</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">abline</span>(h <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;green&#34;</span>)
-</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/pca/642.webp"></p>
+</span></span></code></pre></div><p><img alt="Fig1" src="/RExample/post/pca/642.webp"></p>
 <p>The principal() function in R can perform principal component analysis (PCA) based on the original data matrix or a correlation matrix. Here are the key arguments for the function:</p>
 <ol>
 <li>r: The correlation matrix or the original data matrix.</li>
@@ -732,7 +732,7 @@ In this part, the description of the two principal components includes:</p>
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="http://localhost:45315/blog/tags/pca/">PCA</a>
+          <a href="http://localhost:34193/RExample/tags/pca/">PCA</a>
             
         </div>
 
@@ -740,7 +740,7 @@ In this part, the description of the two principal components includes:</p>
       
       <nav class="post-nav">
         
-          <a class="prev" href="/blog/post/fa/">
+          <a class="prev" href="/RExample/post/fa/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -795,7 +795,7 @@ In this part, the description of the two principal components includes:</p>
     </a>
 
 
-<a href="http://localhost:45315/blog/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+<a href="http://localhost:34193/RExample/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
     class="iconfont" title="rss" target="_blank">
     <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
   xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -858,13 +858,13 @@ In this part, the description of the two principal components includes:</p>
     </div>
   </div>
   
-<script type="text/javascript" src="/blog/lib/jquery/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="/blog/lib/slideout/slideout-1.0.1.min.js"></script>
+<script type="text/javascript" src="/RExample/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/RExample/lib/slideout/slideout-1.0.1.min.js"></script>
 
 
 
 
-<script type="text/javascript" src="/blog/js/main.fe83e11b4fbc9193d67e2c9db78bad21f8dc59fca0cacd8c1c3bb071bb16a852.js" integrity="sha256-/oPhG0&#43;8kZPWfiydt4utIfjcWfygys2MHDuwcbsWqFI=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/RExample/js/main.fe83e11b4fbc9193d67e2c9db78bad21f8dc59fca0cacd8c1c3bb071bb16a852.js" integrity="sha256-/oPhG0&#43;8kZPWfiydt4utIfjcWfygys2MHDuwcbsWqFI=" crossorigin="anonymous"></script>
 
 
 

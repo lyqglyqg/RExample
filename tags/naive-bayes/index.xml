@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Naive Bayes on Example R codes for BIOS 850 &amp; 880</title>
-    <link>http://localhost:45315/blog/tags/naive-bayes/</link>
+    <link>http://localhost:34193/RExample/tags/naive-bayes/</link>
     <description>Recent content in Naive Bayes on Example R codes for BIOS 850 &amp; 880</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Tue, 30 Apr 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:45315/blog/tags/naive-bayes/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:34193/RExample/tags/naive-bayes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Naive Bayes</title>
-      <link>http://localhost:45315/blog/post/nb/</link>
+      <link>http://localhost:34193/RExample/post/nb/</link>
       <pubDate>Tue, 30 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/post/nb/</guid>
+      <guid>http://localhost:34193/RExample/post/nb/</guid>
       <description></description>
     </item>
   </channel>

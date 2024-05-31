@@ -2,115 +2,115 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Example R codes for BIOS 850 &amp; 880</title>
-    <link>http://localhost:45315/blog/post/</link>
+    <link>http://localhost:34193/RExample/post/</link>
     <description>Recent content in Posts on Example R codes for BIOS 850 &amp; 880</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Wed, 29 May 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:45315/blog/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:34193/RExample/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Elastic Net</title>
-      <link>http://localhost:45315/blog/post/en/</link>
+      <link>http://localhost:34193/RExample/post/en/</link>
       <pubDate>Wed, 29 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/post/en/</guid>
+      <guid>http://localhost:34193/RExample/post/en/</guid>
       <description></description>
     </item>
     <item>
       <title>Bagged Classification And Regression Trees（Bagged CART)</title>
-      <link>http://localhost:45315/blog/post/bcart/</link>
+      <link>http://localhost:34193/RExample/post/bcart/</link>
       <pubDate>Thu, 23 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/post/bcart/</guid>
+      <guid>http://localhost:34193/RExample/post/bcart/</guid>
       <description></description>
     </item>
     <item>
       <title>AdaBoost</title>
-      <link>http://localhost:45315/blog/post/ab/</link>
+      <link>http://localhost:34193/RExample/post/ab/</link>
       <pubDate>Mon, 20 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/post/ab/</guid>
+      <guid>http://localhost:34193/RExample/post/ab/</guid>
       <description></description>
     </item>
     <item>
       <title>Gradient Boosting Machine（GBM)</title>
-      <link>http://localhost:45315/blog/post/gbm/</link>
+      <link>http://localhost:34193/RExample/post/gbm/</link>
       <pubDate>Sun, 12 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/post/gbm/</guid>
+      <guid>http://localhost:34193/RExample/post/gbm/</guid>
       <description></description>
     </item>
     <item>
       <title>Naive Bayes</title>
-      <link>http://localhost:45315/blog/post/nb/</link>
+      <link>http://localhost:34193/RExample/post/nb/</link>
       <pubDate>Tue, 30 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/post/nb/</guid>
+      <guid>http://localhost:34193/RExample/post/nb/</guid>
       <description></description>
     </item>
     <item>
       <title>Neural network</title>
-      <link>http://localhost:45315/blog/post/nn/</link>
+      <link>http://localhost:34193/RExample/post/nn/</link>
       <pubDate>Mon, 15 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/post/nn/</guid>
+      <guid>http://localhost:34193/RExample/post/nn/</guid>
       <description></description>
     </item>
     <item>
       <title>Gradient boosting</title>
-      <link>http://localhost:45315/blog/post/gb/</link>
+      <link>http://localhost:34193/RExample/post/gb/</link>
       <pubDate>Thu, 28 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/post/gb/</guid>
+      <guid>http://localhost:34193/RExample/post/gb/</guid>
       <description></description>
     </item>
     <item>
       <title>Random forest</title>
-      <link>http://localhost:45315/blog/post/rf/</link>
+      <link>http://localhost:34193/RExample/post/rf/</link>
       <pubDate>Mon, 18 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/post/rf/</guid>
+      <guid>http://localhost:34193/RExample/post/rf/</guid>
       <description></description>
     </item>
     <item>
       <title>Regression trees</title>
-      <link>http://localhost:45315/blog/post/rt/</link>
+      <link>http://localhost:34193/RExample/post/rt/</link>
       <pubDate>Sun, 10 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/post/rt/</guid>
+      <guid>http://localhost:34193/RExample/post/rt/</guid>
       <description></description>
     </item>
     <item>
       <title>Classification trees</title>
-      <link>http://localhost:45315/blog/post/ct/</link>
+      <link>http://localhost:34193/RExample/post/ct/</link>
       <pubDate>Sat, 24 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/post/ct/</guid>
+      <guid>http://localhost:34193/RExample/post/ct/</guid>
       <description></description>
     </item>
     <item>
       <title>Support vector machine (SVM)</title>
-      <link>http://localhost:45315/blog/post/svm/</link>
+      <link>http://localhost:34193/RExample/post/svm/</link>
       <pubDate>Mon, 12 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/post/svm/</guid>
+      <guid>http://localhost:34193/RExample/post/svm/</guid>
       <description></description>
     </item>
     <item>
       <title>K Nearest Neighbors (KNN)</title>
-      <link>http://localhost:45315/blog/post/knn/</link>
+      <link>http://localhost:34193/RExample/post/knn/</link>
       <pubDate>Wed, 31 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/post/knn/</guid>
+      <guid>http://localhost:34193/RExample/post/knn/</guid>
       <description></description>
     </item>
     <item>
       <title>Cluster analysis</title>
-      <link>http://localhost:45315/blog/post/ca/</link>
+      <link>http://localhost:34193/RExample/post/ca/</link>
       <pubDate>Sat, 20 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/post/ca/</guid>
+      <guid>http://localhost:34193/RExample/post/ca/</guid>
       <description></description>
     </item>
     <item>
       <title>Factor analysis (FA)</title>
-      <link>http://localhost:45315/blog/post/fa/</link>
+      <link>http://localhost:34193/RExample/post/fa/</link>
       <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/post/fa/</guid>
+      <guid>http://localhost:34193/RExample/post/fa/</guid>
       <description></description>
     </item>
     <item>
       <title>Principle component analysis (PCA)</title>
-      <link>http://localhost:45315/blog/post/pca/</link>
+      <link>http://localhost:34193/RExample/post/pca/</link>
       <pubDate>Wed, 03 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/post/pca/</guid>
+      <guid>http://localhost:34193/RExample/post/pca/</guid>
       <description></description>
     </item>
   </channel>

@@ -2,115 +2,115 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Example R codes for BIOS 850 &amp; 880</title>
-    <link>http://localhost:45315/blog/categories/</link>
+    <link>http://localhost:34193/RExample/categories/</link>
     <description>Recent content in Categories on Example R codes for BIOS 850 &amp; 880</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Wed, 29 May 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:45315/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:34193/RExample/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Elastic Net</title>
-      <link>http://localhost:45315/blog/categories/elastic-net/</link>
+      <link>http://localhost:34193/RExample/categories/elastic-net/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/categories/elastic-net/</guid>
+      <guid>http://localhost:34193/RExample/categories/elastic-net/</guid>
       <description></description>
     </item>
     <item>
       <title>Bagged CART</title>
-      <link>http://localhost:45315/blog/categories/bagged-cart/</link>
+      <link>http://localhost:34193/RExample/categories/bagged-cart/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/categories/bagged-cart/</guid>
+      <guid>http://localhost:34193/RExample/categories/bagged-cart/</guid>
       <description></description>
     </item>
     <item>
       <title>AdaBoost</title>
-      <link>http://localhost:45315/blog/categories/adaboost/</link>
+      <link>http://localhost:34193/RExample/categories/adaboost/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/categories/adaboost/</guid>
+      <guid>http://localhost:34193/RExample/categories/adaboost/</guid>
       <description></description>
     </item>
     <item>
       <title>GBM</title>
-      <link>http://localhost:45315/blog/categories/gbm/</link>
+      <link>http://localhost:34193/RExample/categories/gbm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/categories/gbm/</guid>
+      <guid>http://localhost:34193/RExample/categories/gbm/</guid>
       <description></description>
     </item>
     <item>
       <title>Naive Bayes</title>
-      <link>http://localhost:45315/blog/categories/naive-bayes/</link>
+      <link>http://localhost:34193/RExample/categories/naive-bayes/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/categories/naive-bayes/</guid>
+      <guid>http://localhost:34193/RExample/categories/naive-bayes/</guid>
       <description></description>
     </item>
     <item>
       <title>Neural Network</title>
-      <link>http://localhost:45315/blog/categories/neural-network/</link>
+      <link>http://localhost:34193/RExample/categories/neural-network/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/categories/neural-network/</guid>
+      <guid>http://localhost:34193/RExample/categories/neural-network/</guid>
       <description></description>
     </item>
     <item>
       <title>Gradient Boosting</title>
-      <link>http://localhost:45315/blog/categories/gradient-boosting/</link>
+      <link>http://localhost:34193/RExample/categories/gradient-boosting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/categories/gradient-boosting/</guid>
+      <guid>http://localhost:34193/RExample/categories/gradient-boosting/</guid>
       <description></description>
     </item>
     <item>
       <title>Random Forest</title>
-      <link>http://localhost:45315/blog/categories/random-forest/</link>
+      <link>http://localhost:34193/RExample/categories/random-forest/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/categories/random-forest/</guid>
+      <guid>http://localhost:34193/RExample/categories/random-forest/</guid>
       <description></description>
     </item>
     <item>
       <title>Regression Trees</title>
-      <link>http://localhost:45315/blog/categories/regression-trees/</link>
+      <link>http://localhost:34193/RExample/categories/regression-trees/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/categories/regression-trees/</guid>
+      <guid>http://localhost:34193/RExample/categories/regression-trees/</guid>
       <description></description>
     </item>
     <item>
       <title>Classification Trees</title>
-      <link>http://localhost:45315/blog/categories/classification-trees/</link>
+      <link>http://localhost:34193/RExample/categories/classification-trees/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/categories/classification-trees/</guid>
+      <guid>http://localhost:34193/RExample/categories/classification-trees/</guid>
       <description></description>
     </item>
     <item>
       <title>SVM</title>
-      <link>http://localhost:45315/blog/categories/svm/</link>
+      <link>http://localhost:34193/RExample/categories/svm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/categories/svm/</guid>
+      <guid>http://localhost:34193/RExample/categories/svm/</guid>
       <description></description>
     </item>
     <item>
       <title>KNN</title>
-      <link>http://localhost:45315/blog/categories/knn/</link>
+      <link>http://localhost:34193/RExample/categories/knn/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/categories/knn/</guid>
+      <guid>http://localhost:34193/RExample/categories/knn/</guid>
       <description></description>
     </item>
     <item>
       <title>Cluster Analysis</title>
-      <link>http://localhost:45315/blog/categories/cluster-analysis/</link>
+      <link>http://localhost:34193/RExample/categories/cluster-analysis/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/categories/cluster-analysis/</guid>
+      <guid>http://localhost:34193/RExample/categories/cluster-analysis/</guid>
       <description></description>
     </item>
     <item>
       <title>Factor Analysis</title>
-      <link>http://localhost:45315/blog/categories/factor-analysis/</link>
+      <link>http://localhost:34193/RExample/categories/factor-analysis/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/categories/factor-analysis/</guid>
+      <guid>http://localhost:34193/RExample/categories/factor-analysis/</guid>
       <description></description>
     </item>
     <item>
       <title>PCA</title>
-      <link>http://localhost:45315/blog/categories/pca/</link>
+      <link>http://localhost:34193/RExample/categories/pca/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:45315/blog/categories/pca/</guid>
+      <guid>http://localhost:34193/RExample/categories/pca/</guid>
       <description></description>
     </item>
   </channel>
