@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Transcript Profile on Example R codes for BIOS 850 &amp; 880</title>
+    <link>http://localhost:45315/blog/categories/transcript-profile/</link>
+    <description>Recent content in Transcript Profile on Example R codes for BIOS 850 &amp; 880</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 12 Feb 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:45315/blog/categories/transcript-profile/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>UMAP &amp; heatmap replication</title>
+      <link>http://localhost:45315/blog/post/umap/</link>
+      <pubDate>Sun, 12 Feb 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:45315/blog/post/umap/</guid>
+      <description>&lt;p&gt;Transcriptional proﬁling of mESC-derived tendon and ﬁbrocartilage cell fate switch&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
