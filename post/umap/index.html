@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=45315&amp;path=blog/livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>UMAP &amp; heatmap replication - Example R codes for BIOS 850 &amp; 880</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="LYQG" />
+  <meta name="description" content="Transcriptional proﬁling of mESC-derived tendon and ﬁbrocartilage cell fate switch
+" />
+<meta name="keywords" content="RNAseq, R, Transcript profile" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.126.1" />
+
+
+<link rel="canonical" href="http://localhost:45315/blog/post/umap/" />
+
+
+
+
+
+<link rel="icon" href="/blog/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/sass/jane.min.de22abc00de44766eebd1054fd9e0b254b071f89d5019044f893c484a9249a8d.css" integrity="sha256-3iKrwA3kR2buvRBU/Z4LJUsHH4nVAZBE&#43;JPEhKkkmo0=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:url" content="http://localhost:45315/blog/post/umap/">
+  <meta property="og:site_name" content="Example R codes for BIOS 850 &amp; 880">
+  <meta property="og:title" content="UMAP &amp; heatmap replication">
+  <meta property="og:description" content="Transcriptional proﬁling of mESC-derived tendon and ﬁbrocartilage cell fate switch">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-02-12T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-02-12T00:00:00+00:00">
+    <meta property="article:tag" content="RNAseq">
+    <meta property="article:tag" content="R">
+    <meta property="article:tag" content="Transcript Profile">
+
+  <meta itemprop="name" content="UMAP &amp; heatmap replication">
+  <meta itemprop="description" content="Transcriptional proﬁling of mESC-derived tendon and ﬁbrocartilage cell fate switch">
+  <meta itemprop="datePublished" content="2023-02-12T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2023-02-12T00:00:00+00:00">
+  <meta itemprop="wordCount" content="1118">
+  <meta itemprop="keywords" content="RNAseq,R,Transcript profile">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="UMAP &amp; heatmap replication">
+  <meta name="twitter:description" content="Transcriptional proﬁling of mESC-derived tendon and ﬁbrocartilage cell fate switch">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Example R codes for BIOS 850 & 880</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/categories/">Categories</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/about/">About</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">external-link</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          <div class="mobile-menu-parent">
+            <span class="mobile-submenu-open"></span>
+            <a href="http://localhost:45315/blog/">
+              docs
+            </a>
+          </div>
+          <ul class="mobile-submenu-list">
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/ca/">Cluster analysis</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/knn/">K Nearest Neighbors</a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      Example R codes for BIOS 850 & 880
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">Home</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/categories/">Categories</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/about/">About</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">external-link</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          <a class="menu-item-link menu-parent" href="http://localhost:45315/blog/">docs</a>
+          <ul class="submenu">
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/ca/">Cluster analysis</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/knn/">K Nearest Neighbors</a>
+              </li>
+            
+          </ul>
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight wallpaper">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">UMAP &amp; heatmap replication</h1>
+      
+
+      <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      LYQG
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-02-12">
+      2023-02-12
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    
+
+    <div class="post-meta-category">
+        <a href="http://localhost:45315/blog/categories/rnaseq/"> RNAseq </a>
+          <a href="http://localhost:45315/blog/categories/r/"> R </a>
+          <a href="http://localhost:45315/blog/categories/transcript-profile/"> Transcript profile </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+    </header>
+
+    
+    
+
+
+    
+    <div class="post-content">
+      <p>Transcriptional proﬁling of mESC-derived tendon and ﬁbrocartilage cell fate switch</p>
+<h2 id="importing-data-in-batch-mode-and-filtering">Importing data in batch mode and filtering</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(Seurat)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggplot2)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(patchwork)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(tidyverse)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggsci)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(reshape2)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(clustree)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(data.table)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">requireNamespace</span>(<span style="color:#e6db74">&#34;BiocManager&#34;</span>, quietly <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;BiocManager&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>BiocManager<span style="color:#f92672">::</span><span style="color:#a6e22e">install</span>(<span style="color:#e6db74">&#34;glmGamPoi&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(glmGamPoi)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># batch read data</span>
+</span></span><span style="display:flex;"><span>file <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">list.files</span>(pattern <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;.csv&#39;</span>)[1<span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>]
+</span></span><span style="display:flex;"><span>sample <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;culture&#39;</span>,<span style="color:#e6db74">&#39;tail&#39;</span>)
+</span></span><span style="display:flex;"><span>scRNAlist <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">list</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># x = 1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(x <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">length</span>(file)){
+</span></span><span style="display:flex;"><span>  count <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read.csv</span>(file[x],header <span style="color:#f92672">=</span> T,row.names <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># create Seurat object</span>
+</span></span><span style="display:flex;"><span>  scRNAlist[[sample[x]]] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">CreateSeuratObject</span>(count,
+</span></span><span style="display:flex;"><span>                                               <span style="color:#75715e"># min.cells = 3,</span>
+</span></span><span style="display:flex;"><span>                                               <span style="color:#75715e"># min.features = 300</span>
+</span></span><span style="display:flex;"><span>                                               )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># add group</span>
+</span></span><span style="display:flex;"><span>  scRNAlist[[sample[x]]]<span style="color:#f92672">$</span>group <span style="color:#f92672">&lt;-</span> sample[x]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># mitocondral percent</span>
+</span></span><span style="display:flex;"><span>  scRNAlist[[sample[x]]][[<span style="color:#e6db74">&#34;percent.mt&#34;</span>]] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">PercentageFeatureSet</span>(scRNAlist[[sample[x]]],
+</span></span><span style="display:flex;"><span>                                                                 pattern <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;^mt-&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># calculate quantile 2-98</span>
+</span></span><span style="display:flex;"><span>  qt <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">quantile</span>(scRNAlist[[sample[x]]]<span style="color:#f92672">$</span>nFeature_RNA,probs <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.02</span>,<span style="color:#ae81ff">0.98</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># filter cells gene in quantile 2-98 and mitocondral below 7.5</span>
+</span></span><span style="display:flex;"><span>  scRNAlist[[sample[x]]] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">subset</span>(scRNAlist[[sample[x]]],
+</span></span><span style="display:flex;"><span>                                   subset <span style="color:#f92672">=</span> nFeature_RNA <span style="color:#f92672">&gt;=</span> qt[1] <span style="color:#f92672">&amp;</span> nFeature_RNA <span style="color:#f92672">&lt;=</span> qt[2] <span style="color:#f92672">&amp;</span> percent.mt <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">7.5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># SCTransform normalize</span>
+</span></span><span style="display:flex;"><span>  scRNAlist[[sample[x]]] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">SCTransform</span>(scRNAlist[[sample[x]]],
+</span></span><span style="display:flex;"><span>                                        method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;glmGamPoi&#34;</span>,verbose <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">RunPCA</span>(npcs <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>, verbose <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="check-data">Check data</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>scRNAlist
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># $culture</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># An object of class Seurat</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 50537 features across 7508 samples within 2 assays</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Active assay: SCT (22781 features, 3000 variable features)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1 other assay present: RNA</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1 dimensional reduction calculated: pca</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># $tail</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># An object of class Seurat</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 49891 features across 1968 samples within 2 assays</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Active assay: SCT (22135 features, 3000 variable features)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1 other assay present: RNA</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1 dimensional reduction calculated: pca</span>
+</span></span></code></pre></div><h2 id="check-filtering-results">Check filtering results</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># vlnplot</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">lapply</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">length</span>(scRNAlist), <span style="color:#66d9ef">function</span>(x){
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">VlnPlot</span>(scRNAlist[[x]], features <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;nFeature_RNA&#34;</span>, <span style="color:#e6db74">&#34;nCount_RNA&#34;</span>, <span style="color:#e6db74">&#34;percent.mt&#34;</span>),
+</span></span><span style="display:flex;"><span>          ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>}) <span style="color:#f92672">-&gt;</span> vlnlist
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># plot</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">png</span>(<span style="color:#e6db74">&#34;vlnlist.png&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">wrap_plots</span>(vlnlist,nrow <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dev.off</span>()
+</span></span></code></pre></div><p><img alt="vlnlist" src="/blog/post/umap/vlnlist.png"></p>
+<h2 id="data-integration">Data integration</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># select features that are repeatedly variable across datasets for integration</span>
+</span></span><span style="display:flex;"><span>features <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">SelectIntegrationFeatures</span>(object.list <span style="color:#f92672">=</span> scRNAlist, nfeatures <span style="color:#f92672">=</span> <span style="color:#ae81ff">3000</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Perform integration</span>
+</span></span><span style="display:flex;"><span>scRNAlist <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">PrepSCTIntegration</span>(object.list <span style="color:#f92672">=</span> scRNAlist, anchor.features <span style="color:#f92672">=</span> features)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># |++++++++++++++++++++++++++++++++++++++++++++++++++| 100% elapsed=05s</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># find Anchors !tail as refrence</span>
+</span></span><span style="display:flex;"><span>combined.anchors <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">FindIntegrationAnchors</span>(object.list <span style="color:#f92672">=</span> scRNAlist,
+</span></span><span style="display:flex;"><span>                                           reference <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>                                           normalization.method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;SCT&#34;</span>,
+</span></span><span style="display:flex;"><span>                                           reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;cca&#39;</span>,
+</span></span><span style="display:flex;"><span>                                           anchor.features <span style="color:#f92672">=</span> features)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># intergrate</span>
+</span></span><span style="display:flex;"><span>combined.sct <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">IntegrateData</span>(anchorset <span style="color:#f92672">=</span> combined.anchors, normalization.method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;SCT&#34;</span>)
+</span></span></code></pre></div><p>##Dimension reduction and visulization</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span></span><span style="background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></span><span style="background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#75715e"># Perform an integrated analysis</span>
+</span></span><span style="display:flex;"><span>combined.sct <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">RunPCA</span>(combined.sct, verbose <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</span></span><span style="display:flex;"><span>combined.sct <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">FindNeighbors</span>(combined.sct, reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;pca&#34;</span>, dims <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">30</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#不同分辨率下可视化聚类树:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># check different resolution and clusters</span>
+</span></span><span style="display:flex;"><span>combined.sct <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">FindClusters</span>(combined.sct, resolution <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">.1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0.1</span>)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span><span style="color:#75715e"># plot tree</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span><span style="color:#a6e22e">clustree</span>(combined.sct<span style="color:#f92672">@</span>meta.data, prefix <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;integrated_snn_res.&#34;</span>)
+</span></span><span style="display:flex; background-color:#3c3d38"><span><span style="color:#75715e">### Not working currently!!</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># resolution = 0.3</span>
+</span></span><span style="display:flex;"><span>combined.sct <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">FindClusters</span>(combined.sct, resolution <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># check groups</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(combined.sct<span style="color:#f92672">@</span>meta.data<span style="color:#f92672">$</span>group)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># culture    tail</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    7508    1968</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="umap">UMAP</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># run umap</span>
+</span></span><span style="display:flex;"><span>combined.sct <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">RunUMAP</span>(combined.sct, reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;pca&#34;</span>, dims <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">30</span>, verbose <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># DimPlot by group</span>
+</span></span><span style="display:flex;"><span>p2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">DimPlot</span>(combined.sct, reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;umap&#34;</span>,group.by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;group&#39;</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">scale_color_manual</span>(values <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;#009999&#39;</span>,<span style="color:#e6db74">&#39;#CC9933&#39;</span>)) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">theme</span>(aspect.ratio <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        legend.position <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.05</span>,<span style="color:#ae81ff">0.1</span>)) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">labs</span>(title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># DimPlot cluster</span>
+</span></span><span style="display:flex;"><span>p1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">DimPlot</span>(combined.sct, reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;umap&#34;</span>,label <span style="color:#f92672">=</span> T,
+</span></span><span style="display:flex;"><span>        label.size <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>,label.box <span style="color:#f92672">=</span> T) <span style="color:#f92672">+</span> <span style="color:#a6e22e">NoLegend</span>() <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># scale_color_npg() +</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># scale_fill_npg(alpha = 0.5) +</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">theme</span>(aspect.ratio <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># combine</span>
+</span></span><span style="display:flex;"><span>p1 <span style="color:#f92672">+</span> p2
+</span></span></code></pre></div><p><img alt="umaps" src="/blog/post/umap/umaps.png"></p>
+<h2 id="feature-plot">Feature plot</h2>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span></span><span style="background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span></span><span style="background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span></span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#75715e"># gene plot</span>
+</span></span><span style="display:flex;"><span>gene <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;Scx&#39;</span>,<span style="color:#e6db74">&#39;Dcn&#39;</span>,<span style="color:#e6db74">&#39;Bgn&#39;</span>,<span style="color:#e6db74">&#39;Col5a2&#39;</span>,<span style="color:#e6db74">&#39;Col1a1&#39;</span>,<span style="color:#e6db74">&#39;Col3a1&#39;</span>,<span style="color:#e6db74">&#39;Fbn2&#39;</span>,<span style="color:#e6db74">&#39;Postn&#39;</span>,<span style="color:#e6db74">&#39;Tnc&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">FeaturePlot</span>(combined.sct,features <span style="color:#f92672">=</span> gene,
+</span></span><span style="display:flex;"><span>            cols <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;grey90&#39;</span>,<span style="color:#e6db74">&#39;#CC0033&#39;</span>),ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>            min.cutoff <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;q2&#39;</span>,max.cutoff <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;q98&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">png</span>(<span style="color:#e6db74">&#34;gene_plot.png&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">FeaturePlot</span>(combined.sct,features <span style="color:#f92672">=</span> gene,
+</span></span><span style="display:flex;"><span>            cols <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;grey90&#39;</span>,<span style="color:#e6db74">&#39;#CC0033&#39;</span>),ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>            min.cutoff <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;q2&#39;</span>,max.cutoff <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;q98&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dev.off</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Replot with labels</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pc <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">Embeddings</span>(combined.sct,reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;umap&#39;</span>) <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">data.frame</span>()
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># add gene name</span>
+</span></span><span style="display:flex;"><span>exp <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">FetchData</span>(combined.sct,vars <span style="color:#f92672">=</span> gene)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># megrge</span>
+</span></span><span style="display:flex;"><span>mer <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cbind</span>(pc,exp)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># wide to long</span>
+</span></span><span style="display:flex;"><span>dflong <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">melt</span>(mer,id.vars <span style="color:#f92672">=</span> <span style="color:#a6e22e">colnames</span>(mer)[1<span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>],
+</span></span><span style="display:flex;"><span>               value.name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;expressiton&#39;</span>,
+</span></span><span style="display:flex;"><span>               variable.name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;gene&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># check</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(dflong,<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#      UMAP_1    UMAP_2 gene expressiton</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1 -3.011463  3.503852  Scx -0.26745991</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2 -7.580204  3.401761  Scx -0.02333779</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3 -3.620352 -3.481013  Scx -3.29670049</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># filter quantile in 0.02~0.98</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">quantile</span>(dflong<span style="color:#f92672">$</span>expressiton,probs <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.02</span>,<span style="color:#ae81ff">0.98</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#        2%       98%</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -3.322756  7.487187</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span><span style="color:#75715e"># filter expression</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>dflong <span style="color:#f92672">&lt;-</span> dflong <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">filter</span>(dflong<span style="color:#f92672">$</span>expressiton <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">-3.322756</span> <span style="color:#f92672">&amp;</span> dflong<span style="color:#f92672">$</span>expressiton <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">7.487187</span>)
+</span></span><span style="display:flex; background-color:#3c3d38"><span><span style="color:#75715e">####NOT working!!!!!!!!!!</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># plot</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">png</span>(<span style="color:#e6db74">&#34;gene_plot_self.png&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(dflong,<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> UMAP_1,y <span style="color:#f92672">=</span> UMAP_2)) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_point</span>(<span style="color:#a6e22e">aes</span>(color <span style="color:#f92672">=</span> expressiton),size <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>,alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">scale_color_gradient</span>(low <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;grey90&#39;</span>,high <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;#CC0033&#39;</span>,
+</span></span><span style="display:flex;"><span>                       name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;percentile \n expression&#39;</span>,
+</span></span><span style="display:flex;"><span>                       breaks <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">-3.322756</span>,<span style="color:#ae81ff">7.487187</span>),
+</span></span><span style="display:flex;"><span>                       limits <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">-3.322756</span>,<span style="color:#ae81ff">7.487187</span>),
+</span></span><span style="display:flex;"><span>                       labels <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;&lt; 2%&#39;</span>,<span style="color:#e6db74">&#39;&gt; 98%&#39;</span>)
+</span></span><span style="display:flex;"><span>                       ) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">theme_classic</span>(base_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">16</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">theme</span>(axis.line <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_blank</span>(),
+</span></span><span style="display:flex;"><span>        axis.ticks <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_blank</span>(),
+</span></span><span style="display:flex;"><span>        axis.text <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_blank</span>(),
+</span></span><span style="display:flex;"><span>        aspect.ratio <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        legend.position <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;right&#39;</span>,
+</span></span><span style="display:flex;"><span>        strip.text.x <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_text</span>(size <span style="color:#f92672">=</span> <span style="color:#ae81ff">16</span>,face <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;italic&#39;</span>),
+</span></span><span style="display:flex;"><span>        strip.background <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_rect</span>(fill <span style="color:#f92672">=</span> <span style="color:#66d9ef">NA</span>,color <span style="color:#f92672">=</span> <span style="color:#66d9ef">NA</span>)) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">facet_wrap</span>(<span style="color:#f92672">~</span>gene) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">labs</span>(x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>,y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">guides</span>(color <span style="color:#f92672">=</span> <span style="color:#a6e22e">guide_colorbar</span>(title.position <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;left&#39;</span>,
+</span></span><span style="display:flex;"><span>                                title.theme <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_text</span>(angle <span style="color:#f92672">=</span> <span style="color:#ae81ff">90</span>,hjust <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dev.off</span>()</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p><img alt="gene_plots 1" src="/blog/post/umap/gene_plot.png">
+<img alt="gene_plots 2" src="/blog/post/umap/gene_plot_self.png"></p>
+<h2 id="violin-plots">Violin Plots</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># vlionplot</span>
+</span></span><span style="display:flex;"><span>vlngene <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;Pax1&#39;</span>,<span style="color:#e6db74">&#39;Col2a1&#39;</span>,<span style="color:#e6db74">&#39;Pax9&#39;</span>,<span style="color:#e6db74">&#39;Col9a1&#39;</span>,<span style="color:#e6db74">&#39;Sox9&#39;</span>,<span style="color:#e6db74">&#39;Col9a3&#39;</span>,<span style="color:#e6db74">&#39;Sox5&#39;</span>,<span style="color:#e6db74">&#39;Wwp2&#39;</span>,<span style="color:#e6db74">&#39;Sox6&#39;</span>,<span style="color:#e6db74">&#39;Matn4&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">png</span>(<span style="color:#e6db74">&#34;vlionplot_self.png&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">VlnPlot</span>(combined.sct,features <span style="color:#f92672">=</span> vlngene,
+</span></span><span style="display:flex;"><span>        ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,idents <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">4</span>),
+</span></span><span style="display:flex;"><span>        slot <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;counts&#39;</span>,assay <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;RNA&#39;</span>,
+</span></span><span style="display:flex;"><span>        log <span style="color:#f92672">=</span> T,pt.size <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,cols <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;#99CCFF&#39;</span>,<span style="color:#e6db74">&#39;#006699&#39;</span>,<span style="color:#e6db74">&#39;#66CC99&#39;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dev.off</span>()
+</span></span></code></pre></div><p><img alt="Gene violin plots" src="/blog/post/umap/vlionplot_self.png"></p>
+<h2 id="sct-and-de-analysis">SCT and DE analysis</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>SCT 后的基因数量会少一些,因为前者会有基因的过滤指标<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>rnacount <span style="color:#f92672">&lt;-</span> combined.sct<span style="color:#f92672">@</span>assays<span style="color:#f92672">$</span>RNA<span style="color:#f92672">@</span>counts <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">data.frame</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dim</span>(rnacount)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1] 27756  9476</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># SCTransform filter min.cells &lt; 5</span>
+</span></span><span style="display:flex;"><span>sctcount <span style="color:#f92672">&lt;-</span> combined.sct<span style="color:#f92672">@</span>assays<span style="color:#f92672">$</span>SCT<span style="color:#f92672">@</span>counts <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">data.frame</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dim</span>(sctcount)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># [1] 24559  9476</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">10</span>同一 cluster 不同样本的基因差异分析
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># differential analysis</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># add test for group</span>
+</span></span><span style="display:flex;"><span>combined.sct<span style="color:#f92672">$</span>diffGroup <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(combined.sct<span style="color:#f92672">$</span>group,combined.sct<span style="color:#f92672">$</span>seurat_clusters,
+</span></span><span style="display:flex;"><span>                                sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;|&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># make it to active ident</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Idents</span>(combined.sct) <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;diffGroup&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># check</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(combined.sct<span style="color:#f92672">$</span>diffGroup)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># culture|0  culture|1 culture|10 culture|11 culture|12 culture|13  culture|2  culture|3</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1453       1467         62         31         46          4       1490       1302</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># culture|4  culture|5  culture|6  culture|7  culture|8  culture|9     tail|0     tail|1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 655        546        374         26         50          2        398        324</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># tail|10    tail|11    tail|13     tail|2     tail|3     tail|4     tail|5     tail|6</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 67         68         33        203         44        192         88        159</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># tail|7     tail|8     tail|9</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 152        103        137</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># diff test</span>
+</span></span><span style="display:flex;"><span>test <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">FindMarkers</span>(combined.sct,ident.1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;tail|0&#39;</span>,ident.2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;culture|0&#39;</span>,
+</span></span><span style="display:flex;"><span>            test.use <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wilcox&#39;</span>,logfc.threshold <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.25</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># add gene name</span>
+</span></span><span style="display:flex;"><span>test<span style="color:#f92672">$</span>gene_name <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rownames</span>(test)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># check</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(test,<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#                p_val avg_log2FC pct.1 pct.2     p_val_adj gene_name</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Vwce   1.893026e-157   5.596902 0.055 0.847 5.679077e-154      Vwce</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Sphkap 9.220839e-156  -8.948104 0.045 0.667 2.766252e-152    Sphkap</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Kcna1  8.684915e-155  -8.669776 0.053 0.587 2.605475e-151     Kcna1   </span>
+</span></span></code></pre></div><h2 id="heatmaps">Heatmaps</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># heatmap genes</span>
+</span></span><span style="display:flex;"><span>htgene <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;Postn&#39;</span>,<span style="color:#e6db74">&#39;Col1a2&#39;</span>,<span style="color:#e6db74">&#39;Dcn&#39;</span>,<span style="color:#e6db74">&#39;Col1a1&#39;</span>,<span style="color:#e6db74">&#39;Col3a1&#39;</span>,<span style="color:#e6db74">&#39;Igfbp5&#39;</span>,<span style="color:#e6db74">&#39;Col5a2&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;Mgp&#39;</span>,<span style="color:#e6db74">&#39;Ogn&#39;</span>,<span style="color:#e6db74">&#39;Thbs2&#39;</span>,<span style="color:#e6db74">&#39;Rflnb&#39;</span>,<span style="color:#e6db74">&#39;Mfap2&#39;</span>,<span style="color:#e6db74">&#39;Fbn2&#39;</span>,<span style="color:#e6db74">&#39;Fstl1&#39;</span>,<span style="color:#e6db74">&#39;Mfap4&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;Bgn&#39;</span>,<span style="color:#e6db74">&#39;Fn1&#39;</span>,<span style="color:#e6db74">&#39;Igfbp7&#39;</span>,<span style="color:#e6db74">&#39;Igf1&#39;</span>,<span style="color:#e6db74">&#39;Col8a1&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;Hist1h1b&#39;</span>,<span style="color:#e6db74">&#39;Mki67&#39;</span>,<span style="color:#e6db74">&#39;Top2a&#39;</span>,<span style="color:#e6db74">&#39;Pclaf&#39;</span>,<span style="color:#e6db74">&#39;Prc1&#39;</span>,<span style="color:#e6db74">&#39;Ube2c&#39;</span>,<span style="color:#e6db74">&#39;Cenpf&#39;</span>,<span style="color:#e6db74">&#39;Hist1h1e&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;Hist1h2ae&#39;</span>,<span style="color:#e6db74">&#39;Smc2&#39;</span>,<span style="color:#e6db74">&#39;Cdk1&#39;</span>,<span style="color:#e6db74">&#39;Nusap1&#39;</span>,<span style="color:#e6db74">&#39;Cenpe&#39;</span>,<span style="color:#e6db74">&#39;Kif11&#39;</span>,<span style="color:#e6db74">&#39;Birc5&#39;</span>,<span style="color:#e6db74">&#39;Smc4&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;Hmmr&#39;</span>,<span style="color:#e6db74">&#39;Tpx2&#39;</span>,<span style="color:#e6db74">&#39;Aurkb&#39;</span>,<span style="color:#e6db74">&#39;Arl6ip1&#39;</span>,<span style="color:#e6db74">&#39;Col2a1&#39;</span>,<span style="color:#e6db74">&#39;Col9a1&#39;</span>,<span style="color:#e6db74">&#39;Matn4&#39;</span>,<span style="color:#e6db74">&#39;Col9a3&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;Wwp2&#39;</span>,<span style="color:#e6db74">&#39;Col11a1&#39;</span>,<span style="color:#e6db74">&#39;Sox9&#39;</span>,<span style="color:#e6db74">&#39;Col9a2&#39;</span>,<span style="color:#e6db74">&#39;Acan&#39;</span>,<span style="color:#e6db74">&#39;Pax1&#39;</span>,<span style="color:#e6db74">&#39;Plod2&#39;</span>,<span style="color:#e6db74">&#39;Dlk1&#39;</span>,<span style="color:#e6db74">&#39;Pcp4&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;Fmod&#39;</span>,<span style="color:#e6db74">&#39;Fibin&#39;</span>,<span style="color:#e6db74">&#39;Itm2a&#39;</span>,<span style="color:#e6db74">&#39;Stk26&#39;</span>,<span style="color:#e6db74">&#39;Id1&#39;</span>,<span style="color:#e6db74">&#39;H19&#39;</span>,<span style="color:#e6db74">&#39;Ndufa4l2&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># get subgroup data</span>
+</span></span><span style="display:flex;"><span>htdata <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">subset</span>(combined.sct,idents <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;tail|0&#39;</span>,<span style="color:#e6db74">&#39;culture|0&#39;</span>,
+</span></span><span style="display:flex;"><span>                                         <span style="color:#e6db74">&#39;tail|2&#39;</span>,<span style="color:#e6db74">&#39;culture|2&#39;</span>,
+</span></span><span style="display:flex;"><span>                                         <span style="color:#e6db74">&#39;tail|4&#39;</span>,<span style="color:#e6db74">&#39;culture|4&#39;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># order</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Idents</span>(htdata) <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">Idents</span>(htdata),levels <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;culture|0&#39;</span>,<span style="color:#e6db74">&#39;tail|0&#39;</span>,
+</span></span><span style="display:flex;"><span>                                                   <span style="color:#e6db74">&#39;culture|2&#39;</span>,<span style="color:#e6db74">&#39;tail|2&#39;</span>,
+</span></span><span style="display:flex;"><span>                                                   <span style="color:#e6db74">&#39;culture|4&#39;</span>,<span style="color:#e6db74">&#39;tail|4&#39;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># heatmap</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">png</span>(<span style="color:#e6db74">&#34;heatmap.png&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">DoHeatmap</span>(htdata,features <span style="color:#f92672">=</span> htgene,
+</span></span><span style="display:flex;"><span>          draw.lines <span style="color:#f92672">=</span> T,
+</span></span><span style="display:flex;"><span>          assay <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;RNA&#39;</span>,
+</span></span><span style="display:flex;"><span>          slot <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;counts&#39;</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">scale_fill_gradient</span>(low <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;white&#39;</span>,high <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;#990033&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dev.off</span>()
+</span></span></code></pre></div><p><img alt="heatmap" src="/blog/post/umap/heatmap.png"></p>
+    </div>
+
+    
+    
+
+
+
+    
+    
+
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="http://localhost:45315/blog/tags/rnaseq/">RNAseq</a>
+            <a href="http://localhost:45315/blog/tags/r/">R</a>
+            <a href="http://localhost:45315/blog/tags/transcript-profile/">Transcript profile</a>
+            
+        </div>
+
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/blog/post/osteoarthrisis/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">A osteoarthritis study using scRNAseq data</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+
+  
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:lyqglyqg@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+  
+    <a href="http://lyqg.github.io/" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+
+
+<a href="http://localhost:45315/blog/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2023 -
+    2024
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        lyqg
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/blog/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/blog/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/blog/js/main.fe83e11b4fbc9193d67e2c9db78bad21f8dc59fca0cacd8c1c3bb071bb16a852.js" integrity="sha256-/oPhG0&#43;8kZPWfiydt4utIfjcWfygys2MHDuwcbsWqFI=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=45315&amp;path=blog/livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>A osteoarthritis study using scRNAseq data - Example R codes for BIOS 850 &amp; 880</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="LYQG" />
+  <meta name="description" content="Synovial fibroblasts assume distinct functional identities and secrete R-spondin 2 to drive osteoarthritis
+" />
+<meta name="keywords" content="RNAseq, R, osteoarthritis" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.126.1" />
+
+
+<link rel="canonical" href="http://localhost:45315/blog/post/osteoarthrisis/" />
+
+
+
+
+
+<link rel="icon" href="/blog/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/sass/jane.min.de22abc00de44766eebd1054fd9e0b254b071f89d5019044f893c484a9249a8d.css" integrity="sha256-3iKrwA3kR2buvRBU/Z4LJUsHH4nVAZBE&#43;JPEhKkkmo0=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:url" content="http://localhost:45315/blog/post/osteoarthrisis/">
+  <meta property="og:site_name" content="Example R codes for BIOS 850 &amp; 880">
+  <meta property="og:title" content="A osteoarthritis study using scRNAseq data">
+  <meta property="og:description" content="Synovial fibroblasts assume distinct functional identities and secrete R-spondin 2 to drive osteoarthritis">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-02-18T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-02-18T00:00:00+00:00">
+    <meta property="article:tag" content="RNAseq">
+    <meta property="article:tag" content="R">
+    <meta property="article:tag" content="Osteoarthritis">
+
+  <meta itemprop="name" content="A osteoarthritis study using scRNAseq data">
+  <meta itemprop="description" content="Synovial fibroblasts assume distinct functional identities and secrete R-spondin 2 to drive osteoarthritis">
+  <meta itemprop="datePublished" content="2023-02-18T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2023-02-18T00:00:00+00:00">
+  <meta itemprop="wordCount" content="728">
+  <meta itemprop="keywords" content="RNAseq,R,osteoarthritis">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="A osteoarthritis study using scRNAseq data">
+  <meta name="twitter:description" content="Synovial fibroblasts assume distinct functional identities and secrete R-spondin 2 to drive osteoarthritis">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Example R codes for BIOS 850 & 880</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/categories/">Categories</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/about/">About</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">external-link</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          <div class="mobile-menu-parent">
+            <span class="mobile-submenu-open"></span>
+            <a href="http://localhost:45315/blog/">
+              docs
+            </a>
+          </div>
+          <ul class="mobile-submenu-list">
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/ca/">Cluster analysis</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/knn/">K Nearest Neighbors</a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      Example R codes for BIOS 850 & 880
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">Home</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/categories/">Categories</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/about/">About</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">external-link</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          <a class="menu-item-link menu-parent" href="http://localhost:45315/blog/">docs</a>
+          <ul class="submenu">
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/ca/">Cluster analysis</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/knn/">K Nearest Neighbors</a>
+              </li>
+            
+          </ul>
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight wallpaper">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">A osteoarthritis study using scRNAseq data</h1>
+      
+
+      <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      LYQG
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-02-18">
+      2023-02-18
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    
+
+    <div class="post-meta-category">
+        <a href="http://localhost:45315/blog/categories/rnaseq/"> RNAseq </a>
+          <a href="http://localhost:45315/blog/categories/r/"> R </a>
+          <a href="http://localhost:45315/blog/categories/osteoarthritis/"> osteoarthritis </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+    </header>
+
+    
+    
+
+
+    
+    <div class="post-content">
+      <p>Synovial fibroblasts assume distinct functional identities and secrete R-spondin 2 to drive osteoarthritis</p>
+<p><img alt="paper_header" src="/blog/post/osteoarthrisis/640.png"></p>
+<p><img alt="GEO_data" src="/blog/post/osteoarthrisis/GEO.png"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">rm</span>(list<span style="color:#f92672">=</span><span style="color:#a6e22e">ls</span>())
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">options</span>(stringsAsFactors <span style="color:#f92672">=</span> F) 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(Seurat)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggplot2)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(clustree)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(cowplot)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(dplyr)
+</span></span></code></pre></div><h2 id="step-1-import-data">Step 1: Import data</h2>
+<p>Untar dataset into &ldquo;GSE211584_raw/&rdquo; folder using <code>tar -xvf</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(stringr)
+</span></span><span style="display:flex;"><span>fs <span style="color:#f92672">=</span> <span style="color:#a6e22e">list.files</span>(<span style="color:#e6db74">&#39;./GSE211584_raw/&#39;</span>,pattern <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;^GSM&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>samples<span style="color:#f92672">=</span><span style="color:#a6e22e">str_split</span>(fs,<span style="color:#e6db74">&#39;_&#39;</span>,simplify <span style="color:#f92672">=</span> T)[,<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">lapply</span>(<span style="color:#a6e22e">unique</span>(samples),<span style="color:#66d9ef">function</span>(x){
+</span></span><span style="display:flex;"><span>  y<span style="color:#f92672">=</span>fs<span style="color:#a6e22e">[grepl</span>(x,fs)]
+</span></span><span style="display:flex;"><span>  folder<span style="color:#f92672">=</span><span style="color:#a6e22e">paste0</span>(<span style="color:#e6db74">&#34;GSE211584_raw/&#34;</span>, <span style="color:#a6e22e">str_split</span>(y[1],<span style="color:#e6db74">&#39;_&#39;</span>,simplify <span style="color:#f92672">=</span> T)[,<span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">dir.create</span>(folder,recursive <span style="color:#f92672">=</span> T)
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#为每个样本创建子文件夹</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">file.rename</span>(<span style="color:#a6e22e">paste0</span>(<span style="color:#e6db74">&#34;GSE211584_raw/&#34;</span>,y[1]),<span style="color:#a6e22e">file.path</span>(folder,<span style="color:#e6db74">&#34;barcodes.tsv.gz&#34;</span>))
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#重命名文件，并移动到相应的子文件夹里</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">file.rename</span>(<span style="color:#a6e22e">paste0</span>(<span style="color:#e6db74">&#34;GSE211584_raw/&#34;</span>,y[2]),<span style="color:#a6e22e">file.path</span>(folder,<span style="color:#e6db74">&#34;features.tsv.gz&#34;</span>))
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">file.rename</span>(<span style="color:#a6e22e">paste0</span>(<span style="color:#e6db74">&#34;GSE211584_raw/&#34;</span>,y[3]),<span style="color:#a6e22e">file.path</span>(folder,<span style="color:#e6db74">&#34;matrix.mtx.gz&#34;</span>))
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dir<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;./GSE211584_raw&#39;</span>
+</span></span><span style="display:flex;"><span>sceList <span style="color:#f92672">=</span> <span style="color:#a6e22e">lapply</span>(samples,<span style="color:#66d9ef">function</span>(pro){ 
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#pro=samples2[2] </span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">print</span>(pro)  
+</span></span><span style="display:flex;"><span>  sce <span style="color:#f92672">=</span><span style="color:#a6e22e">CreateSeuratObject</span>(counts <span style="color:#f92672">=</span>  <span style="color:#a6e22e">Read10X</span>(<span style="color:#a6e22e">file.path</span>(dir,pro)) ,
+</span></span><span style="display:flex;"><span>                          project <span style="color:#f92672">=</span>  pro  ,
+</span></span><span style="display:flex;"><span>                          min.cells <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>                          min.features <span style="color:#f92672">=</span> <span style="color:#ae81ff">300</span> )
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(sce)
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sce.all<span style="color:#f92672">=</span><span style="color:#a6e22e">merge</span>(x<span style="color:#f92672">=</span>sceList[[1]],
+</span></span><span style="display:flex;"><span>              y<span style="color:#f92672">=</span>sceList[<span style="color:#ae81ff">-1</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(stringr)
+</span></span><span style="display:flex;"><span>sce<span style="color:#f92672">=</span>sce.all
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(sce<span style="color:#f92672">$</span>orig.ident)
+</span></span><span style="display:flex;"><span>sce<span style="color:#f92672">$</span>group<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ifelse</span>(<span style="color:#a6e22e">grepl</span>(<span style="color:#e6db74">&#34;GSM6481125|1126&#34;</span>,sce<span style="color:#f92672">$</span>orig.ident),<span style="color:#e6db74">&#34;Sham&#34;</span>,
+</span></span><span style="display:flex;"><span>                   <span style="color:#a6e22e">ifelse</span>(<span style="color:#a6e22e">grepl</span>(<span style="color:#e6db74">&#34;GSM6481127|1128&#34;</span>,sce<span style="color:#f92672">$</span>orig.ident),<span style="color:#e6db74">&#34;7d ACLR&#34;</span>,<span style="color:#e6db74">&#34;28d ACLR&#34;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(sce<span style="color:#f92672">$</span>group)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sce.all<span style="color:#f92672">=</span>sce
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">as.data.frame</span>(sce.all<span style="color:#f92672">@</span>assays<span style="color:#f92672">$</span>RNA<span style="color:#f92672">@</span>counts[1<span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>])
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(sce.all<span style="color:#f92672">@</span>meta.data, <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">tail</span>(sce.all<span style="color:#f92672">@</span>meta.data, <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(stringr)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(sce.all<span style="color:#f92672">$</span>orig.ident)
+</span></span></code></pre></div><h2 id="step-2-harmony-dimension-reduction-and-clustering">Step 2: Harmony, dimension reduction, and clustering</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>sce <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">NormalizeData</span>(sce, 
+</span></span><span style="display:flex;"><span>                         normalization.method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;LogNormalize&#34;</span>,
+</span></span><span style="display:flex;"><span>                         scale.factor <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e4</span>) 
+</span></span><span style="display:flex;"><span>sce <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">FindVariableFeatures</span>(sce)
+</span></span><span style="display:flex;"><span>sce <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ScaleData</span>(sce)
+</span></span><span style="display:flex;"><span>sce <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">RunPCA</span>(sce, features <span style="color:#f92672">=</span> <span style="color:#a6e22e">VariableFeatures</span>(object <span style="color:#f92672">=</span> sce))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(harmony)
+</span></span><span style="display:flex;"><span>seuratObj <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">RunHarmony</span>(sce, <span style="color:#e6db74">&#34;orig.ident&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">names</span>(seuratObj<span style="color:#f92672">@</span>reductions)
+</span></span><span style="display:flex;"><span>seuratObj <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">RunUMAP</span>(seuratObj,  dims <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">15</span>, 
+</span></span><span style="display:flex;"><span>                     reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;harmony&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">DimPlot</span>(seuratObj,reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;umap&#34;</span>,label<span style="color:#f92672">=</span>T ) 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sce<span style="color:#f92672">=</span>seuratObj
+</span></span><span style="display:flex;"><span>sce <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">FindNeighbors</span>(sce, reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;harmony&#34;</span>,
+</span></span><span style="display:flex;"><span>                     dims <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">15</span>) 
+</span></span><span style="display:flex;"><span>sce.all<span style="color:#f92672">=</span>sce
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#设置不同的分辨率，观察分群效果(选择哪一个？)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (res <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.01</span>, <span style="color:#ae81ff">0.05</span>, <span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.3</span>, <span style="color:#ae81ff">0.5</span>,<span style="color:#ae81ff">0.8</span>,<span style="color:#ae81ff">1</span>)) {
+</span></span><span style="display:flex;"><span>  sce.all<span style="color:#f92672">=</span><span style="color:#a6e22e">FindClusters</span>(sce.all, <span style="color:#75715e">#graph.name = &#34;CCA_snn&#34;,</span>
+</span></span><span style="display:flex;"><span>                       resolution <span style="color:#f92672">=</span> res, algorithm <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(<span style="color:#a6e22e">colnames</span>(sce.all))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(sce.all<span style="color:#f92672">$</span>orig.ident)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(sce.all<span style="color:#f92672">$</span>group)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#接下来分析，按照分辨率为0.8进行 </span>
+</span></span><span style="display:flex;"><span>sel.clust <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;RNA_snn_res.0.8&#34;</span>
+</span></span><span style="display:flex;"><span>sce.all <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">SetIdent</span>(sce.all, value <span style="color:#f92672">=</span> sel.clust)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(sce.all<span style="color:#f92672">@</span>active.ident) 
+</span></span></code></pre></div><h2 id="step-3-examing-the-clusters">Step 3: Examing the clusters</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">DimPlot</span>(sce.all, reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;umap&#34;</span>, group.by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;seurat_clusters&#34;</span>,label <span style="color:#f92672">=</span> T) 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">DimPlot</span>(sce.all, reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;umap&#34;</span>, group.by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;RNA_snn_res.0.8&#34;</span>,label <span style="color:#f92672">=</span> T) 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggsave</span>(<span style="color:#e6db74">&#39;umap_by_RNA_snn_res.0.8.pdf&#39;</span>)
+</span></span><span style="display:flex;"><span>sce.all
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggplot2)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#除了一些常见marker外还加了文献中展示的一部分markergene</span>
+</span></span><span style="display:flex;"><span>genes_to_check <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;PTPRC&#39;</span>, <span style="color:#e6db74">&#39;CD3D&#39;</span>, <span style="color:#e6db74">&#39;CD3E&#39;</span>, <span style="color:#e6db74">&#39;CD4&#39;</span>,<span style="color:#e6db74">&#39;CD8A&#39;</span>,
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;CD19&#39;</span>, <span style="color:#e6db74">&#39;CD79A&#39;</span>, <span style="color:#e6db74">&#39;MS4A1&#39;</span> ,
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;IGHG1&#39;</span>, <span style="color:#e6db74">&#39;MZB1&#39;</span>, <span style="color:#e6db74">&#39;SDC1&#39;</span>,
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;CD68&#39;</span>, <span style="color:#e6db74">&#39;CD163&#39;</span>, <span style="color:#e6db74">&#39;CD14&#39;</span>, 
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;TPSAB1&#39;</span> , <span style="color:#e6db74">&#39;TPSB2&#39;</span>,  <span style="color:#75715e"># mast cells,</span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;RCVRN&#39;</span>,<span style="color:#e6db74">&#39;FPR1&#39;</span> , <span style="color:#e6db74">&#39;ITGAM&#39;</span> ,
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;C1QA&#39;</span>,  <span style="color:#e6db74">&#39;C1QB&#39;</span>,  <span style="color:#75715e"># mac</span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;S100A9&#39;</span>, <span style="color:#e6db74">&#39;S100A8&#39;</span>, <span style="color:#e6db74">&#39;MMP19&#39;</span>,<span style="color:#75715e"># monocyte</span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;FCGR3A&#39;</span>,
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;LAMP3&#39;</span>, <span style="color:#e6db74">&#39;IDO1&#39;</span>,<span style="color:#e6db74">&#39;IDO2&#39;</span>,<span style="color:#75715e">## DC3 </span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;CD1E&#39;</span>,<span style="color:#e6db74">&#39;CD1C&#39;</span>, <span style="color:#75715e"># DC2</span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;KLRB1&#39;</span>,<span style="color:#e6db74">&#39;NCR1&#39;</span>, <span style="color:#75715e"># NK </span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;FGF7&#39;</span>,<span style="color:#e6db74">&#39;MME&#39;</span>, <span style="color:#e6db74">&#39;ACTA2&#39;</span>, <span style="color:#75715e">## human  fibo </span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;DCN&#39;</span>, <span style="color:#e6db74">&#39;LUM&#39;</span>,  <span style="color:#e6db74">&#39;GSN&#39;</span> , <span style="color:#75715e">## mouse PDAC fibo </span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;MKI67&#39;</span> , <span style="color:#e6db74">&#39;TOP2A&#39;</span>, 
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;PECAM1&#39;</span>, <span style="color:#e6db74">&#39;VWF&#39;</span>,  <span style="color:#75715e">## endo </span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;EPCAM&#39;</span> , <span style="color:#e6db74">&#39;KRT19&#39;</span>,<span style="color:#e6db74">&#39;KRT7&#39;</span>, <span style="color:#75715e"># epi </span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;FYXD2&#39;</span>, <span style="color:#e6db74">&#39;TM4SF4&#39;</span>, <span style="color:#e6db74">&#39;ANXA4&#39;</span>,<span style="color:#75715e"># cholangiocytes</span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;APOC3&#39;</span>, <span style="color:#e6db74">&#39;FABP1&#39;</span>,  <span style="color:#e6db74">&#39;APOA1&#39;</span>,  <span style="color:#75715e"># hepatocytes</span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#39;Serpina1c&#39;</span>,<span style="color:#e6db74">&#39;PROM1&#39;</span>, <span style="color:#e6db74">&#39;ALDH1A1&#39;</span>,
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#34;NKG7&#34;</span>,<span style="color:#75715e">#NKT</span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#34;Pdgfra&#34;</span>,<span style="color:#e6db74">&#34;Thy1&#34;</span>,<span style="color:#e6db74">&#34;Prg4&#34;</span>,<span style="color:#e6db74">&#34;Itgam&#34;</span>,<span style="color:#e6db74">&#34;Lyz2&#34;</span>,
+</span></span><span style="display:flex;"><span>                   <span style="color:#e6db74">&#34;Pecam1&#34;</span>,<span style="color:#e6db74">&#34;Mcam&#34;</span>,<span style="color:#e6db74">&#34;Lyve1&#34;</span>,<span style="color:#e6db74">&#34;Actn3&#34;</span>,<span style="color:#e6db74">&#34;Cd3d&#34;</span>,<span style="color:#e6db74">&#34;Kcna1&#34;</span>,<span style="color:#e6db74">&#34;Hbb-bs&#34;</span>
+</span></span><span style="display:flex;"><span>                   )
+</span></span><span style="display:flex;"><span>                   
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(stringr)  
+</span></span><span style="display:flex;"><span>genes_to_check<span style="color:#f92672">=</span><span style="color:#a6e22e">str_to_title</span>(<span style="color:#a6e22e">unique</span>(genes_to_check))
+</span></span><span style="display:flex;"><span>genes_to_check
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">DotPlot</span>(sce.all, features <span style="color:#f92672">=</span> <span style="color:#a6e22e">unique</span>(genes_to_check),
+</span></span><span style="display:flex;"><span>             assay<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;RNA&#39;</span>  )  <span style="color:#f92672">+</span> <span style="color:#a6e22e">coord_flip</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggsave</span>(<span style="color:#e6db74">&#39;check_last_markers.pdf&#39;</span>,height <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>,width <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>)
+</span></span></code></pre></div><p><img alt="umap" src="/blog/post/osteoarthrisis/umap_1.png">
+<img alt="dotplot" src="/blog/post/osteoarthrisis/dotPlot.png"></p>
+<h2 id="step-4-biological-annotation-for-cell-clusters">Step 4: Biological annotation for cell clusters</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># 需要自行看图,定细胞亚群：</span>
+</span></span><span style="display:flex;"><span>celltype<span style="color:#f92672">=</span><span style="color:#a6e22e">data.frame</span>(ClusterID<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#ae81ff">25</span>,
+</span></span><span style="display:flex;"><span>                    celltype<span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#ae81ff">25</span>) 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#定义细胞亚群 </span>
+</span></span><span style="display:flex;"><span>celltype[celltype<span style="color:#f92672">$</span>ClusterID <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>( <span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">17</span>,<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">9</span> ),<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;fib&#39;</span>  
+</span></span><span style="display:flex;"><span>celltype[celltype<span style="color:#f92672">$</span>ClusterID <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>( <span style="color:#ae81ff">11</span>),<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cycling&#39;</span>   
+</span></span><span style="display:flex;"><span>celltype[celltype<span style="color:#f92672">$</span>ClusterID <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>( <span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">19</span>),<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;myoepithelial&#39;</span> 
+</span></span><span style="display:flex;"><span>celltype[celltype<span style="color:#f92672">$</span>ClusterID <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>( <span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">25</span>),<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;myeloid&#39;</span>  
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>celltype[celltype<span style="color:#f92672">$</span>ClusterID <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>( <span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">22</span>,<span style="color:#ae81ff">13</span>),<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Endo-1&#39;</span>  
+</span></span><span style="display:flex;"><span>celltype[celltype<span style="color:#f92672">$</span>ClusterID <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>( <span style="color:#ae81ff">15</span>),<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Endo-2&#39;</span>
+</span></span><span style="display:flex;"><span>celltype[celltype<span style="color:#f92672">$</span>ClusterID <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>( <span style="color:#ae81ff">23</span>),<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;T cell&#39;</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>celltype[celltype<span style="color:#f92672">$</span>ClusterID <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>( <span style="color:#ae81ff">20</span>),<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Skeletal muscle&#39;</span>
+</span></span><span style="display:flex;"><span>celltype[celltype<span style="color:#f92672">$</span>ClusterID <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>( <span style="color:#ae81ff">21</span>),<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Schwann cells&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(celltype)
+</span></span><span style="display:flex;"><span>celltype
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(celltype<span style="color:#f92672">$</span>celltype)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sce.all<span style="color:#f92672">@</span>meta.data<span style="color:#f92672">$</span>celltype <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;NA&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">nrow</span>(celltype)){
+</span></span><span style="display:flex;"><span>  sce.all<span style="color:#f92672">@</span>meta.data<span style="color:#a6e22e">[which</span>(sce.all<span style="color:#f92672">@</span>meta.data<span style="color:#f92672">$</span>RNA_snn_res.0.8 <span style="color:#f92672">==</span> celltype<span style="color:#f92672">$</span>ClusterID[i]),<span style="color:#e6db74">&#39;celltype&#39;</span>] <span style="color:#f92672">&lt;-</span> celltype<span style="color:#f92672">$</span>celltype[i]}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(sce.all<span style="color:#f92672">@</span>meta.data<span style="color:#f92672">$</span>celltype)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># #去除干扰亚群</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(sce.all<span style="color:#f92672">$</span>celltype)
+</span></span><span style="display:flex;"><span>sce<span style="color:#f92672">=</span>sce.all
+</span></span><span style="display:flex;"><span>sce <span style="color:#f92672">&lt;-</span> sce[, <span style="color:#f92672">!</span>(sce<span style="color:#f92672">$</span>celltype <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;24&#34;</span>,<span style="color:#e6db74">&#34;47&#34;</span>))]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(sce<span style="color:#f92672">$</span>celltype)
+</span></span></code></pre></div><h2 id="step-5-visualization">Step 5: Visualization</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>sce.all<span style="color:#f92672">=</span>sce
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>th<span style="color:#f92672">=</span><span style="color:#a6e22e">theme</span>(axis.text.x <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_text</span>(angle <span style="color:#f92672">=</span> <span style="color:#ae81ff">45</span>, 
+</span></span><span style="display:flex;"><span>                                    vjust <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>, hjust<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)) 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(patchwork)
+</span></span><span style="display:flex;"><span>p_all_markers<span style="color:#f92672">=</span><span style="color:#a6e22e">DotPlot</span>(sce.all, features <span style="color:#f92672">=</span> <span style="color:#a6e22e">unique</span>(genes_to_check),
+</span></span><span style="display:flex;"><span>                      assay<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;RNA&#39;</span>, group.by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;celltype&#39;</span> )  <span style="color:#f92672">+</span> <span style="color:#a6e22e">coord_flip</span>()<span style="color:#f92672">+</span>th
+</span></span><span style="display:flex;"><span>p_umap<span style="color:#f92672">=</span><span style="color:#a6e22e">DimPlot</span>(sce.all, reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;umap&#34;</span>, group.by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;celltype&#34;</span>,label <span style="color:#f92672">=</span> T,label.box <span style="color:#f92672">=</span> T)
+</span></span><span style="display:flex;"><span>p_all_markers<span style="color:#f92672">+</span>p_umap
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggsave</span>(<span style="color:#e6db74">&#39;markers_umap_by_celltype.pdf&#39;</span>,width <span style="color:#f92672">=</span> <span style="color:#ae81ff">18</span>,height <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">DimPlot</span>(sce.all, reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;umap&#34;</span>,split.by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;group&#39;</span>,
+</span></span><span style="display:flex;"><span>        group.by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;celltype&#34;</span>,label <span style="color:#f92672">=</span> T) 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggsave</span>(<span style="color:#e6db74">&#39;group_umap_RNA_snn_res.0.8.pdf&#39;</span>,width <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 在健康滑膜和PTOA滑膜中，成纤维细胞、髓系细胞和内皮细胞在数量上占主导地位，其中成纤维细胞和髓系细胞在ACLR 7天的丰度增加最急剧。还检测到罕见的细胞群，包括T细胞和Schwann cells，这些细胞在滑膜中没有很好的特征。</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>paper_marker<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Pdgfra&#34;</span>,<span style="color:#e6db74">&#34;Thy1&#34;</span>,<span style="color:#e6db74">&#34;Prg4&#34;</span>,<span style="color:#e6db74">&#34;Itgam&#34;</span>,<span style="color:#e6db74">&#34;Lyz2&#34;</span>,
+</span></span><span style="display:flex;"><span>     <span style="color:#e6db74">&#34;Pecam1&#34;</span>,<span style="color:#e6db74">&#34;Mcam&#34;</span>,<span style="color:#e6db74">&#34;Lyve1&#34;</span>,<span style="color:#e6db74">&#34;Actn3&#34;</span>,<span style="color:#e6db74">&#34;Cd3d&#34;</span>,<span style="color:#e6db74">&#34;Kcna1&#34;</span>,<span style="color:#e6db74">&#34;Hbb-bs&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(stringr)  
+</span></span><span style="display:flex;"><span>paper_marker<span style="color:#f92672">=</span><span style="color:#a6e22e">str_to_title</span>(paper_marker)
+</span></span><span style="display:flex;"><span>paper_marker
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>v1<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">VlnPlot</span>(sce,features <span style="color:#f92672">=</span> paper_marker,group<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;celltype&#34;</span>,
+</span></span><span style="display:flex;"><span>        split.by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;group&#34;</span>,flip <span style="color:#f92672">=</span> T,stack <span style="color:#f92672">=</span> T,
+</span></span><span style="display:flex;"><span>        split.plot <span style="color:#f92672">=</span>T )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggsave</span>(plot<span style="color:#f92672">=</span>v1, filename<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;paper_marker_volin.pdf&#34;</span>,width <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>,height <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>)
+</span></span></code></pre></div><p><img alt="umap_treat" src="/blog/post/osteoarthrisis/umap_by_treatment.png">
+<img alt="plots_cellType" src="/blog/post/osteoarthrisis/plots_by_cellType.png">
+<img alt="violin_plot" src="/blog/post/osteoarthrisis/violin_plot.png"></p>
+    </div>
+
+    
+    
+
+
+
+    
+    
+
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="http://localhost:45315/blog/tags/rnaseq/">RNAseq</a>
+            <a href="http://localhost:45315/blog/tags/r/">R</a>
+            <a href="http://localhost:45315/blog/tags/osteoarthritis/">osteoarthritis</a>
+            
+        </div>
+
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/blog/post/immunead/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">scRNAseq analysis reveals Immune Cell Signatures in Alzheimer’s Disease</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/blog/post/umap/">
+            <span class="next-text nav-default">UMAP &amp; heatmap replication</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+
+  
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:lyqglyqg@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+  
+    <a href="http://lyqg.github.io/" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+
+
+<a href="http://localhost:45315/blog/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2023 -
+    2024
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        lyqg
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/blog/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/blog/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/blog/js/main.fe83e11b4fbc9193d67e2c9db78bad21f8dc59fca0cacd8c1c3bb071bb16a852.js" integrity="sha256-/oPhG0&#43;8kZPWfiydt4utIfjcWfygys2MHDuwcbsWqFI=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

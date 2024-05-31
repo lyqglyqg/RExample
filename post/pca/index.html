@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=45315&amp;path=blog/livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Principle component analysis (PCA) - Example R codes for BIOS 850 &amp; 880</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="LYQG" />
+  <meta name="description" content="" />
+<meta name="keywords" content="PCA" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.126.1" />
+
+
+<link rel="canonical" href="http://localhost:45315/blog/post/pca/" />
+
+
+
+
+
+<link rel="icon" href="/blog/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/sass/jane.min.de22abc00de44766eebd1054fd9e0b254b071f89d5019044f893c484a9249a8d.css" integrity="sha256-3iKrwA3kR2buvRBU/Z4LJUsHH4nVAZBE&#43;JPEhKkkmo0=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:url" content="http://localhost:45315/blog/post/pca/">
+  <meta property="og:site_name" content="Example R codes for BIOS 850 &amp; 880">
+  <meta property="og:title" content="Principle component analysis (PCA)">
+  <meta property="og:description" content="Example R codes for BIOS 850 &amp; 880">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-01-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-01-03T00:00:00+00:00">
+    <meta property="article:tag" content="PCA">
+
+  <meta itemprop="name" content="Principle component analysis (PCA)">
+  <meta itemprop="description" content="Example R codes for BIOS 850 &amp; 880">
+  <meta itemprop="datePublished" content="2024-01-03T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2024-01-03T00:00:00+00:00">
+  <meta itemprop="wordCount" content="2041">
+  <meta itemprop="keywords" content="PCA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Principle component analysis (PCA)">
+  <meta name="twitter:description" content="Example R codes for BIOS 850 &amp; 880">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Example R codes for BIOS 850 & 880</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/categories/">Categories</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/about/">About</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">external-link</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          <div class="mobile-menu-parent">
+            <span class="mobile-submenu-open"></span>
+            <a href="http://localhost:45315/blog/">
+              docs
+            </a>
+          </div>
+          <ul class="mobile-submenu-list">
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/ab/">AdaBoost</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/bcart/">Bagged Classification And Regression Trees（Bagged CART)</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/ct/">Classification trees</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/ca/">Cluster analysis</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/en/">Elastic Net</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/gb/">Gradient boosting</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/gbm/">Gradient Boosting Machine（GBM)</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/knn/">K Nearest Neighbors (KNN)</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/nb/">Naive Bayes</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/nn/">Neural network</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/rf/">Random forest</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/rt/">Regression trees</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/svm/">Support vector machine (SVM)</a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      Example R codes for BIOS 850 & 880
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">Home</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/categories/">Categories</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/about/">About</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">external-link</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          <a class="menu-item-link menu-parent" href="http://localhost:45315/blog/">docs</a>
+          <ul class="submenu">
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/ab/">AdaBoost</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/bcart/">Bagged Classification And Regression Trees（Bagged CART)</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/ct/">Classification trees</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/ca/">Cluster analysis</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/en/">Elastic Net</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/gb/">Gradient boosting</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/gbm/">Gradient Boosting Machine（GBM)</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/knn/">K Nearest Neighbors (KNN)</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/nb/">Naive Bayes</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/nn/">Neural network</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/rf/">Random forest</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/rt/">Regression trees</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/svm/">Support vector machine (SVM)</a>
+              </li>
+            
+          </ul>
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight wallpaper">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">Principle component analysis (PCA)</h1>
+      
+
+      <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      LYQG
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2024-01-03">
+      2024-01-03
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    
+
+    <div class="post-meta-category">
+        <a href="http://localhost:45315/blog/categories/pca/"> PCA </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+    </header>
+
+    
+    
+
+
+    
+    <div class="post-content">
+      <h2 id="1-package-installation">1. Package installation</h2>
+<p>We will use functions in the R package <code>psych</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(psych)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;psych&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(car)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;car&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(ElemStatLearn)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;ElemStatLearn&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(psych)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ElemStatLearn)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(car)
+</span></span></code></pre></div><h2 id="2-example-data">2. Example data</h2>
+<p>The Stanford University Medical Center provided PSA (Prostate-Specific Antigen) data for 97 patients who underwent radical prostatectomy. Our goal is to build a predictive model using clinical test data to forecast post-operative PSA levels. The PSA level can be an effective prognostic indicator of the extent of recovery after surgery. Post-surgery, doctors will check patients&rsquo; PSA levels at various intervals and determine their recovery status using various formulas. A predictive model developed before surgery, combined with post-surgery data (not provided here), could enhance the diagnosis and treatment of prostate cancer and improve its prognosis.</p>
+<p>Specifically, the dataset includes the following variables:</p>
+<p>Here is the detailed description of the variables in the dataset:</p>
+<ul>
+<li><strong>lcavol</strong>: The logarithm of the tumor volume.</li>
+<li><strong>lweight</strong>: The logarithm of the prostate weight.</li>
+<li><strong>age</strong>: The age of the patient in years.</li>
+<li><strong>bph</strong>: The logarithm of the amount of benign prostatic hyperplasia (BPH), which refers to non-cancerous enlargement of the prostate.</li>
+<li><strong>svi</strong>: Seminal vesicle invasion, a binary indicator variable representing whether cancer cells have invaded the seminal vesicles beyond the prostate wall (1—Yes, 0—No).</li>
+<li><strong>lcp</strong>: The logarithm of capsular penetration, indicating the extent to which cancer cells have spread beyond the prostate capsule.</li>
+<li><strong>gleason</strong>: The patient&rsquo;s Gleason score, given by a pathologist after a biopsy (range 2–10), indicating the degree of variation in cancer cells—the higher the score, the more aggressive the cancer.</li>
+<li><strong>pgg45</strong>: The percentage of Gleason scores that are 4 or 5.</li>
+<li><strong>lpsa</strong>: The logarithm of the PSA (Prostate-Specific Antigen) level, which is the response variable.</li>
+<li><strong>train</strong>: A logical vector for cancer status indicator.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">data</span>(prostate)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">str</span>(prostate)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## &#39;data.frame&#39;:	97 obs. of  10 variables:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ lcavol : num  -0.58 -0.994 -0.511 -1.204 0.751 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ lweight: num  2.77 3.32 2.69 3.28 3.43 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ age    : int  50 58 74 58 62 50 64 58 47 63 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ lbph   : num  -1.39 -1.39 -1.39 -1.39 -1.39 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ svi    : int  0 0 0 0 0 0 0 0 0 0 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ lcp    : num  -1.39 -1.39 -1.39 -1.39 -1.39 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ gleason: int  6 6 7 6 6 6 6 6 6 6 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ pgg45  : int  0 0 20 0 0 0 0 0 0 0 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ lpsa   : num  -0.431 -0.163 -0.163 -0.163 0.372 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ train  : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">corPlot</span>(prostate, gr <span style="color:#f92672">=</span> <span style="color:#a6e22e">colorRampPalette</span>(<span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;#2171B5&#34;</span>, <span style="color:#e6db74">&#34;white&#34;</span>, <span style="color:#e6db74">&#34;#B52127&#34;</span>)))
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/pca/640.webp"></p>
+<h2 id="3-build-a-logistic-regression-model">3. Build a logistic regression model</h2>
+<p>We first build a logistic regression model using train as the dependent variable and all other variables as independent variables. We will construct the model and calculate the Variance Inflation Factor (VIF) and Generalized Variance Inflation Factor (GVIF) for linear, generalized linear, and other regression models to examine the linear relationships between the independent variables. We find that the VIF values are all greater than 2, indicating that the relationships between the variables are very tight, as shown below:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>fit <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">glm</span>(train <span style="color:#f92672">~</span> ., family <span style="color:#f92672">=</span> <span style="color:#a6e22e">binomial</span>(link <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;logit&#34;</span>), data <span style="color:#f92672">=</span> prostate)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(fit)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Call:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## glm(formula = train ~ ., family = binomial(link = &#34;logit&#34;), data = prostate)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Deviance Residuals: </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##     Min       1Q   Median       3Q      Max  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## -1.9957  -1.1059   0.6743   0.8467   1.4434  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Coefficients:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##             Estimate Std. Error z value Pr(&gt;|z|)  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## (Intercept)  2.86104    4.29240   0.667   0.5051  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lcavol      -0.11984    0.34452  -0.348   0.7280  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lweight     -0.27024    0.71907  -0.376   0.7071  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## age          0.07015    0.03662   1.915   0.0554 .</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lbph        -0.15435    0.19585  -0.788   0.4306  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## svi          0.21798    0.82065   0.266   0.7905  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lcp         -0.21210    0.27918  -0.760   0.4474  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## gleason     -0.92305    0.51668  -1.787   0.0740 .</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## pgg45        0.02997    0.01567   1.913   0.0558 .</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lpsa         0.05286    0.34889   0.152   0.8796  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ---</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## (Dispersion parameter for binomial family taken to be 1)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##     Null deviance: 119.99  on 96  degrees of freedom</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Residual deviance: 110.07  on 87  degrees of freedom</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## AIC: 130.07</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Number of Fisher Scoring iterations: 4</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">vif</span>(fit)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   lcavol  lweight      age     lbph      svi      lcp  gleason    pgg45 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3.043623 1.716716 1.456603 1.512082 2.003681 2.833653 2.710155 3.151257 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##     lpsa </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2.876862</span>
+</span></span><span style="display:flex;"><span>forestmodel<span style="color:#f92672">::</span><span style="color:#a6e22e">forest_model</span>(fit)
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/pca/641.webp"></p>
+<h2 id="4-pca">4. PCA</h2>
+<p>To address the issue of insignificant results, we need to perform dimensionality reduction by selecting the most important variables that significantly influence the dependent variable. We will use Principal Component Analysis (PCA) to obtain the principal components. We can create a scree plot to determine the number of principal components to retain. We will use Cattell&rsquo;s scree test, which shows the relationship between eigenvalues and the number of principal components. The general principle is to retain principal components with eigenvalues greater than 1 and greater than the eigenvalues obtained from parallel analysis. We observe that three principal components meet this criterion, as shown below.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">fa.parallel</span>(prostate[, <span style="color:#ae81ff">-10</span>], fa <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;pc&#34;</span>, n.iter <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>, show.legend <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>, main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Scree plot with parallel analysis&#34;</span>)  <span style="color:#75715e">#判断主成分个数</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Parallel analysis suggests that the number of factors =  NA  and the number of components =  2</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">abline</span>(h <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;green&#34;</span>)
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/pca/642.webp"></p>
+<p>The principal() function in R can perform principal component analysis (PCA) based on the original data matrix or a correlation matrix. Here are the key arguments for the function:</p>
+<ol>
+<li>r: The correlation matrix or the original data matrix.</li>
+<li>nfactors: The number of principal components to extract (default is 1).</li>
+<li>rotate: The method of rotation to use (default is varimax).</li>
+<li>scores: Whether to calculate principal component scores (default is FALSE).
+Let&rsquo;s use the principal() function to perform PCA on the prostate cancer dataset and identify the main components for each variable. In the example provided, we find that RC1 is mainly influenced by lpsa, RC2 by lbph, and RC3 by gleason.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>pc <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">principal</span>(prostate[, <span style="color:#ae81ff">-10</span>], nfactors <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, rotate <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;none&#34;</span>)
+</span></span><span style="display:flex;"><span>pc
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Principal Components Analysis</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Call: principal(r = prostate[, -10], nfactors = 3, rotate = &#34;none&#34;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Standardized loadings (pattern matrix) based upon correlation matrix</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##          PC1   PC2   PC3   h2   u2 com</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lcavol  0.81 -0.08 -0.28 0.75 0.25 1.3</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lweight 0.40  0.70 -0.33 0.75 0.25 2.1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## age     0.38  0.57  0.37 0.60 0.40 2.5</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lbph    0.18  0.80  0.12 0.68 0.32 1.1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## svi     0.73 -0.28 -0.28 0.68 0.32 1.6</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lcp     0.83 -0.27 -0.06 0.77 0.23 1.2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## gleason 0.69 -0.14  0.56 0.82 0.18 2.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## pgg45   0.77 -0.16  0.47 0.83 0.17 1.8</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lpsa    0.79  0.09 -0.39 0.79 0.21 1.5</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                        PC1  PC2  PC3</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## SS loadings           3.91 1.66 1.11</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Proportion Var        0.43 0.18 0.12</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Cumulative Var        0.43 0.62 0.74</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Proportion Explained  0.59 0.25 0.17</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Cumulative Proportion 0.59 0.83 1.00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Mean item complexity =  1.7</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Test of the hypothesis that 3 components are sufficient.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## The root mean square of the residuals (RMSR) is  0.08 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  with the empirical chi square  40.91  with prob &lt;  5.1e-05 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Fit based upon off diagonal values = 0.96</span>
+</span></span></code></pre></div><p>From the output, we can see that the first principal component has large loadings on five observed variables. The second principal component has large loadings on lweight and lbph. The third principal component has relatively smaller loadings, and the differences are not significant. The two principal components explain 73% of the variance in the data, but the results are not easily interpretable for the three principal components. Therefore, we consider performing principal component rotation to improve interpretability.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>rc <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">principal</span>(prostate[, <span style="color:#ae81ff">-10</span>], nfactors <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, rotate <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;varimax&#34;</span>, score <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span>rc
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Principal Components Analysis</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Call: principal(r = prostate[, -10], nfactors = 3, rotate = &#34;varimax&#34;, </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##     scores = TRUE)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Standardized loadings (pattern matrix) based upon correlation matrix</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##           RC1   RC3   RC2   h2   u2 com</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lcavol   0.82  0.23  0.12 0.75 0.25 1.2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lweight  0.38 -0.18  0.76 0.75 0.25 1.6</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## age     -0.01  0.40  0.67 0.60 0.40 1.6</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lbph    -0.07  0.04  0.82 0.68 0.32 1.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## svi      0.79  0.23 -0.10 0.68 0.32 1.2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lcp      0.75  0.46 -0.05 0.77 0.23 1.7</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## gleason  0.25  0.87  0.07 0.82 0.18 1.2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## pgg45    0.36  0.83  0.07 0.83 0.17 1.4</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lpsa     0.84  0.10  0.27 0.79 0.21 1.2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                        RC1  RC3  RC2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## SS loadings           2.91 1.97 1.80</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Proportion Var        0.32 0.22 0.20</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Cumulative Var        0.32 0.54 0.74</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Proportion Explained  0.44 0.30 0.27</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Cumulative Proportion 0.44 0.73 1.00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Mean item complexity =  1.4</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Test of the hypothesis that 3 components are sufficient.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## The root mean square of the residuals (RMSR) is  0.08 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  with the empirical chi square  40.91  with prob &lt;  5.1e-05 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Fit based upon off diagonal values = 0.96</span>
+</span></span></code></pre></div><h2 id="5-rebuild-logistic-regression-model">5. Rebuild logistic regression model</h2>
+<p>After completing the principal component analysis (PCA) and using the results to construct a logistic regression model with three principal components, we observed that the inflation factors are now around 1, indicating that multicollinearity has been effectively addressed. However, despite this improvement, the logistic regression model constructed with the principal components does not seem to be very suitable.</p>
+<p>In comparison to the previous LASSO regression model, it appears that the latter performs better under these circumstances.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>newdata <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(prostate, rc<span style="color:#f92672">$</span>scores)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(newdata)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##       lcavol  lweight age      lbph svi       lcp gleason pgg45       lpsa</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1 -0.5798185 2.769459  50 -1.386294   0 -1.386294       6     0 -0.4307829</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2 -0.9942523 3.319626  58 -1.386294   0 -1.386294       6     0 -0.1625189</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3 -0.5108256 2.691243  74 -1.386294   0 -1.386294       7    20 -0.1625189</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 4 -1.2039728 3.282789  58 -1.386294   0 -1.386294       6     0 -0.1625189</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 5  0.7514161 3.432373  62 -1.386294   0 -1.386294       6     0  0.3715636</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 6 -1.0498221 3.228826  50 -1.386294   0 -1.386294       6     0  0.7654678</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   train        RC1        RC3        RC2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1  TRUE -1.4885513 -0.3812754 -2.0498849</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2  TRUE -1.4810035 -0.4569587 -1.0922377</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3  TRUE -2.2297727  1.5210898 -0.9234636</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 4  TRUE -1.5529117 -0.4196166 -1.1270163</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 5  TRUE -0.8927156 -0.5944523 -0.7497934</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 6  TRUE -1.0589794 -0.8250678 -1.5131640</span>
+</span></span><span style="display:flex;"><span>fitness <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">glm</span>(train <span style="color:#f92672">~</span> RC1 <span style="color:#f92672">+</span> RC2 <span style="color:#f92672">+</span> RC3, family <span style="color:#f92672">=</span> <span style="color:#a6e22e">binomial</span>(link <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;logit&#34;</span>), data <span style="color:#f92672">=</span> newdata)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(fitness)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Call:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## glm(formula = train ~ RC1 + RC2 + RC3, family = binomial(link = &#34;logit&#34;), </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##     data = newdata)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Deviance Residuals: </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##     Min       1Q   Median       3Q      Max  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## -1.7195  -1.4258   0.8082   0.8841   1.1148  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Coefficients:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##             Estimate Std. Error z value Pr(&gt;|z|)    </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## (Intercept)  0.81359    0.22177   3.669 0.000244 ***</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## RC1         -0.12319    0.21787  -0.565 0.571772    </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## RC2          0.09409    0.22203   0.424 0.671714    </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## RC3          0.17378    0.23189   0.749 0.453616    </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ---</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## (Dispersion parameter for binomial family taken to be 1)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##     Null deviance: 119.99  on 96  degrees of freedom</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Residual deviance: 118.90  on 93  degrees of freedom</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## AIC: 126.9</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Number of Fisher Scoring iterations: 4</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">vif</span>(fitness)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##      RC1      RC2      RC3 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1.000359 1.000444 1.000274</span>
+</span></span></code></pre></div><h2 id="5-outputs-interpretation">5. Outputs interpretation</h2>
+<p>The output results consist of two main parts:</p>
+<p><strong>Part 1</strong>: Loadings for PC1, PC2, and PC3
+In this part, PC1, PC2, and PC3 represent the loadings of each observed variable on the two principal components. These loadings indicate the correlation between the observed variables and the principal components:</p>
+<p>-h2: Represents the communality of the principal component, i.e., the proportion of variance explained by the principal component for each variable.
+-u2: Represents uniqueness, i.e., the proportion of variance in the variable that is not explained by the principal component. The sum of h2 and u2 equals 1.</p>
+<p><strong>Part 2</strong>: Description of the Two Principal Components
+In this part, the description of the two principal components includes:</p>
+<ul>
+<li>SS loadings: Eigenvalues of the two principal components.</li>
+<li>Proportion Var: Proportion of variance explained by each principal component, indicating the degree to which each principal component explains the data.</li>
+<li>Cumulative Var: Cumulative proportion of variance explained by the principal components.</li>
+</ul>
+<p>These descriptions provide insights into the variance explained by each principal component and their cumulative contribution to the total variance in the data.</p>
+    </div>
+
+    
+    
+
+
+
+    
+    
+
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="http://localhost:45315/blog/tags/pca/">PCA</a>
+            
+        </div>
+
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/blog/post/fa/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">Factor analysis (FA)</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+
+  
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:lyqglyqg@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+  
+    <a href="http://lyqg.github.io/" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+
+
+<a href="http://localhost:45315/blog/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2023 -
+    2024
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        lyqg
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/blog/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/blog/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/blog/js/main.fe83e11b4fbc9193d67e2c9db78bad21f8dc59fca0cacd8c1c3bb071bb16a852.js" integrity="sha256-/oPhG0&#43;8kZPWfiydt4utIfjcWfygys2MHDuwcbsWqFI=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=45315&amp;path=blog/livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Cluster analysis - Example R codes for BIOS 850 &amp; 880</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="yli8" />
+  <meta name="description" content="" />
+
+  <meta name="keywords" content="R codes, BIOS 850, BIOS 880" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.126.1" />
+
+
+<link rel="canonical" href="http://localhost:45315/blog/post/ca/" />
+
+
+
+
+
+<link rel="icon" href="/blog/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/sass/jane.min.de22abc00de44766eebd1054fd9e0b254b071f89d5019044f893c484a9249a8d.css" integrity="sha256-3iKrwA3kR2buvRBU/Z4LJUsHH4nVAZBE&#43;JPEhKkkmo0=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:url" content="http://localhost:45315/blog/post/ca/">
+  <meta property="og:site_name" content="Example R codes for BIOS 850 &amp; 880">
+  <meta property="og:title" content="Cluster analysis">
+  <meta property="og:description" content="Example R codes for BIOS 850 &amp; 880">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-01-20T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-01-20T00:00:00+00:00">
+    <meta property="article:tag" content="Cluster Analysis">
+
+  <meta itemprop="name" content="Cluster analysis">
+  <meta itemprop="description" content="Example R codes for BIOS 850 &amp; 880">
+  <meta itemprop="datePublished" content="2024-01-20T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2024-01-20T00:00:00+00:00">
+  <meta itemprop="wordCount" content="2407">
+  <meta itemprop="keywords" content="Cluster Analysis">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Cluster analysis">
+  <meta name="twitter:description" content="Example R codes for BIOS 850 &amp; 880">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Example R codes for BIOS 850 & 880</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/categories/">Categories</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/about/">About</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">external-link</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          <div class="mobile-menu-parent">
+            <span class="mobile-submenu-open"></span>
+            <a href="http://localhost:45315/blog/">
+              docs
+            </a>
+          </div>
+          <ul class="mobile-submenu-list">
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/ab/">AdaBoost</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/bcart/">Bagged Classification And Regression Trees（Bagged CART)</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/ct/">Classification trees</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/ca/">Cluster analysis</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/en/">Elastic Net</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/gb/">Gradient boosting</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/gbm/">Gradient Boosting Machine（GBM)</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/knn/">K Nearest Neighbors (KNN)</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/nb/">Naive Bayes</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/nn/">Neural network</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/rf/">Random forest</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/rt/">Regression trees</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/svm/">Support vector machine (SVM)</a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      Example R codes for BIOS 850 & 880
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">Home</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/categories/">Categories</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/about/">About</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">external-link</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          <a class="menu-item-link menu-parent" href="http://localhost:45315/blog/">docs</a>
+          <ul class="submenu">
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/ab/">AdaBoost</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/bcart/">Bagged Classification And Regression Trees（Bagged CART)</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/ct/">Classification trees</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/ca/">Cluster analysis</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/en/">Elastic Net</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/gb/">Gradient boosting</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/gbm/">Gradient Boosting Machine（GBM)</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/knn/">K Nearest Neighbors (KNN)</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/nb/">Naive Bayes</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/nn/">Neural network</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/rf/">Random forest</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/rt/">Regression trees</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/svm/">Support vector machine (SVM)</a>
+              </li>
+            
+          </ul>
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight wallpaper">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">Cluster analysis</h1>
+      
+
+      <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      yli8
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2024-01-20">
+      2024-01-20
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    
+
+    <div class="post-meta-category">
+        <a href="http://localhost:45315/blog/categories/cluster-analysis/"> Cluster analysis </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-package-installation">1. Package installation</a></li>
+    <li><a href="#data-reading">Data Reading</a></li>
+    <li><a href="#cluster-analysis">Cluster analysis</a>
+      <ul>
+        <li><a href="#1-hierarchical-clustering-methods">1. Hierarchical clustering methods</a></li>
+        <li><a href="#b-nbclust-nbclust">b. NbClust {NbClust}</a></li>
+      </ul>
+    </li>
+    <li><a href="#partitioning-clustering-methods">Partitioning clustering methods</a>
+      <ul>
+        <li><a href="#pampartitioning-around-mediods">PAM（Partitioning around mediods）</a></li>
+      </ul>
+    </li>
+    <li><a href="#model-based-clustering-methods">Model-based clustering methods</a>
+      <ul>
+        <li><a href="#mclustmclust">Mclust{mclust}</a></li>
+      </ul>
+    </li>
+    <li><a href="#density-based-clustering-methods">Density-based clustering methods</a></li>
+    <li><a href="#grid-based-clustering-methods">Grid-based clustering methods</a>
+      <ul>
+        <li><a href="#clique-optpart">clique {optpart}</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+
+    
+    <div class="post-content">
+      <h2 id="1-package-installation">1. Package installation</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(flexclust)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;flexclust&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(NbClust)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;NbClust&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(cluster)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;cluster&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(fMultivar)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;fMultivar&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(Hmisc)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;Hmisc&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(ggplot2)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;ggplot2&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(mclust)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;mclust&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(fpc)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;fpc&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(optpart)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;optpart&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(factoextra)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;factoextra&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(flexclust)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(NbClust)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(cluster)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(fMultivar)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(Hmisc)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggplot2)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(mclust)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(fpc)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(factoextra)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(optpart)
+</span></span></code></pre></div><h2 id="data-reading">Data Reading</h2>
+<p>We will continue to use the differential results of colon cancer for cluster analysis, with 41 normal tissues and 478 cancer tissues. We will check the number of differential analyses: 1296 down-regulated and 2832 up-regulated.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>DEG <span style="color:#f92672">=</span> <span style="color:#a6e22e">read.table</span>(<span style="color:#e6db74">&#34;DEG-resdata.xls&#34;</span>, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;\t&#34;</span>, check.names <span style="color:#f92672">=</span> F, header <span style="color:#f92672">=</span> T)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(DEG<span style="color:#f92672">$</span>sig)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Down   Up </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1296 2832</span>
+</span></span><span style="display:flex;"><span>group <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read.table</span>(<span style="color:#e6db74">&#34;DEG-group.xls&#34;</span>, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;\t&#34;</span>, check.names <span style="color:#f92672">=</span> F, header <span style="color:#f92672">=</span> T)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(group<span style="color:#f92672">$</span>Group)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  NT  TP </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  41 478</span>
+</span></span><span style="display:flex;"><span>len <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read.table</span>(<span style="color:#e6db74">&#34;All_hg19gene_len.txt&#34;</span>, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;\t&#34;</span>, check.names <span style="color:#f92672">=</span> F, header <span style="color:#f92672">=</span> T)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(len, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##      Gene Length</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1 DDX11L1   1735</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2  WASH7P   1351</span>
+</span></span></code></pre></div><p>We have obtained genes in ENSEMBL format, and we need to convert them to SYMBOL format.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(org.Hs.eg.db)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(clusterProfiler)
+</span></span><span style="display:flex;"><span>geneList <span style="color:#f92672">&lt;-</span> DEG<span style="color:#f92672">$</span>Row.names
+</span></span><span style="display:flex;"><span>eg <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">bitr</span>(geneList, fromType <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ENSEMBL&#34;</span>, toType <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;ENTREZID&#34;</span>, <span style="color:#e6db74">&#34;ENSEMBL&#34;</span>, <span style="color:#e6db74">&#34;SYMBOL&#34;</span>),
+</span></span><span style="display:flex;"><span>    OrgDb <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;org.Hs.eg.db&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(eg)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##           ENSEMBL ENTREZID   SYMBOL</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1 ENSG00000142959   266675    BEST4</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2 ENSG00000163815     7123   CLEC3B</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3 ENSG00000107611     8029     CUBN</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 4 ENSG00000162461   284723 SLC25A34</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 5 ENSG00000163959   200931   SLC51A</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 6 ENSG00000144410   130749      CPO</span>
+</span></span><span style="display:flex;"><span>mergedata <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">merge</span>(eg, DEG, by.y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Row.names&#34;</span>, by.x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ENSEMBL&#34;</span>)
+</span></span></code></pre></div><p>Convert Counts Reads to RPKM (Reads Per Kilobase of transcript, per Million mapped reads).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>exp <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">merge</span>(mergedata, len, by.x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;SYMBOL&#34;</span>, by.y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Gene&#34;</span>)
+</span></span><span style="display:flex;"><span>exp <span style="color:#f92672">&lt;-</span> exp[<span style="color:#f92672">!</span><span style="color:#a6e22e">duplicated</span>(exp<span style="color:#f92672">$</span>SYMBOL), ]
+</span></span><span style="display:flex;"><span>kb <span style="color:#f92672">&lt;-</span> exp<span style="color:#f92672">$</span>Length<span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>countdata <span style="color:#f92672">&lt;-</span> exp[, <span style="color:#ae81ff">10</span><span style="color:#f92672">:</span><span style="color:#a6e22e">ncol</span>(exp)]
+</span></span><span style="display:flex;"><span>rpk <span style="color:#f92672">&lt;-</span> countdata<span style="color:#f92672">/</span>kb
+</span></span><span style="display:flex;"><span>expMat <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">t</span>(<span style="color:#a6e22e">t</span>(rpk)<span style="color:#f92672">/</span><span style="color:#a6e22e">colSums</span>(countdata) <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>^6)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">rownames</span>(expMat) <span style="color:#f92672">=</span> exp<span style="color:#f92672">$</span>SYMBOL
+</span></span><span style="display:flex;"><span>expMat <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.data.frame</span>(expMat)
+</span></span><span style="display:flex;"><span>expMat[1<span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##        TCGA-3L-AA1B-01A-11R-A37K-07 TCGA-4N-A93T-01A-11R-A37K-07</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A2ML1                     0.3428737                    0.1904078</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## AACSP1                    0.1481661                    0.0000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## AADAC                     4.5036087                    3.7514781</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##        TCGA-4T-AA8H-01A-11R-A41B-07</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A2ML1                     9.9516816</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## AACSP1                    0.2905691</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## AADAC                     1.1776060</span>
+</span></span></code></pre></div><p>Substrat a subdata with 100 samples and 50 genes for clustering analysis.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">1234</span>)
+</span></span><span style="display:flex;"><span>sam <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sample</span>(<span style="color:#a6e22e">ncol</span>(expMat), <span style="color:#ae81ff">100</span>, replace <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</span></span><span style="display:flex;"><span>expMat <span style="color:#f92672">=</span> expMat[, sam]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dim</span>(expMat)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [1] 2534  100</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(dplyr)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">1234</span>)
+</span></span><span style="display:flex;"><span>exp_sample <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sample_n</span>(expMat, <span style="color:#ae81ff">50</span>, replace <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># exp_sample&lt;-na.omit(exp_sample)</span>
+</span></span><span style="display:flex;"><span>exp_sample <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">t</span>(exp_sample)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dim</span>(exp_sample)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [1] 100  50</span>
+</span></span><span style="display:flex;"><span>exp_sample <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.data.frame</span>(exp_sample)
+</span></span><span style="display:flex;"><span>exp_sample[1<span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                  IL17F         F7  IGHV3-7</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-AZ-4614-01A-01R-1410-07 1.5826763 192.233246  0.00000</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-AA-3524-01A-02R-0821-07 0.0000000  40.575613  0.00000</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-DM-A1D9-01A-11R-A155-07 0.5863731   1.813507 11.64019</span>
+</span></span></code></pre></div><h2 id="cluster-analysis">Cluster analysis</h2>
+<h3 id="1-hierarchical-clustering-methods">1. Hierarchical clustering methods</h3>
+<h4 id="a-hclust-stats">a. hclust {stats}</h4>
+<p><code>hclust</code> has the following distance options： 1) euclidean, 2) maximum, 3) manhattan, 4) canberra, 5) binary, 6) minkowski.
+<code>hclust</code> has the following method options： 1) ward.D, 2) ward.D2, 3) single, 4) complete, 5) average, 6) mcquitty, 7) median, 8) centroid.</p>
+<p>To find the most suitable clustering method and the distance, we will perform hierarchical clustering iteratively to identify the best one.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">24</span>, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>dis <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;euclidean&#34;</span>, <span style="color:#e6db74">&#34;maximum&#34;</span>, <span style="color:#e6db74">&#34;manhattan&#34;</span>, <span style="color:#e6db74">&#34;canberra&#34;</span>, <span style="color:#e6db74">&#34;binary&#34;</span>, <span style="color:#e6db74">&#34;minkowski&#34;</span>)
+</span></span><span style="display:flex;"><span>meds <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;ward.D&#34;</span>, <span style="color:#e6db74">&#34;ward.D2&#34;</span>, <span style="color:#e6db74">&#34;single&#34;</span>, <span style="color:#e6db74">&#34;complete&#34;</span>, <span style="color:#e6db74">&#34;average&#34;</span>, <span style="color:#e6db74">&#34;mcquitty&#34;</span>, <span style="color:#e6db74">&#34;median&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;centroid&#34;</span>)
+</span></span><span style="display:flex;"><span>nom <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(exp_sample)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (i in1<span style="color:#f92672">:</span><span style="color:#a6e22e">length</span>(dis)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (j in1<span style="color:#f92672">:</span><span style="color:#a6e22e">length</span>(meds)) {
+</span></span><span style="display:flex;"><span>        d <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">dist</span>(nom, method <span style="color:#f92672">=</span> dis[i])
+</span></span><span style="display:flex;"><span>        hc <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">hclust</span>(d, method <span style="color:#f92672">=</span> meds[j])
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">plot</span>(hc, hang <span style="color:#f92672">=</span> <span style="color:#ae81ff">-1</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.8</span>, main <span style="color:#f92672">=</span> <span style="color:#a6e22e">paste</span>(dis[i], meds[j], sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34; and &#34;</span>),
+</span></span><span style="display:flex;"><span>            labels <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>, xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, sub <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/ca/640.webp"></p>
+<p>The results indicate that the clustering results are better with the combination of maximum linkage and Ward&rsquo;s method with Euclidean distance (ward.D) or maximum linkage and Ward&rsquo;s method with squared Euclidean distance (ward.D2).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>nom <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(exp_sample)
+</span></span><span style="display:flex;"><span>d <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">dist</span>(nom, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;maximum&#34;</span>)
+</span></span><span style="display:flex;"><span>hc <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">hclust</span>(d, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ward.D&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(hc, hang <span style="color:#f92672">=</span> <span style="color:#ae81ff">-1</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.8</span>, main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;maximum and ward.D&#34;</span>, labels <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>, xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, sub <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/ca/641.png"></p>
+<h3 id="b-nbclust-nbclust">b. NbClust {NbClust}</h3>
+<p>Common practice involves trying different numbers of clusters (e.g., from 2 to K) and comparing the quality of solutions. The NbClust() function in the NbClust package provides 30 different indices to assist you in making this choice. R provides a variety of hierarchical clustering functions. Here, we briefly introduce hierarchical clustering analysis using the Ward method. Selecting the number of clusters.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">1234</span>)
+</span></span><span style="display:flex;"><span>nc <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">NbClust</span>(nom, min.nc <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, max.nc <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;kmeans&#34;</span>)
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/ca/643.webp"></p>
+<p>The Hubert index is a graphical method of determining the number of clusters. In the plot of Hubert index, we seek a significant knee that corresponds to a significant increase of the value of the measure i.e the significant peak in Hubert index second differences plot.</p>
+<p><img alt="Fig1" src="/blog/post/ca/644.webp"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## *** : The D index is a graphical method of determining the number of clusters. </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                 In the plot of D index, we seek a significant knee (the significant peak in Dindex</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                 second differences plot) that corresponds to a significant increase of the value of</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                 the measure. </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ******************************************************************* </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## * Among all indices:                                                </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## * 6 proposed 2 as the best number of clusters </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## * 12 proposed 3 as the best number of clusters </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## * 4 proposed 4 as the best number of clusters </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## * 1 proposed 12 as the best number of clusters </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## * 1 proposed 13 as the best number of clusters </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                    ***** Conclusion *****                            </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## * According to the majority rule, the best number of clusters is  3 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## *******************************************************************</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(nc<span style="color:#f92672">$</span>Best.n[1, ])  <span style="color:#75715e"># cluster numbers</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  0  2  3  4 12 13 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  2  6 12  4  1  1</span>
+</span></span></code></pre></div><p>Generally, we need to control the within-cluster sum of squares to be small, while also ensuring that the number of clusters is not too large. Therefore, from the graph, we can see that having 2 to 3 clusters is preferable.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">barplot</span>(<span style="color:#a6e22e">table</span>(nc<span style="color:#f92672">$</span>Best.n[1, ]), xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Numer of Clusters&#34;</span>, ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Number of Criteria&#34;</span>,
+</span></span><span style="display:flex;"><span>    main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Number of Clusters Chosen by 13 Criteria&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;lightblue&#34;</span>)
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/ca/645.webp"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">1234</span>)
+</span></span><span style="display:flex;"><span>fit.km <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">kmeans</span>(nom, <span style="color:#ae81ff">3</span>, nstart <span style="color:#f92672">=</span> <span style="color:#ae81ff">25</span>)  <span style="color:#75715e"># k mean clustering</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(fit.km<span style="color:#f92672">$</span>size)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [1] 11 88  1</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(fit.km<span style="color:#f92672">$</span>centers)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##        IL17F          F7    IGHV3-7      CMTM5      SMYD1       PDCD4</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1 -0.3033558 -0.26190722  1.4055743  0.4082672  0.2498796  0.69684023</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2  0.0421243  0.02517585 -0.1709715 -0.1522383 -0.1231630 -0.08641151</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3 -0.3700242  0.66550478 -0.4158215  8.9060298  8.0896682 -0.06102960</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##         TMEM40       KRT32      CARD14      SPOCK3        SIX1      PLPP4</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1 -0.362363108 -0.22065253 -0.78214969  0.11952882 -0.55062557 -0.7788310</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2  0.005027673 -0.00806648  0.07851735 -0.04062087  0.07074427  0.1038498</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3  3.543558958  3.13702805  1.69412011  2.25981933 -0.16861467 -0.5716388</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##     LINC01630   LINC01433   IGLV7-43     CYP2D8P    FAM180B      IGFBP1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1 -0.24579463 -0.65201479  1.2035853 -0.68438367  0.7997951 -0.31833860</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2 -0.05810688  0.02298383 -0.1466840  0.02431761 -0.1718955  0.03427224</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3  7.81714632  5.14958598 -0.3312469  5.38827060  6.3290583  0.48576776</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##      EMILIN3        MMP3          KY     ARNTL2       INHBA         GCG</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1  0.8095011 -0.46443987 -0.14329723 -0.8842087 -0.79163943  2.26939837</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2 -0.1671745  0.05721899 -0.09203014  0.1189363  0.09411268 -0.28280319</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3  5.8068424  0.07356759  9.67492155 -0.7400995  0.42611749 -0.07670164</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##       RUNDC3B        CCL8    RNA5SP123        CADPS       ALKAL2     TMEFF2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1  0.45673682  0.41538110 -0.130832591 -0.568783015  0.269797780  0.2654644</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2 -0.07048812 -0.05666444  0.003104592  0.071202484 -0.033612042 -0.1422725</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3  1.17884953  0.41727843  1.165954384 -0.009205451 -0.009915867  9.5998700</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##         CD160  IGFBP7-AS1  LINC01749        EDN2       ASB11   LINC00052</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1 -0.03071948 -0.15939844 -0.2331126  0.36867201 -0.07035151 -0.12921182</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2 -0.07427513  0.01659261 -0.0598016 -0.06959498 -0.10312412 -0.09439828</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3  6.87412605  0.29323277  7.8267799  2.06896647  9.84878886  9.72837895</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    IGKV1D-17     SNORA54     RIPPLY1   LINC01929      ERVV-2     DBNDD1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1  1.1706605 -0.16585298 -0.47669118 -0.30734680 -0.27433892 -0.8699670</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2 -0.1603865  0.02279823 -0.02897558  0.04346155  0.03869342  0.1093077</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3  1.2367475 -0.18186187  7.79345442 -0.44380136 -0.38729319 -0.0494384</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##     DNASE1L3    ST8SIA3    LGALS9C     EIF3IP1      NPY2R    IGKV1-17</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1  1.7339587  0.5752728  0.9766528 -0.35904218  2.2800690  0.75062759</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2 -0.2231538 -0.1345245 -0.1423932  0.05060592 -0.2792156 -0.08565249</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3  0.5639854  5.5101569  1.7874242 -0.50385688 -0.5097886 -0.71948427</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##       TACSTD2     MIR3941</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1 -0.49459774 -0.31656432</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2  0.05944485  0.04441591</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3  0.20942843 -0.42639268</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">aggregate</span>(exp_sample, by <span style="color:#f92672">=</span> <span style="color:#a6e22e">list</span>(cluster <span style="color:#f92672">=</span> fit.km<span style="color:#f92672">$</span>cluster), mean)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   cluster     IL17F        F7   IGHV3-7      CMTM5     SMYD1    PDCD4    TMEM40</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1       1 0.4785149  7.460917 209.45886  1.4723694  4.332919 656.7416  0.444122</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2       2 2.9582112 26.684794  28.15752  0.3581697  1.626264 482.0289  2.261306</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3       3 0.0000000 69.562991   0.00000 18.3646297 61.215432 487.6906 19.763545</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##        KRT32    CARD14    SPOCK3      SIX1     PLPP4 LINC01630  LINC01433</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1  0.1315531  3.833043 1.1778745 0.2997228  1.675485 0.0403494  0.8104104</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2  2.0334175 17.405693 0.6783717 5.0841760 36.541595 0.2227790  3.6539136</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3 30.1704631 42.883618 7.8533855 3.2411486  9.859628 7.8774055 25.2502680</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   IGLV7-43   CYP2D8P    FAM180B     IGFBP1   EMILIN3     MMP3         KY</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1 839.8532  3.349757  4.2951477  0.5694678  3.758912 118.7052  0.5516859</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2 221.6396 11.229645  0.5933968 14.3262393  1.775201 661.8622  0.7076329</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3 137.1385 70.870215 25.3594190 31.9409017 13.908933 678.8845 30.4172776</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##      ARNTL2     INHBA        GCG   RUNDC3B     CCL8  RNA5SP123    CADPS</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1  30.01116  10.75001 106.891035 14.697087 55.74761   6.069886 12.09875</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2 119.35135 113.95056   6.651268  9.058721 36.01527  20.718074 42.26393</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3  42.84554 152.63303  14.746072 22.419665 55.82692 147.894427 38.47397</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##      ALKAL2     TMEFF2     CD160 IGFBP7-AS1   LINC01749     EDN2      ASB11</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1 12.988460  1.0522118  3.042562   2.191211  0.05379713 23.46872  0.2065057</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2  7.612765  0.1708365  2.921970   9.204716  0.72567688 15.67902  0.1331140</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3  8.032605 21.2297187 22.159956  20.229238 31.29981141 53.68956 22.4196647</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##     LINC00052 IGKV1D-17   SNORA54    RIPPLY1 LINC01929    ERVV-2    DBNDD1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1  0.01406769  126.8576  6.907777  0.4795657 0.6475473 0.1455193  38.24107</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2  0.07724792   16.7068 88.310073  4.4568368 2.3123139 0.5487996 154.81437</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3 17.90380144  132.3266  0.000000 73.9472135 0.0000000 0.0000000 135.91717</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   DNASE1L3   ST8SIA3  LGALS9C  EIF3IP1     NPY2R   IGKV1-17   TACSTD2   MIR3941</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1 75.87623 0.2630833 42.24571 1.739676 2.6566259 1261.99486  14.74231 0.5053909</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2 14.41560 0.0911642 13.69061 6.660828 0.2195618  570.58862 474.43309 2.1664932</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3 39.13471 1.4583557 62.93446 0.000000 0.0000000   46.55936 598.87492 0.0000000</span>
+</span></span></code></pre></div><p>To assess the accuracy of clustering:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>NT <span style="color:#f92672">&lt;-</span> group[group<span style="color:#f92672">$</span>Group <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;NT&#34;</span>, ]
+</span></span><span style="display:flex;"><span>exp_sample<span style="color:#f92672">$</span>group <span style="color:#f92672">=</span> <span style="color:#a6e22e">ifelse</span>(<span style="color:#a6e22e">rownames</span>(exp_sample) <span style="color:#f92672">%in%</span> NT<span style="color:#f92672">$</span>Sample, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>ct.km <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">table</span>(exp_sample<span style="color:#f92672">$</span>group, fit.km<span style="color:#f92672">$</span>cluster)
+</span></span><span style="display:flex;"><span>ct.km
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##      1  2  3</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   1  8  0  0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   2  3 88  1</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">randIndex</span>(ct.km)
+</span></span></code></pre></div><h2 id="partitioning-clustering-methods">Partitioning clustering methods</h2>
+<h3 id="pampartitioning-around-mediods">PAM（Partitioning around mediods）</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">1234</span>)
+</span></span><span style="display:flex;"><span>fit.pam <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">pam</span>(exp_sample, k <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, stand <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(fit.pam<span style="color:#f92672">$</span>medoids)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                  IL17F         F7   IGHV3-7      CMTM5</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-T9-A92H-01A-11R-A37K-07 0.6943772  1.7570762  15.50722  0.7731135</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-AZ-6599-11A-01R-1774-07 0.0000000  0.3429155 104.41179  2.4895665</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-CM-4748-01A-01R-1410-07 0.0000000 69.5629914   0.00000 18.3646297</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                   SMYD1    PDCD4     TMEM40      KRT32   CARD14</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-T9-A92H-01A-11R-A37K-07  0.0000000 533.3114  2.0800125  0.4233717 19.67791</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-AZ-6599-11A-01R-1774-07  0.6601123 706.5871  0.1217822  0.0000000  2.80102</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-CM-4748-01A-01R-1410-07 61.2154324 487.6906 19.7635450 30.1704631 42.88362</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                SPOCK3      SIX1    PLPP4  LINC01630  LINC01433</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-T9-A92H-01A-11R-A37K-07 0.000000 0.6822288 6.226054 0.05527045  3.1889546</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-AZ-6599-11A-01R-1774-07 2.226043 0.2396619 2.187167 0.01618009  0.3111823</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-CM-4748-01A-01R-1410-07 7.853385 3.2411486 9.859628 7.87740551 25.2502680</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                               IGLV7-43   CYP2D8P   FAM180B     IGFBP1   EMILIN3</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-T9-A92H-01A-11R-A37K-07  21.16858 18.895448  1.067580  0.8964313  1.756613</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-AZ-6599-11A-01R-1774-07 496.32119  1.164532  3.750329  0.3936371  3.313977</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-CM-4748-01A-01R-1410-07 137.13847 70.870215 25.359419 31.9409017 13.908933</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                    MMP3         KY     ARNTL2      INHBA</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-T9-A92H-01A-11R-A37K-07   3.617678  0.2561011 125.517002  75.500094</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-AZ-6599-11A-01R-1774-07   2.753538  0.1124580   9.535511   3.500819</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-CM-4748-01A-01R-1410-07 678.884526 30.4172776  42.845543 152.633034</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                      GCG   RUNDC3B     CCL8 RNA5SP123     CADPS</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-T9-A92H-01A-11R-A37K-07   0.9311694  2.674163  1.76265    0.0000 23.130995</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-AZ-6599-11A-01R-1774-07 127.3923166 12.663665 82.04478    0.0000  3.719115</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-CM-4748-01A-01R-1410-07  14.7460719 22.419665 55.82692  147.8944 38.473970</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                 ALKAL2    TMEFF2     CD160 IGFBP7-AS1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-T9-A92H-01A-11R-A37K-07  3.719719  0.000000  1.679200  0.0000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-AZ-6599-11A-01R-1774-07 16.234881  1.111942  2.621736  0.3739553</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-CM-4748-01A-01R-1410-07  8.032605 21.229719 22.159956 20.2292377</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                               LINC01749     EDN2      ASB11 LINC00052 IGKV1D-17</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-T9-A92H-01A-11R-A37K-07  0.0000000 38.42376  0.4719111    0.0000   2.78534</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-AZ-6599-11A-01R-1774-07  0.0551052 28.98096  0.2072236    0.0000  15.90013</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-CM-4748-01A-01R-1410-07 31.2998114 53.68956 22.4196647   17.9038 132.32659</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                               SNORA54    RIPPLY1 LINC01929 ERVV-2     DBNDD1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-T9-A92H-01A-11R-A37K-07 12.04716  0.0000000 2.5709479      0 116.911028</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-AZ-6599-11A-01R-1774-07  0.00000  0.5467917 0.2052625      0   6.609587</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-CM-4748-01A-01R-1410-07  0.00000 73.9472135 0.0000000      0 135.917170</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                               DNASE1L3   ST8SIA3  LGALS9C   EIF3IP1     NPY2R</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-T9-A92H-01A-11R-A37K-07  4.001051 0.1227876 21.97454 0.0000000 0.2042173</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-AZ-6599-11A-01R-1774-07 33.278217 0.6290431 27.51096 0.4485916 3.8261354</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-CM-4748-01A-01R-1410-07 39.134707 1.4583557 62.93446 0.0000000 0.0000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                IGKV1-17    TACSTD2 MIR3941 group</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-T9-A92H-01A-11R-A37K-07  276.36763 180.261614       0     2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-AZ-6599-11A-01R-1774-07 1770.72762   8.303047       0     1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## TCGA-CM-4748-01A-01R-1410-07   46.55936 598.874924       0     2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">clusplot</span>(fit.pam, main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Bivariate Cluster Plot&#34;</span>, color <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>, shade <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>, labels <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    lines <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/ca/646.webp"></p>
+<p>Assess the accuracy of clustering.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># evaluate clustering</span>
+</span></span><span style="display:flex;"><span>ct.pam <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">table</span>(exp_sample<span style="color:#f92672">$</span>group, fit.pam<span style="color:#f92672">$</span>clustering)
+</span></span><span style="display:flex;"><span>ct.pam
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##      1  2  3</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   1  0  8  0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   2 91  0  1</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">randIndex</span>(ct.pam)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##       ARI </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 0.9309073</span>
+</span></span></code></pre></div><h2 id="model-based-clustering-methods">Model-based clustering methods</h2>
+<h3 id="mclustmclust">Mclust{mclust}</h3>
+<p>Model-based clustering methods utilize maximum likelihood estimation and Bayesian criteria to select the optimal clustering model from a large number of assumed models and determine the optimal number of clusters. Model-based clustering is based on a parameterized finite Gaussian mixture model. The clustering algorithm initializes the EM algorithm based on a hierarchical model to estimate the model. Then, the optimal model is selected based on the Bayesian Information Criterion (BIC). From the results below, clustering the population into two classes seems to be more appropriate.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>fit.m <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">Mclust</span>(exp_sample)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(fit.m)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ---------------------------------------------------- </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Gaussian finite mixture model fitted by EM algorithm </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ---------------------------------------------------- </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Mclust EEI (diagonal, equal volume and shape) model with 5 components: </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  log-likelihood   n  df      BIC      ICL</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##        -19190.8 100 310 -39809.2 -39809.2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Clustering table:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  1  2  3  4  5 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 96  1  1  1  1</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(fit.m, what <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;classification&#34;</span>)  
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/ca/647.webp"></p>
+<h2 id="density-based-clustering-methods">Density-based clustering methods</h2>
+<p>We introduce a new clustering method called DBSCAN (Density-Based Spatial Clustering of Applications with Noise) clustering, which is a density-based clustering algorithm. However, since differential genes are not suitable for this clustering method, the effectiveness is not very good.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">1234</span>)
+</span></span><span style="display:flex;"><span>db <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">dbscan</span>(exp_sample, eps <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.15</span>, MinPts <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fviz_cluster</span>(db, data <span style="color:#f92672">=</span> exp_sample, stand <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>, ellipse <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>, show.clust.cent <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>,
+</span></span><span style="display:flex;"><span>    geom <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;point&#34;</span>, palette <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Set2&#34;</span>, ggtheme <span style="color:#f92672">=</span> <span style="color:#a6e22e">theme_classic</span>())
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/ca/648.webp"></p>
+<p>The expression data is not uitable for density clustering. We choose the data provided by the software package. The clustering results are as follows.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">data</span>(<span style="color:#e6db74">&#34;multishapes&#34;</span>)
+</span></span><span style="display:flex;"><span>df <span style="color:#f92672">&lt;-</span> multishapes[, <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span>db <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">dbscan</span>(df, eps <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.15</span>, MinPts <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fviz_cluster</span>(db, data <span style="color:#f92672">=</span> df, stand <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>, ellipse <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>, show.clust.cent <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>,
+</span></span><span style="display:flex;"><span>    geom <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;point&#34;</span>, palette <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;jco&#34;</span>, ggtheme <span style="color:#f92672">=</span> <span style="color:#a6e22e">theme_classic</span>())
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/ca/649.webp"></p>
+<h2 id="grid-based-clustering-methods">Grid-based clustering methods</h2>
+<h3 id="clique-optpart">clique {optpart}</h3>
+<p>The grid-based clustering method quantifies space into a finite number of units, forming a grid structure where all clustering is performed on the grid. The basic idea is to partition the possible values of each attribute into many adjacent intervals and create a collection of grid cells. Each object falls into a grid cell, and the attribute space corresponding to the grid cell contains the value of the object. The main advantage of grid-based clustering methods is fast processing speed, as their processing time is independent of the number of data objects and only depends on the number of units in each dimension of the quantized space. However, these algorithms have the disadvantage of only being able to detect clusters with boundaries that are horizontal or vertical, and cannot detect diagonal boundaries. Additionally, when dealing with high-dimensional data, the number of grid cells increases exponentially with the dimensionality of the attributes. Since differential genes are not suitable for this clustering method, the effectiveness is not very good.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>cq <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">clique</span>(d, <span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(cq)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 100 maximal cliques at alphac =  0.5 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## minimum size =  1 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## maximum size =  1</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(cq, panel <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;all&#34;</span>)
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/ca/6410.webp"></p>
+<p>This data is not suitable for grid-based clustering. We choose the data provided by the software package, and the clustering results are as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">data</span>(<span style="color:#e6db74">&#34;iris&#34;</span>)
+</span></span><span style="display:flex;"><span>iris2 <span style="color:#f92672">&lt;-</span> iris[<span style="color:#ae81ff">-5</span>]
+</span></span><span style="display:flex;"><span>dist.e <span style="color:#f92672">=</span> <span style="color:#a6e22e">dist</span>(iris2, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;euclidean&#34;</span>)
+</span></span><span style="display:flex;"><span>cq <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">clique</span>(dist.e, <span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># summary(cq)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(cq)
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/ca/6411.webp"></p>
+    </div>
+
+    
+    
+
+
+
+    
+    
+
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="http://localhost:45315/blog/tags/cluster-analysis/">Cluster analysis</a>
+            
+        </div>
+
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/blog/post/knn/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">K Nearest Neighbors (KNN)</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/blog/post/fa/">
+            <span class="next-text nav-default">Factor analysis (FA)</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+
+  
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+  
+
+    
+
+  
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:lyqglyqg@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+  
+    <a href="http://lyqg.github.io/" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+
+
+<a href="http://localhost:45315/blog/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2023 -
+    2024
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        lyqg
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/blog/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/blog/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/blog/js/main.fe83e11b4fbc9193d67e2c9db78bad21f8dc59fca0cacd8c1c3bb071bb16a852.js" integrity="sha256-/oPhG0&#43;8kZPWfiydt4utIfjcWfygys2MHDuwcbsWqFI=" crossorigin="anonymous"></script>
+
+
+
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=45315&amp;path=blog/livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Random forest - Example R codes for BIOS 850 &amp; 880</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="yli8" />
+  <meta name="description" content="" />
+
+  <meta name="keywords" content="R codes, BIOS 850, BIOS 880" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.126.1" />
+
+
+<link rel="canonical" href="http://localhost:45315/blog/post/rf-copy/" />
+
+
+
+
+
+<link rel="icon" href="/blog/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/sass/jane.min.de22abc00de44766eebd1054fd9e0b254b071f89d5019044f893c484a9249a8d.css" integrity="sha256-3iKrwA3kR2buvRBU/Z4LJUsHH4nVAZBE&#43;JPEhKkkmo0=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:url" content="http://localhost:45315/blog/post/rf-copy/">
+  <meta property="og:site_name" content="Example R codes for BIOS 850 &amp; 880">
+  <meta property="og:title" content="Random forest">
+  <meta property="og:description" content="Example R codes for BIOS 850 &amp; 880">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-03-18T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-03-18T00:00:00+00:00">
+    <meta property="article:tag" content="Random Forest">
+
+  <meta itemprop="name" content="Random forest">
+  <meta itemprop="description" content="Example R codes for BIOS 850 &amp; 880">
+  <meta itemprop="datePublished" content="2024-03-18T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2024-03-18T00:00:00+00:00">
+  <meta itemprop="wordCount" content="1215">
+  <meta itemprop="keywords" content="Random Forest">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Random forest">
+  <meta name="twitter:description" content="Example R codes for BIOS 850 &amp; 880">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Example R codes for BIOS 850 & 880</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/categories/">Categories</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/about/">About</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">external-link</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          <div class="mobile-menu-parent">
+            <span class="mobile-submenu-open"></span>
+            <a href="http://localhost:45315/blog/">
+              docs
+            </a>
+          </div>
+          <ul class="mobile-submenu-list">
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/ct/">Classification trees</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/ca/">Cluster analysis</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/knn/">K Nearest Neighbors (KNN)</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/rf/">Random forest</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/rt/">Regression trees</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/svm/">Support vector machine (SVM)</a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      Example R codes for BIOS 850 & 880
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">Home</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/categories/">Categories</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/about/">About</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">external-link</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          <a class="menu-item-link menu-parent" href="http://localhost:45315/blog/">docs</a>
+          <ul class="submenu">
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/ct/">Classification trees</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/ca/">Cluster analysis</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/knn/">K Nearest Neighbors (KNN)</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/rf/">Random forest</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/rt/">Regression trees</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/svm/">Support vector machine (SVM)</a>
+              </li>
+            
+          </ul>
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight wallpaper">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">Random forest</h1>
+      
+
+      <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      yli8
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2024-03-18">
+      2024-03-18
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    
+
+    <div class="post-meta-category">
+        <a href="http://localhost:45315/blog/categories/random-forest/"> Random forest </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-package-installation">1. Package installation</a></li>
+    <li><a href="#data-reading-and-processing">Data Reading and processing</a></li>
+    <li><a href="#random-forest">Random forest</a>
+      <ul>
+        <li><a href="#roc-curves">ROC curves</a></li>
+      </ul>
+    </li>
+    <li><a href="#regression-random-forest">Regression random forest</a>
+      <ul>
+        <li><a href="#roc-curves-1">ROC curves</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+
+    
+    <div class="post-content">
+      <h2 id="1-package-installation">1. Package installation</h2>
+<p>Here we primarily use the <code>randomForest</code> package.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(randomForest)) <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;randomForest&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(randomForest)
+</span></span></code></pre></div><h2 id="data-reading-and-processing">Data Reading and processing</h2>
+<p>The data can be downloaded from <a href="http://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/">http://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/</a>. There are two files: wbdc.data and wbdc.names. The data has been processed into panel data format. Upon inspecting the data structure, the first column is an ID column with no meaningful features, so it needs to be deleted. The second column, &ldquo;diagnosis,&rdquo; is the response variable, which is categorical. In R, for classification tasks, the response variable is typically required to be of factor type, so it needs to be converted. The remaining columns are predictor variables, which are numeric. The dataset consists of 97 samples and 9 features (including the response feature).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>BreastCancer <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read.csv</span>(<span style="color:#e6db74">&#34;wisc_bc_data.csv&#34;</span>, stringsAsFactors <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dim</span>(BreastCancer)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [1] 568  32</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(BreastCancer<span style="color:#f92672">$</span>diagnosis)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   B   M </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 357 211</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(tidyverse)
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">select</span>(BreastCancer, <span style="color:#ae81ff">-1</span>) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mutate_at</span>(<span style="color:#e6db74">&#34;diagnosis&#34;</span>, as.factor)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">is.na</span>(data))  <span style="color:#75715e">##check for missing data</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [1] 0</span>
+</span></span></code></pre></div><p>Split the raw data into training and testing datasets.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(sampling)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># </span>
+</span></span><span style="display:flex;"><span>train_id <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">strata</span>(data, <span style="color:#e6db74">&#34;diagnosis&#34;</span>, size <span style="color:#f92672">=</span> <span style="color:#a6e22e">rev</span>(<span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">table</span>(data<span style="color:#f92672">$</span>diagnosis) <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.7</span>)))<span style="color:#f92672">$</span>ID_unit
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># training data</span>
+</span></span><span style="display:flex;"><span>train_data <span style="color:#f92672">&lt;-</span> data[train_id, ]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># test data</span>
+</span></span><span style="display:flex;"><span>test_data <span style="color:#f92672">&lt;-</span> data[<span style="color:#f92672">-</span>train_id, ]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># check proportions</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">prop.table</span>(<span style="color:#a6e22e">table</span>(train_data<span style="color:#f92672">$</span>diagnosis))
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##         B         M </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 0.6281407 0.3718593</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">prop.table</span>(<span style="color:#a6e22e">table</span>(test_data<span style="color:#f92672">$</span>diagnosis))
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##         B         M </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 0.6294118 0.3705882</span>
+</span></span></code></pre></div><h2 id="random-forest">Random forest</h2>
+<p>To build a classification random forest model for breast cancer diagnosis (malignant or benign), we&rsquo;ll use the randomForest package in R. We&rsquo;ll select the diagnosis (malignant or benign) as the response variable and construct the random forest model. We&rsquo;ll then choose the model with the minimum RSS (Residual Sum of Squares).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span>rf.biop <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">randomForest</span>(diagnosis <span style="color:#f92672">~</span> ., data <span style="color:#f92672">=</span> train_data)
+</span></span><span style="display:flex;"><span>rf.biop
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Call:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  randomForest(formula = diagnosis ~ ., data = train_data) </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                Type of random forest: classification</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                      Number of trees: 500</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## No. of variables tried at each split: 5</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##         OOB estimate of  error rate: 4.77%</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Confusion matrix:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##     B   M class.error</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## B 244   6  0.02400000</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## M  13 135  0.08783784</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(rf.biop)
+</span></span></code></pre></div><p><img alt="Fig1" src="640.webp"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">which.min</span>(rf.biop<span style="color:#f92672">$</span>err.rate[, <span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [1] 53</span>
+</span></span></code></pre></div><p><strong>Optimal random number</strong></p>
+<p>We observed that the minimum number of trees is 53. We rebuild the random forest model again, with only 6 false positives and false negatives, achieving an accuracy of 0.9647, which is quite high.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span>rf.biop.2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">randomForest</span>(diagnosis <span style="color:#f92672">~</span> ., data <span style="color:#f92672">=</span> train_data, ntree <span style="color:#f92672">=</span> <span style="color:#ae81ff">53</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">getTree</span>(rf.biop, <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    left daughter right daughter split var split point status prediction</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1              2              3         8    0.051455      1          0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2              4              5        22   28.025000      1          0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3              6              7         2   15.900000      1          0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 4              0              0         0    0.000000     -1          1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 5              8              9         4  697.800000      1          0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 6             10             11         8    0.079050      1          0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 7             12             13        29    0.228650      1          0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 8             14             15        24  766.450000      1          0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 9             16             17        21   17.900000      1          0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 10             0              0         0    0.000000     -1          1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 11             0              0         0    0.000000     -1          2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 12            18             19         2   20.595000      1          0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 13            20             21        28    0.142350      1          0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 14             0              0         0    0.000000     -1          1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 15            22             23         3   90.995000      1          0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 16             0              0         0    0.000000     -1          2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 17             0              0         0    0.000000     -1          1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 18             0              0         0    0.000000     -1          1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 19             0              0         0    0.000000     -1          2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 20            24             25         9    0.195450      1          0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 21             0              0         0    0.000000     -1          2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 22             0              0         0    0.000000     -1          2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 23             0              0         0    0.000000     -1          1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 24             0              0         0    0.000000     -1          2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 25            26             27        17    0.030105      1          0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 26             0              0         0    0.000000     -1          2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 27             0              0         0    0.000000     -1          1</span>
+</span></span><span style="display:flex;"><span>rf.biop.2
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Call:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  randomForest(formula = diagnosis ~ ., data = train_data, ntree = 53) </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                Type of random forest: classification</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                      Number of trees: 53</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## No. of variables tried at each split: 5</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##         OOB estimate of  error rate: 3.52%</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Confusion matrix:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##     B   M class.error</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## B 246   4  0.01600000</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## M  10 138  0.06756757</span>
+</span></span></code></pre></div><p>Prediction on test data.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(caret)
+</span></span><span style="display:flex;"><span>rf.biop.test <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">predict</span>(rf.biop.2, newdata <span style="color:#f92672">=</span> test_data, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;response&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(rf.biop.test, test_data<span style="color:#f92672">$</span>diagnosis)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##             </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## rf.biop.test   B   M</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##            B 106   5</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##            M   1  58</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">confusionMatrix</span>(rf.biop.test, test_data<span style="color:#f92672">$</span>diagnosis, positive <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;B&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Confusion Matrix and Statistics</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##           Reference</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Prediction   B   M</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##          B 106   5</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##          M   1  58</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                           </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                Accuracy : 0.9647          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                  95% CI : (0.9248, 0.9869)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##     No Information Rate : 0.6294          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##     P-Value [Acc &gt; NIR] : &lt;2e-16          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                           </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                   Kappa : 0.9233          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                           </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  Mcnemar&#39;s Test P-Value : 0.2207          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                           </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##             Sensitivity : 0.9907          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##             Specificity : 0.9206          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##          Pos Pred Value : 0.9550          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##          Neg Pred Value : 0.9831          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##              Prevalence : 0.6294          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##          Detection Rate : 0.6235          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    Detection Prevalence : 0.6529          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##       Balanced Accuracy : 0.9556          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                           </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##        &#39;Positive&#39; Class : B               </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">varImpPlot</span>(rf.biop.2)
+</span></span></code></pre></div><p><img alt="Fig1" src="641.webp"></p>
+<h3 id="roc-curves">ROC curves</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ROSE)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">roc.curve</span>(rf.biop.test, test_data<span style="color:#f92672">$</span>diagnosis, main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ROC curve of randomForest&#34;</span>,
+</span></span><span style="display:flex;"><span>    col <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, lty <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Area under the curve (AUC): 0.969</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">legend</span>(<span style="color:#e6db74">&#34;bottomright&#34;</span>, <span style="color:#e6db74">&#34;AUC:0.969&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, lty <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, bty <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;n&#34;</span>)
+</span></span></code></pre></div><p><img alt="Fig1" src="642.webp"></p>
+<h2 id="regression-random-forest">Regression random forest</h2>
+<p>When building the regression result random forest model, we chose the pancreatic cancer data from the ElemStatLearn package. The response variable is continuous numerical, and we performed data reading and splitting.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ElemStatLearn)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">data</span>(prostate)
+</span></span><span style="display:flex;"><span>prostate<span style="color:#f92672">$</span>gleason <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ifelse</span>(prostate<span style="color:#f92672">$</span>gleason <span style="color:#f92672">==</span> <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>pros.train <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">subset</span>(prostate, train <span style="color:#f92672">==</span> <span style="color:#66d9ef">TRUE</span>)[, <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span>]
+</span></span><span style="display:flex;"><span>pros.test <span style="color:#f92672">=</span> <span style="color:#a6e22e">subset</span>(prostate, train <span style="color:#f92672">==</span> <span style="color:#66d9ef">FALSE</span>)[, <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span>]
+</span></span></code></pre></div><p>Construct regression random forest</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">################ RF</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span>rf.pros <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">randomForest</span>(lpsa <span style="color:#f92672">~</span> ., data <span style="color:#f92672">=</span> pros.train)
+</span></span><span style="display:flex;"><span>rf.pros
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Call:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  randomForest(formula = lpsa ~ ., data = pros.train) </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                Type of random forest: regression</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                      Number of trees: 500</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## No. of variables tried at each split: 2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##           Mean of squared residuals: 0.6936697</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                     % Var explained: 51.73</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(rf.pros)
+</span></span></code></pre></div><p><img alt="Fig1" src="643.webp"></p>
+<p><strong>The final number of random trees</strong> is 80. With this optimal number, we rebuilt the model and found that the variables lcavol and lweight are highly important in the model and have a significant impact.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">which.min</span>(rf.pros<span style="color:#f92672">$</span>mse)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [1] 80</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span>rf.pros.2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">randomForest</span>(lpsa <span style="color:#f92672">~</span> ., data <span style="color:#f92672">=</span> pros.train, ntree <span style="color:#f92672">=</span> <span style="color:#ae81ff">80</span>)
+</span></span><span style="display:flex;"><span>rf.pros.2
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Call:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  randomForest(formula = lpsa ~ ., data = pros.train, ntree = 80) </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                Type of random forest: regression</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                      Number of trees: 80</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## No. of variables tried at each split: 2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##           Mean of squared residuals: 0.6566502</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                     % Var explained: 54.31</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">varImpPlot</span>(rf.pros.2, scale <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>, main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Variable Importance Plot - PSA Score&#34;</span>)
+</span></span></code></pre></div><p><img alt="Fig1" src="644.webp"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">importance</span>(rf.pros.2)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##         IncNodePurity</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lcavol      25.011557</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lweight     15.822110</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## age          7.167320</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lbph         5.471032</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## svi          8.497838</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## lcp          8.113947</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## gleason      4.990213</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## pgg45        6.663911</span>
+</span></span></code></pre></div><p>Validation on test data.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>rf.pros.test <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">predict</span>(rf.pros.2, newdata <span style="color:#f92672">=</span> pros.test)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(rf.pros.test, pros.test<span style="color:#f92672">$</span>lpsa)
+</span></span></code></pre></div><p><img alt="Fig1" src="645.webp"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>rf.resid <span style="color:#f92672">&lt;-</span> rf.pros.test <span style="color:#f92672">-</span> pros.test<span style="color:#f92672">$</span>lpsa  <span style="color:#75715e">#calculate residual</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mean</span>(rf.resid^2)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [1] 0.5512549</span>
+</span></span></code></pre></div><h3 id="roc-curves-1">ROC curves</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">## ROC</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ROCR)
+</span></span><span style="display:flex;"><span>pred <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">prediction</span>(predictions <span style="color:#f92672">=</span> rf.pros.test, labels <span style="color:#f92672">=</span> pros.test<span style="color:#f92672">$</span>gleason)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>perf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">performance</span>(prediction.obj <span style="color:#f92672">=</span> pred, measure <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;tpr&#34;</span>, x.measure <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;fpr&#34;</span>)
+</span></span><span style="display:flex;"><span>perf
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A performance instance</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   &#39;False positive rate&#39; vs. &#39;True positive rate&#39; (alpha: &#39;Cutoff&#39;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   with 31 data points</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(perf, colorize <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>, main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ROC&#34;</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;True positive rate&#34;</span>, ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;False positive rate&#34;</span>,
+</span></span><span style="display:flex;"><span>    box.lty <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>, box.lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, box.col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;gray&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">abline</span>(a <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, b <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, lty <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;gray&#34;</span>)
+</span></span></code></pre></div><p><img alt="Fig1" src="646.webp"></p>
+    </div>
+
+    
+    
+
+
+
+    
+    
+
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="http://localhost:45315/blog/tags/random-forest/">Random forest</a>
+            
+        </div>
+
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/blog/post/rf/">
+            <span class="next-text nav-default">Random forest</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+
+  
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+  
+
+    
+
+  
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:lyqglyqg@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+  
+    <a href="http://lyqg.github.io/" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+
+
+<a href="http://localhost:45315/blog/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2023 -
+    2024
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        lyqg
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/blog/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/blog/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/blog/js/main.fe83e11b4fbc9193d67e2c9db78bad21f8dc59fca0cacd8c1c3bb071bb16a852.js" integrity="sha256-/oPhG0&#43;8kZPWfiydt4utIfjcWfygys2MHDuwcbsWqFI=" crossorigin="anonymous"></script>
+
+
+
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

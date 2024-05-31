@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=45315&amp;path=blog/livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bagged Classification And Regression Trees（Bagged CART) - Example R codes for BIOS 850 &amp; 880</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="yli8" />
+  <meta name="description" content="" />
+
+  <meta name="keywords" content="R codes, BIOS 850, BIOS 880" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.126.1" />
+
+
+<link rel="canonical" href="http://localhost:45315/blog/post/bcart/" />
+
+
+
+
+
+<link rel="icon" href="/blog/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/sass/jane.min.de22abc00de44766eebd1054fd9e0b254b071f89d5019044f893c484a9249a8d.css" integrity="sha256-3iKrwA3kR2buvRBU/Z4LJUsHH4nVAZBE&#43;JPEhKkkmo0=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:url" content="http://localhost:45315/blog/post/bcart/">
+  <meta property="og:site_name" content="Example R codes for BIOS 850 &amp; 880">
+  <meta property="og:title" content="Bagged Classification And Regression Trees（Bagged CART)">
+  <meta property="og:description" content="Example R codes for BIOS 850 &amp; 880">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-05-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-05-23T00:00:00+00:00">
+    <meta property="article:tag" content="Bagged CART">
+
+  <meta itemprop="name" content="Bagged Classification And Regression Trees（Bagged CART)">
+  <meta itemprop="description" content="Example R codes for BIOS 850 &amp; 880">
+  <meta itemprop="datePublished" content="2024-05-23T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2024-05-23T00:00:00+00:00">
+  <meta itemprop="wordCount" content="3376">
+  <meta itemprop="keywords" content="Bagged CART">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Bagged Classification And Regression Trees（Bagged CART)">
+  <meta name="twitter:description" content="Example R codes for BIOS 850 &amp; 880">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Example R codes for BIOS 850 & 880</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/categories/">Categories</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/about/">About</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">external-link</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          <div class="mobile-menu-parent">
+            <span class="mobile-submenu-open"></span>
+            <a href="http://localhost:45315/blog/">
+              docs
+            </a>
+          </div>
+          <ul class="mobile-submenu-list">
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/ab/">AdaBoost</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/bcart/">Bagged Classification And Regression Trees（Bagged CART)</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/ct/">Classification trees</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/ca/">Cluster analysis</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/en/">Elastic Net</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/gb/">Gradient boosting</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/gbm/">Gradient Boosting Machine（GBM)</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/knn/">K Nearest Neighbors (KNN)</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/nb/">Naive Bayes</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/nn/">Neural network</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/rf/">Random forest</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/rt/">Regression trees</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/svm/">Support vector machine (SVM)</a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      Example R codes for BIOS 850 & 880
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">Home</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/categories/">Categories</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/about/">About</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">external-link</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          <a class="menu-item-link menu-parent" href="http://localhost:45315/blog/">docs</a>
+          <ul class="submenu">
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/ab/">AdaBoost</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/bcart/">Bagged Classification And Regression Trees（Bagged CART)</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/ct/">Classification trees</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/ca/">Cluster analysis</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/en/">Elastic Net</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/gb/">Gradient boosting</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/gbm/">Gradient Boosting Machine（GBM)</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/knn/">K Nearest Neighbors (KNN)</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/nb/">Naive Bayes</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/nn/">Neural network</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/rf/">Random forest</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/rt/">Regression trees</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/svm/">Support vector machine (SVM)</a>
+              </li>
+            
+          </ul>
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight wallpaper">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">Bagged Classification And Regression Trees（Bagged CART)</h1>
+      
+
+      <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      yli8
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2024-05-23">
+      2024-05-23
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    
+
+    <div class="post-meta-category">
+        <a href="http://localhost:45315/blog/categories/bagged-cart/"> Bagged CART </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-package-installation">1. Package installation</a></li>
+    <li><a href="#data-reading-and-processing">Data Reading and processing</a>
+      <ul>
+        <li><a href="#feature-selection">Feature Selection</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+
+    
+    <div class="post-content">
+      <h2 id="1-package-installation">1. Package installation</h2>
+<p>We&rsquo;re using the package <code>caret</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">require</span>(caret))
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;caret&#34;</span>)
+</span></span><span style="display:flex;"><span>  
+</span></span></code></pre></div><h2 id="data-reading-and-processing">Data Reading and processing</h2>
+<p>The data can be downloaded at wbdc.data and wbdc.names from the following address: <a href="http://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/">http://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/</a></p>
+<p>The data has been processed into panel data format. Upon inspection of the data structure, it was found that the first column is an ID column with no meaningful features and thus needs to be removed. The second column, &ldquo;diagnosis,&rdquo; is the response variable and is categorical. In R, for classification tasks, response variables are typically required to be of factor type, so data type conversion is needed. The remaining columns are predictor variables and are of numeric type.</p>
+<p>The data has dimensions of 568 samples and 32 features (including the response feature).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(caret)
+</span></span><span style="display:flex;"><span>BreastCancer <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read.csv</span>(<span style="color:#e6db74">&#34;wisc_bc_data.csv&#34;</span>, stringsAsFactors <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</span></span><span style="display:flex;"><span>BreastCancer <span style="color:#f92672">=</span> BreastCancer[, <span style="color:#ae81ff">-1</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dim</span>(BreastCancer)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [1] 568  31</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">str</span>(BreastCancer)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## &#39;data.frame&#39;:	568 obs. of  31 variables:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ diagnosis              : chr  &#34;M&#34; &#34;M&#34; &#34;M&#34; &#34;M&#34; ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ radius_mean            : num  20.6 19.7 11.4 20.3 12.4 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ texture_mean           : num  17.8 21.2 20.4 14.3 15.7 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ perimeter_mean         : num  132.9 130 77.6 135.1 82.6 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ area_mean              : num  1326 1203 386 1297 477 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ smoothness_mean        : num  0.0847 0.1096 0.1425 0.1003 0.1278 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ compactne_mean         : num  0.0786 0.1599 0.2839 0.1328 0.17 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ concavity_mean         : num  0.0869 0.1974 0.2414 0.198 0.1578 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ concave_points_mean    : num  0.0702 0.1279 0.1052 0.1043 0.0809 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ symmetry_mean          : num  0.181 0.207 0.26 0.181 0.209 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ fractal_dimension_mean : num  0.0567 0.06 0.0974 0.0588 0.0761 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ radius_se              : num  0.543 0.746 0.496 0.757 0.335 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ texture_se             : num  0.734 0.787 1.156 0.781 0.89 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ perimeter_se           : num  3.4 4.58 3.44 5.44 2.22 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ area_se                : num  74.1 94 27.2 94.4 27.2 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ smoothness_se          : num  0.00522 0.00615 0.00911 0.01149 0.00751 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ compactne_se           : num  0.0131 0.0401 0.0746 0.0246 0.0335 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ concavity_se           : num  0.0186 0.0383 0.0566 0.0569 0.0367 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ concave_points_se      : num  0.0134 0.0206 0.0187 0.0188 0.0114 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ symmetry_se            : num  0.0139 0.0225 0.0596 0.0176 0.0216 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ fractal_dimension_se   : num  0.00353 0.00457 0.00921 0.00511 0.00508 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ radius_worst           : num  25 23.6 14.9 22.5 15.5 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ texture_worst          : num  23.4 25.5 26.5 16.7 23.8 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ perimeter_worst        : num  158.8 152.5 98.9 152.2 103.4 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ area_worst             : num  1956 1709 568 1575 742 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ smoothness_worst       : num  0.124 0.144 0.21 0.137 0.179 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ compactne_worst        : num  0.187 0.424 0.866 0.205 0.525 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ concavity_worst        : num  0.242 0.45 0.687 0.4 0.535 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ concave_points_worst   : num  0.186 0.243 0.258 0.163 0.174 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ symmetry_worst         : num  0.275 0.361 0.664 0.236 0.399 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  $ fractal_dimension_worst: num  0.089 0.0876 0.173 0.0768 0.1244 ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(BreastCancer<span style="color:#f92672">$</span>diagnosis)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   B   M </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 357 211</span>
+</span></span></code></pre></div><p><strong>Data Preprocessing</strong></p>
+<p>Data preprocessing includes five steps. First, check if there is any missing data and count the number of missing values. Then proceed with the following steps:</p>
+<ul>
+<li>Delete variables with low variance.</li>
+<li>Remove variables that have a very high correlation with other independent variables.</li>
+<li>Eliminate multicollinearity.</li>
+<li>Standardize the data and impute missing values.</li>
+<li>Feature selection using Recursive Feature Elimination (RFE).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Delete variables with low variance</span>
+</span></span><span style="display:flex;"><span>zerovar <span style="color:#f92672">=</span> <span style="color:#a6e22e">nearZeroVar</span>(BreastCancer[, <span style="color:#ae81ff">-1</span>])
+</span></span><span style="display:flex;"><span>zerovar
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## integer(0)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># BreastCancer=BreastCancer[,-zerovar]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Remove variables that have a very high correlation with other independent variables</span>
+</span></span><span style="display:flex;"><span>descrCorr <span style="color:#f92672">=</span> <span style="color:#a6e22e">cor</span>(BreastCancer[, <span style="color:#ae81ff">-1</span>])
+</span></span><span style="display:flex;"><span>descrCorr[1<span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>]
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                 radius_mean texture_mean perimeter_mean area_mean</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## radius_mean       1.0000000   0.32938305      0.9978764 0.9873442</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## texture_mean      0.3293830   1.00000000      0.3359176 0.3261929</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## perimeter_mean    0.9978764   0.33591759      1.0000000 0.9865482</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## area_mean         0.9873442   0.32619289      0.9865482 1.0000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## smoothness_mean   0.1680940  -0.01776898      0.2045046 0.1748380</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                 smoothness_mean</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## radius_mean          0.16809398</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## texture_mean        -0.01776898</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## perimeter_mean       0.20450464</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## area_mean            0.17483805</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## smoothness_mean      1.00000000</span>
+</span></span><span style="display:flex;"><span>highCorr <span style="color:#f92672">=</span> <span style="color:#a6e22e">findCorrelation</span>(descrCorr, <span style="color:#ae81ff">0.9</span>)
+</span></span><span style="display:flex;"><span>highCorr
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [1]  7  8 23 21  3 24  1 13 14  2</span>
+</span></span><span style="display:flex;"><span>BreastCancer <span style="color:#f92672">=</span> BreastCancer[, <span style="color:#f92672">-</span>(highCorr <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dim</span>(BreastCancer)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [1] 568  21</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Eliminate multicollinearity</span>
+</span></span><span style="display:flex;"><span>comboInfo <span style="color:#f92672">=</span> <span style="color:#a6e22e">findLinearCombos</span>(BreastCancer[, <span style="color:#ae81ff">-1</span>])
+</span></span><span style="display:flex;"><span>comboInfo
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## $linearCombos</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## list()</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## $remove</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## NULL</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># BreastCancer=BreastCancer[, -(comboInfo$remove+2)]</span>
+</span></span><span style="display:flex;"><span>Process <span style="color:#f92672">=</span> <span style="color:#a6e22e">preProcess</span>(BreastCancer)
+</span></span><span style="display:flex;"><span>Process
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Created from 568 samples and 21 variables</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Pre-processing:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   - centered (20)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   - ignored (1)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   - scaled (20)</span>
+</span></span><span style="display:flex;"><span>BreastCancer <span style="color:#f92672">=</span> <span style="color:#a6e22e">predict</span>(Process, BreastCancer)
+</span></span></code></pre></div><h3 id="feature-selection">Feature Selection</h3>
+<p>In data mining, not all independent variables are needed for modeling; instead, a subset of the most important variables is selected. This process is called feature selection. One algorithm for this is backward selection, which starts by including all variables in the model, then calculates their performance (such as error or prediction accuracy) and ranks the variables by importance. The most important variables are retained, and performance is recalculated, iterating this process to determine the optimal number of independent variables. One drawback of this algorithm is the potential for overfitting, which is why it should be coupled with an outer loop of sample partitioning.</p>
+<p>The rfe function in the caret package can accomplish this task. The functions parameter determines the model used for ranking the independent variables, including:</p>
+<ul>
+<li>rfFuncs (Random Forest)</li>
+<li>lmFuncs (Linear Regression)</li>
+<li>nbFuncs (Naive Bayes)</li>
+<li>treebagFuncs (Bagged Trees)</li>
+<li>caretFuncs (Custom Training Models)
+The method parameter specifies the sampling method, such as cross-validation (cv), bootstrapping (boot), and Leave-One-Out Cross-Validation (LOOCV).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>ctrl <span style="color:#f92672">=</span> <span style="color:#a6e22e">rfeControl</span>(functions <span style="color:#f92672">=</span> caretFuncs, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;repeatedcv&#34;</span>, verbose <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>,
+</span></span><span style="display:flex;"><span>    returnResamp <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;final&#34;</span>)
+</span></span><span style="display:flex;"><span>BreastCancer<span style="color:#f92672">$</span>diagnosis <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.factor</span>(BreastCancer<span style="color:#f92672">$</span>diagnosis)
+</span></span><span style="display:flex;"><span>Profile <span style="color:#f92672">=</span> <span style="color:#a6e22e">rfe</span>(BreastCancer[, <span style="color:#ae81ff">-1</span>], BreastCancer<span style="color:#f92672">$</span>diagnosis, rfeControl <span style="color:#f92672">=</span> ctrl)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">print</span>(Profile)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Recursive feature selection</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Outer resampling method: Cross-Validated (10 fold, repeated 1 times) </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Resampling performance over subset size:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  Variables Accuracy  Kappa AccuracySD KappaSD Selected</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##          4   0.9332 0.8566    0.03596 0.07796         </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##          8   0.9561 0.9050    0.02513 0.05479         </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##         16   0.9578 0.9083    0.03429 0.07471         </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##         20   0.9596 0.9117    0.04219 0.09263        *</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## The top 5 variables (out of 20):</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    concave_points_worst, area_mean, concavity_worst, radius_se, compactne_worst</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(Profile)
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/bcart/640.png"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">xyplot</span>(Profile<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>Kappa <span style="color:#f92672">~</span> Profile<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>Variables, ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Kappa&#34;</span>, xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Variables&#34;</span>,
+</span></span><span style="display:flex;"><span>    type <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;g&#34;</span>, <span style="color:#e6db74">&#34;p&#34;</span>, <span style="color:#e6db74">&#34;l&#34;</span>), auto.key <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/bcart/641.png"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">xyplot</span>(Profile<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>Accuracy <span style="color:#f92672">~</span> Profile<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>Variables, ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Accuracy&#34;</span>, xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Variables&#34;</span>,
+</span></span><span style="display:flex;"><span>    type <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;g&#34;</span>, <span style="color:#e6db74">&#34;p&#34;</span>, <span style="color:#e6db74">&#34;l&#34;</span>), auto.key <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/bcart/642.png"></p>
+<p><strong>Split the raw data into training and testing datasets</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(tidyverse)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(sampling)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># </span>
+</span></span><span style="display:flex;"><span>train_id <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">strata</span>(BreastCancer, <span style="color:#e6db74">&#34;diagnosis&#34;</span>, size <span style="color:#f92672">=</span> <span style="color:#a6e22e">rev</span>(<span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">table</span>(BreastCancer<span style="color:#f92672">$</span>diagnosis) <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0.7</span>)))<span style="color:#f92672">$</span>ID_unit
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Training data</span>
+</span></span><span style="display:flex;"><span>trainData <span style="color:#f92672">&lt;-</span> BreastCancer[train_id, ]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Test data</span>
+</span></span><span style="display:flex;"><span>testData <span style="color:#f92672">&lt;-</span> BreastCancer[<span style="color:#f92672">-</span>train_id, ]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># check proportions</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">prop.table</span>(<span style="color:#a6e22e">table</span>(trainData<span style="color:#f92672">$</span>diagnosis))
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##         B         M </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 0.6281407 0.3718593</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">prop.table</span>(<span style="color:#a6e22e">table</span>(testData<span style="color:#f92672">$</span>diagnosis))
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##         B         M </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 0.6294118 0.3705882</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">prop.table</span>(<span style="color:#a6e22e">table</span>(BreastCancer<span style="color:#f92672">$</span>diagnosis))
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##         B         M </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 0.6285211 0.3714789</span>
+</span></span></code></pre></div><p><strong>Visualizing Important Variables</strong></p>
+<p>We can use the featurePlot() function to visualize the range of values for each independent variable and compare different classifications.</p>
+<p>For classification models, you can choose from: box, strip, density, pairs, or ellipse.
+For regression models, you can choose from: pairs or scatter.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">featurePlot</span>(x <span style="color:#f92672">=</span> trainData[, <span style="color:#ae81ff">2</span><span style="color:#f92672">:</span><span style="color:#ae81ff">21</span>], 
+</span></span><span style="display:flex;"><span>            y <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.factor</span>(trainData<span style="color:#f92672">$</span>diagnosis), 
+</span></span><span style="display:flex;"><span>            plot <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;box&#34;</span>, <span style="color:#75715e">#For classification:box, strip, density, pairs or ellipse. For regression, pairs or scatter</span>
+</span></span><span style="display:flex;"><span>            strip<span style="color:#f92672">=</span><span style="color:#a6e22e">strip.custom</span>(par.strip.text<span style="color:#f92672">=</span><span style="color:#a6e22e">list</span>(cex<span style="color:#f92672">=</span><span style="color:#ae81ff">.7</span>)),
+</span></span><span style="display:flex;"><span>            scales <span style="color:#f92672">=</span> <span style="color:#a6e22e">list</span>(x <span style="color:#f92672">=</span> <span style="color:#a6e22e">list</span>(relation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;free&#34;</span>), 
+</span></span><span style="display:flex;"><span>                          y <span style="color:#f92672">=</span> <span style="color:#a6e22e">list</span>(relation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;free&#34;</span>))
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/bcart/643.png"></p>
+<p><strong>Tuning Parameters</strong></p>
+<p>Before formal training, we first need to define the model training parameters using the trainControl function. The method parameter specifies the resampling method for cross-validation, number determines the number of folds, and repeats specifies the number of repetitions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>fitControl <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">trainControl</span>(
+</span></span><span style="display:flex;"><span>  method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;cv&#39;</span>,                   <span style="color:#75715e"># k-fold cross validation</span>
+</span></span><span style="display:flex;"><span>  number <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>,                      <span style="color:#75715e"># number of folds</span>
+</span></span><span style="display:flex;"><span>  savePredictions <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;final&#39;</span>,       <span style="color:#75715e"># saves predictions for optimal tuning parameter</span>
+</span></span><span style="display:flex;"><span>  classProbs <span style="color:#f92672">=</span> T,                  <span style="color:#75715e"># should class probabilities be returned</span>
+</span></span><span style="display:flex;"><span>  summaryFunction<span style="color:#f92672">=</span>twoClassSummary  <span style="color:#75715e"># results summary function</span>
+</span></span><span style="display:flex;"><span>) 
+</span></span></code></pre></div><p><strong>Constructing a Bagged CART Classifier</strong></p>
+<p>Use the train function to train the model. In this example, we are using the treebag algorithm. We can manually tune some parameters, including interaction.depth, n.trees, shrinkage, n.minobsinnode, etc., or use the default parameters.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">names</span>(<span style="color:#a6e22e">getModelInfo</span>())
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   [1] &#34;ada&#34;                 &#34;AdaBag&#34;              &#34;AdaBoost.M1&#34;        </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   [4] &#34;adaboost&#34;            &#34;amdai&#34;               &#34;ANFIS&#34;              </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   [7] &#34;avNNet&#34;              &#34;awnb&#34;                &#34;awtan&#34;              </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [10] &#34;bag&#34;                 &#34;bagEarth&#34;            &#34;bagEarthGCV&#34;        </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [13] &#34;bagFDA&#34;              &#34;bagFDAGCV&#34;           &#34;bam&#34;                </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [16] &#34;bartMachine&#34;         &#34;bayesglm&#34;            &#34;binda&#34;              </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [19] &#34;blackboost&#34;          &#34;blasso&#34;              &#34;blassoAveraged&#34;     </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [22] &#34;bridge&#34;              &#34;brnn&#34;                &#34;BstLm&#34;              </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [25] &#34;bstSm&#34;               &#34;bstTree&#34;             &#34;C5.0&#34;               </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [28] &#34;C5.0Cost&#34;            &#34;C5.0Rules&#34;           &#34;C5.0Tree&#34;           </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [31] &#34;cforest&#34;             &#34;chaid&#34;               &#34;CSimca&#34;             </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [34] &#34;ctree&#34;               &#34;ctree2&#34;              &#34;cubist&#34;             </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [37] &#34;dda&#34;                 &#34;deepboost&#34;           &#34;DENFIS&#34;             </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [40] &#34;dnn&#34;                 &#34;dwdLinear&#34;           &#34;dwdPoly&#34;            </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [43] &#34;dwdRadial&#34;           &#34;earth&#34;               &#34;elm&#34;                </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [46] &#34;enet&#34;                &#34;evtree&#34;              &#34;extraTrees&#34;         </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [49] &#34;fda&#34;                 &#34;FH.GBML&#34;             &#34;FIR.DM&#34;             </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [52] &#34;foba&#34;                &#34;FRBCS.CHI&#34;           &#34;FRBCS.W&#34;            </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [55] &#34;FS.HGD&#34;              &#34;gam&#34;                 &#34;gamboost&#34;           </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [58] &#34;gamLoess&#34;            &#34;gamSpline&#34;           &#34;gaussprLinear&#34;      </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [61] &#34;gaussprPoly&#34;         &#34;gaussprRadial&#34;       &#34;gbm_h2o&#34;            </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [64] &#34;gbm&#34;                 &#34;gcvEarth&#34;            &#34;GFS.FR.MOGUL&#34;       </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [67] &#34;GFS.LT.RS&#34;           &#34;GFS.THRIFT&#34;          &#34;glm.nb&#34;             </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [70] &#34;glm&#34;                 &#34;glmboost&#34;            &#34;glmnet_h2o&#34;         </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [73] &#34;glmnet&#34;              &#34;glmStepAIC&#34;          &#34;gpls&#34;               </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [76] &#34;hda&#34;                 &#34;hdda&#34;                &#34;hdrda&#34;              </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [79] &#34;HYFIS&#34;               &#34;icr&#34;                 &#34;J48&#34;                </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [82] &#34;JRip&#34;                &#34;kernelpls&#34;           &#34;kknn&#34;               </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [85] &#34;knn&#34;                 &#34;krlsPoly&#34;            &#34;krlsRadial&#34;         </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [88] &#34;lars&#34;                &#34;lars2&#34;               &#34;lasso&#34;              </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [91] &#34;lda&#34;                 &#34;lda2&#34;                &#34;leapBackward&#34;       </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [94] &#34;leapForward&#34;         &#34;leapSeq&#34;             &#34;Linda&#34;              </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [97] &#34;lm&#34;                  &#34;lmStepAIC&#34;           &#34;LMT&#34;                </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [100] &#34;loclda&#34;              &#34;logicBag&#34;            &#34;LogitBoost&#34;         </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [103] &#34;logreg&#34;              &#34;lssvmLinear&#34;         &#34;lssvmPoly&#34;          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [106] &#34;lssvmRadial&#34;         &#34;lvq&#34;                 &#34;M5&#34;                 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [109] &#34;M5Rules&#34;             &#34;manb&#34;                &#34;mda&#34;                </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [112] &#34;Mlda&#34;                &#34;mlp&#34;                 &#34;mlpKerasDecay&#34;      </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [115] &#34;mlpKerasDecayCost&#34;   &#34;mlpKerasDropout&#34;     &#34;mlpKerasDropoutCost&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [118] &#34;mlpML&#34;               &#34;mlpSGD&#34;              &#34;mlpWeightDecay&#34;     </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [121] &#34;mlpWeightDecayML&#34;    &#34;monmlp&#34;              &#34;msaenet&#34;            </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [124] &#34;multinom&#34;            &#34;mxnet&#34;               &#34;mxnetAdam&#34;          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [127] &#34;naive_bayes&#34;         &#34;nb&#34;                  &#34;nbDiscrete&#34;         </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [130] &#34;nbSearch&#34;            &#34;neuralnet&#34;           &#34;nnet&#34;               </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [133] &#34;nnls&#34;                &#34;nodeHarvest&#34;         &#34;null&#34;               </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [136] &#34;OneR&#34;                &#34;ordinalNet&#34;          &#34;ordinalRF&#34;          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [139] &#34;ORFlog&#34;              &#34;ORFpls&#34;              &#34;ORFridge&#34;           </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [142] &#34;ORFsvm&#34;              &#34;ownn&#34;                &#34;pam&#34;                </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [145] &#34;parRF&#34;               &#34;PART&#34;                &#34;partDSA&#34;            </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [148] &#34;pcaNNet&#34;             &#34;pcr&#34;                 &#34;pda&#34;                </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [151] &#34;pda2&#34;                &#34;penalized&#34;           &#34;PenalizedLDA&#34;       </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [154] &#34;plr&#34;                 &#34;pls&#34;                 &#34;plsRglm&#34;            </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [157] &#34;polr&#34;                &#34;ppr&#34;                 &#34;pre&#34;                </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [160] &#34;PRIM&#34;                &#34;protoclass&#34;          &#34;qda&#34;                </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [163] &#34;QdaCov&#34;              &#34;qrf&#34;                 &#34;qrnn&#34;               </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [166] &#34;randomGLM&#34;           &#34;ranger&#34;              &#34;rbf&#34;                </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [169] &#34;rbfDDA&#34;              &#34;Rborist&#34;             &#34;rda&#34;                </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [172] &#34;regLogistic&#34;         &#34;relaxo&#34;              &#34;rf&#34;                 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [175] &#34;rFerns&#34;              &#34;RFlda&#34;               &#34;rfRules&#34;            </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [178] &#34;ridge&#34;               &#34;rlda&#34;                &#34;rlm&#34;                </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [181] &#34;rmda&#34;                &#34;rocc&#34;                &#34;rotationForest&#34;     </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [184] &#34;rotationForestCp&#34;    &#34;rpart&#34;               &#34;rpart1SE&#34;           </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [187] &#34;rpart2&#34;              &#34;rpartCost&#34;           &#34;rpartScore&#34;         </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [190] &#34;rqlasso&#34;             &#34;rqnc&#34;                &#34;RRF&#34;                </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [193] &#34;RRFglobal&#34;           &#34;rrlda&#34;               &#34;RSimca&#34;             </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [196] &#34;rvmLinear&#34;           &#34;rvmPoly&#34;             &#34;rvmRadial&#34;          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [199] &#34;SBC&#34;                 &#34;sda&#34;                 &#34;sdwd&#34;               </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [202] &#34;simpls&#34;              &#34;SLAVE&#34;               &#34;slda&#34;               </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [205] &#34;smda&#34;                &#34;snn&#34;                 &#34;sparseLDA&#34;          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [208] &#34;spikeslab&#34;           &#34;spls&#34;                &#34;stepLDA&#34;            </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [211] &#34;stepQDA&#34;             &#34;superpc&#34;             &#34;svmBoundrangeString&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [214] &#34;svmExpoString&#34;       &#34;svmLinear&#34;           &#34;svmLinear2&#34;         </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [217] &#34;svmLinear3&#34;          &#34;svmLinearWeights&#34;    &#34;svmLinearWeights2&#34;  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [220] &#34;svmPoly&#34;             &#34;svmRadial&#34;           &#34;svmRadialCost&#34;      </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [223] &#34;svmRadialSigma&#34;      &#34;svmRadialWeights&#34;    &#34;svmSpectrumString&#34;  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [226] &#34;tan&#34;                 &#34;tanSearch&#34;           &#34;treebag&#34;            </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [229] &#34;vbmpRadial&#34;          &#34;vglmAdjCat&#34;          &#34;vglmContRatio&#34;      </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [232] &#34;vglmCumulative&#34;      &#34;widekernelpls&#34;       &#34;WM&#34;                 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [235] &#34;wsrf&#34;                &#34;xgbDART&#34;             &#34;xgbLinear&#34;          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [238] &#34;xgbTree&#34;             &#34;xyf&#34;</span>
+</span></span></code></pre></div><p>When constructing bagged decision trees, the main parameters to set include: (i) Instead of using the formula method, use the input method with X as a matrix and Y as a vector.
+(ii) All other parameters remain the same as in previous methods.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">2863</span>)
+</span></span><span style="display:flex;"><span>model_BCART <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">train</span>(trainData[, <span style="color:#ae81ff">-1</span>], trainData<span style="color:#f92672">$</span>diagnosis, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;treebag&#34;</span>, tuneLength <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>    metric <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ROC&#34;</span>, trControl <span style="color:#f92672">=</span> fitControl)
+</span></span></code></pre></div><p><strong>Compute variable importance</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>varimp_mars <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">varImp</span>(model_BCART)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(varimp_mars, main<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Variable Importance with BreastCancer&#34;</span>)
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/bcart/644.png"></p>
+<p><strong>Prediction</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>predProb <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">predict</span>(model_BCART, testData, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;prob&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(predProb)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##      B    M</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1 0.00 1.00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2 0.28 0.72</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3 0.48 0.52</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 4 0.00 1.00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 5 0.00 1.00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 6 0.00 1.00</span>
+</span></span><span style="display:flex;"><span>predicted <span style="color:#f92672">=</span> <span style="color:#a6e22e">predict</span>(model_BCART, testData)
+</span></span><span style="display:flex;"><span>testData<span style="color:#f92672">$</span>predProb <span style="color:#f92672">=</span> predProb<span style="color:#f92672">$</span>B
+</span></span><span style="display:flex;"><span>testData<span style="color:#f92672">$</span>diagnosis <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.factor</span>(testData<span style="color:#f92672">$</span>diagnosis)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">confusionMatrix</span>(reference <span style="color:#f92672">=</span> testData<span style="color:#f92672">$</span>diagnosis, data <span style="color:#f92672">=</span> predicted, mode <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;everything&#34;</span>,
+</span></span><span style="display:flex;"><span>    positive <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;B&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Confusion Matrix and Statistics</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##           Reference</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Prediction   B   M</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##          B 103   7</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##          M   4  56</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                           </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                Accuracy : 0.9353          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                  95% CI : (0.8872, 0.9673)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##     No Information Rate : 0.6294          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##     P-Value [Acc &gt; NIR] : &lt;2e-16          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                           </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                   Kappa : 0.8599          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                           </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  Mcnemar&#39;s Test P-Value : 0.5465          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                           </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##             Sensitivity : 0.9626          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##             Specificity : 0.8889          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##          Pos Pred Value : 0.9364          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##          Neg Pred Value : 0.9333          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##               Precision : 0.9364          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                  Recall : 0.9626          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                      F1 : 0.9493          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##              Prevalence : 0.6294          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##          Detection Rate : 0.6059          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    Detection Prevalence : 0.6471          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##       Balanced Accuracy : 0.9258          </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                           </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##        &#39;Positive&#39; Class : B               </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span></code></pre></div><p><strong>ROC curves</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ROCR)
+</span></span><span style="display:flex;"><span>pred <span style="color:#f92672">=</span> <span style="color:#a6e22e">prediction</span>(testData<span style="color:#f92672">$</span>predProb, testData<span style="color:#f92672">$</span>diagnosis)
+</span></span><span style="display:flex;"><span>perf <span style="color:#f92672">=</span> <span style="color:#a6e22e">performance</span>(pred, measure <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;fpr&#34;</span>, x.measure <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;tpr&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(perf, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ROC&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">abline</span>(a <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, b <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, col <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, lty <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/bcart/6455.png"></p>
+<p><strong>Comparison between multiple classifiers</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Train the model using rf</span>
+</span></span><span style="display:flex;"><span>model_rf <span style="color:#f92672">=</span> <span style="color:#a6e22e">train</span>(diagnosis <span style="color:#f92672">~</span> ., data <span style="color:#f92672">=</span> trainData, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;rf&#34;</span>, tuneLength <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>    trControl <span style="color:#f92672">=</span> fitControl)
+</span></span><span style="display:flex;"><span>model_rf
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Random Forest </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 398 samples</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  20 predictor</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   2 classes: &#39;B&#39;, &#39;M&#39; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## No pre-processing</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Resampling: Cross-Validated (5 fold) </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Summary of sample sizes: 318, 318, 319, 318, 319 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Resampling results across tuning parameters:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   mtry  ROC        Sens   Spec     </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    2    0.9858782  0.976  0.9124138</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   20    0.9792345  0.944  0.9324138</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ROC was used to select the optimal model using the largest value.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## The final value used for the model was mtry = 2.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train the model using adaboost</span>
+</span></span><span style="display:flex;"><span>model_adaboost <span style="color:#f92672">=</span> <span style="color:#a6e22e">train</span>(diagnosis <span style="color:#f92672">~</span> ., data <span style="color:#f92672">=</span> trainData, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;adaboost&#34;</span>, tuneLength <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>    trControl <span style="color:#f92672">=</span> fitControl)
+</span></span><span style="display:flex;"><span>model_adaboost
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## AdaBoost Classification Trees </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 398 samples</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  20 predictor</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   2 classes: &#39;B&#39;, &#39;M&#39; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## No pre-processing</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Resampling: Cross-Validated (5 fold) </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Summary of sample sizes: 319, 318, 318, 318, 319 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Resampling results across tuning parameters:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   nIter  method         ROC        Sens   Spec     </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    50    Adaboost.M1    0.9864644  0.984  0.9455172</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    50    Real adaboost  0.8731701  0.992  0.9183908</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   100    Adaboost.M1    0.9909977  0.984  0.9317241</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   100    Real adaboost  0.8495747  0.992  0.9317241</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ROC was used to select the optimal model using the largest value.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## The final values used for the model were nIter = 100 and method = Adaboost.M1.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train the model using Logitboost</span>
+</span></span><span style="display:flex;"><span>model_LogitBoost <span style="color:#f92672">=</span> <span style="color:#a6e22e">train</span>(diagnosis <span style="color:#f92672">~</span> ., data <span style="color:#f92672">=</span> trainData, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;LogitBoost&#34;</span>,
+</span></span><span style="display:flex;"><span>    tuneLength <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, trControl <span style="color:#f92672">=</span> fitControl)
+</span></span><span style="display:flex;"><span>model_LogitBoost
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Boosted Logistic Regression </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 398 samples</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  20 predictor</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   2 classes: &#39;B&#39;, &#39;M&#39; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## No pre-processing</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Resampling: Cross-Validated (5 fold) </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Summary of sample sizes: 319, 318, 318, 318, 319 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Resampling results across tuning parameters:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   nIter  ROC        Sens   Spec     </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   11     0.9907517  0.972  0.9462069</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   21     0.9876897  0.976  0.9190805</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ROC was used to select the optimal model using the largest value.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## The final value used for the model was nIter = 11.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train the model using GBM</span>
+</span></span><span style="display:flex;"><span>model_GBM <span style="color:#f92672">=</span> <span style="color:#a6e22e">train</span>(diagnosis <span style="color:#f92672">~</span> ., data <span style="color:#f92672">=</span> trainData, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;gbm&#34;</span>, tuneLength <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>    trControl <span style="color:#f92672">=</span> fitControl)
+</span></span><span style="display:flex;"><span>model_GBM
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Stochastic Gradient Boosting </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 398 samples</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  20 predictor</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   2 classes: &#39;B&#39;, &#39;M&#39; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## No pre-processing</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Resampling: Cross-Validated (5 fold) </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Summary of sample sizes: 318, 319, 318, 318, 319 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Resampling results across tuning parameters:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   interaction.depth  n.trees  ROC        Sens   Spec     </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   1                   50      0.9877770  0.964  0.8988506</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   1                  100      0.9890437  0.980  0.9121839</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   2                   50      0.9900460  0.968  0.9259770</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   2                  100      0.9897609  0.976  0.9393103</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Tuning parameter &#39;shrinkage&#39; was held constant at a value of 0.1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Tuning parameter &#39;n.minobsinnode&#39; was held constant at a value of 10</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ROC was used to select the optimal model using the largest value.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## The final values used for the model were n.trees = 50, interaction.depth =</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  2, shrinkage = 0.1 and n.minobsinnode = 10.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train the model using PAM</span>
+</span></span><span style="display:flex;"><span>model_PAM <span style="color:#f92672">=</span> <span style="color:#a6e22e">train</span>(diagnosis <span style="color:#f92672">~</span> ., data <span style="color:#f92672">=</span> trainData, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;pam&#34;</span>, tuneLength <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>    trControl <span style="color:#f92672">=</span> fitControl)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 123456789101112131415161718192021222324252627282930111111</span>
+</span></span><span style="display:flex;"><span>model_PAM
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Nearest Shrunken Centroids </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 398 samples</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  20 predictor</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   2 classes: &#39;B&#39;, &#39;M&#39; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## No pre-processing</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Resampling: Cross-Validated (5 fold) </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Summary of sample sizes: 318, 318, 318, 319, 319 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Resampling results across tuning parameters:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   threshold   ROC     Sens  Spec     </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    0.3730189  0.9536  0.94  0.8048276</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   10.4445296  0.5000  1.00  0.0000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ROC was used to select the optimal model using the largest value.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## The final value used for the model was threshold = 0.3730189.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train the model using NB</span>
+</span></span><span style="display:flex;"><span>model_NB <span style="color:#f92672">=</span> <span style="color:#a6e22e">train</span>(diagnosis <span style="color:#f92672">~</span> ., data <span style="color:#f92672">=</span> trainData, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;naive_bayes&#34;</span>, tuneLength <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>    trControl <span style="color:#f92672">=</span> fitControl)
+</span></span><span style="display:flex;"><span>model_NB
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Naive Bayes </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 398 samples</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  20 predictor</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   2 classes: &#39;B&#39;, &#39;M&#39; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## No pre-processing</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Resampling: Cross-Validated (5 fold) </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Summary of sample sizes: 319, 319, 318, 318, 318 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Resampling results across tuning parameters:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   usekernel  ROC        Sens   Spec     </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   FALSE      0.9693701  0.936  0.9124138</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    TRUE      0.9695218  0.908  0.8926437</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Tuning parameter &#39;laplace&#39; was held constant at a value of 0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Tuning</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  parameter &#39;adjust&#39; was held constant at a value of 1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ROC was used to select the optimal model using the largest value.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## The final values used for the model were laplace = 0, usekernel = TRUE</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  and adjust = 1.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train the model using NNNET</span>
+</span></span><span style="display:flex;"><span>model_NNET <span style="color:#f92672">=</span> <span style="color:#a6e22e">train</span>(diagnosis <span style="color:#f92672">~</span> ., data <span style="color:#f92672">=</span> trainData, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;nnet&#34;</span>, tuneLength <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>    trControl <span style="color:#f92672">=</span> fitControl)
+</span></span><span style="display:flex;"><span>model_NNET
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Neural Network </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 398 samples</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  20 predictor</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   2 classes: &#39;B&#39;, &#39;M&#39; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## No pre-processing</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Resampling: Cross-Validated (5 fold) </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Summary of sample sizes: 318, 318, 319, 318, 319 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Resampling results across tuning parameters:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   size  decay  ROC        Sens   Spec     </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   1     0.0    0.9628506  0.988  0.9326437</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   1     0.1    0.9798529  0.968  0.9257471</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   3     0.0    0.9658184  0.964  0.8983908</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   3     0.1    0.9871034  0.972  0.9459770</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ROC was used to select the optimal model using the largest value.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## The final values used for the model were size = 3 and decay = 0.1.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>models_compare <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">resamples</span>(<span style="color:#a6e22e">list</span>(ADABOOST <span style="color:#f92672">=</span> model_adaboost, RF <span style="color:#f92672">=</span> model_rf, LOGITBOOST <span style="color:#f92672">=</span> model_LogitBoost,
+</span></span><span style="display:flex;"><span>    GBM <span style="color:#f92672">=</span> model_GBM, PAM <span style="color:#f92672">=</span> model_PAM, NB <span style="color:#f92672">=</span> model_NB, NNET <span style="color:#f92672">=</span> model_NNET, BaggedCART <span style="color:#f92672">=</span> model_BCART))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(models_compare)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Call:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## summary.resamples(object = models_compare)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Models: ADABOOST, RF, LOGITBOOST, GBM, PAM, NB, NNET, BaggedCART </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Number of resamples: 5 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ROC </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                 Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&#39;s</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ADABOOST   0.9848276 0.9848276 0.9900000 0.9909977 0.9953333 1.0000000    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## RF         0.9517241 0.9850000 0.9953333 0.9858782 0.9973333 1.0000000    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## LOGITBOOST 0.9783333 0.9862069 0.9926667 0.9907517 0.9965517 1.0000000    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## GBM        0.9653333 0.9868966 0.9980000 0.9900460 1.0000000 1.0000000    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## PAM        0.9046667 0.9306667 0.9703448 0.9536000 0.9726667 0.9896552    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## NB         0.9440000 0.9682759 0.9773333 0.9695218 0.9780000 0.9800000    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## NNET       0.9751724 0.9820000 0.9903448 0.9871034 0.9906667 0.9973333    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## BaggedCART 0.9583333 0.9872414 0.9886207 0.9847057 0.9900000 0.9993333    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Sens </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##            Min. 1st Qu. Median  Mean 3rd Qu. Max. NA&#39;s</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ADABOOST   0.96    0.98   0.98 0.984    1.00 1.00    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## RF         0.96    0.96   0.98 0.976    0.98 1.00    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## LOGITBOOST 0.94    0.96   0.96 0.972    1.00 1.00    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## GBM        0.94    0.94   0.96 0.968    1.00 1.00    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## PAM        0.90    0.94   0.94 0.940    0.96 0.96    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## NB         0.88    0.88   0.88 0.908    0.92 0.98    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## NNET       0.92    0.96   0.98 0.972    1.00 1.00    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## BaggedCART 0.90    0.92   0.94 0.936    0.94 0.98    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Spec </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                 Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&#39;s</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ADABOOST   0.8275862 0.9310345 0.9333333 0.9317241 0.9666667 1.0000000    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## RF         0.8333333 0.8620690 0.9000000 0.9124138 0.9666667 1.0000000    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## LOGITBOOST 0.8333333 0.9310345 0.9666667 0.9462069 1.0000000 1.0000000    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## GBM        0.8333333 0.8965517 0.9000000 0.9259770 1.0000000 1.0000000    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## PAM        0.7333333 0.7333333 0.8275862 0.8048276 0.8333333 0.8965517    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## NB         0.7333333 0.8666667 0.9310345 0.8926437 0.9655172 0.9666667    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## NNET       0.9310345 0.9333333 0.9333333 0.9459770 0.9655172 0.9666667    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## BaggedCART 0.8666667 0.8965517 0.9310345 0.9321839 0.9666667 1.0000000    0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Draw box plots to compare models</span>
+</span></span><span style="display:flex;"><span>scales <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">list</span>(x <span style="color:#f92672">=</span> <span style="color:#a6e22e">list</span>(relation <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;free&#34;</span>), y <span style="color:#f92672">=</span> <span style="color:#a6e22e">list</span>(relation <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;free&#34;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">bwplot</span>(models_compare, scales <span style="color:#f92672">=</span> scales)
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/bcart/646.png"></p>
+<p><strong>Classification on test data</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">## Generate the test set results</span>
+</span></span><span style="display:flex;"><span>results <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(Diagnosis <span style="color:#f92672">=</span> testData<span style="color:#f92672">$</span>diagnosis)
+</span></span><span style="display:flex;"><span>results<span style="color:#f92672">$</span>RF <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">predict</span>(model_rf, testData, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;prob&#34;</span>)[, <span style="color:#e6db74">&#34;B&#34;</span>]
+</span></span><span style="display:flex;"><span>results<span style="color:#f92672">$</span>adaboost <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">predict</span>(model_adaboost, testData, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;prob&#34;</span>)[, <span style="color:#e6db74">&#34;B&#34;</span>]
+</span></span><span style="display:flex;"><span>results<span style="color:#f92672">$</span>LogitBoost <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">predict</span>(model_LogitBoost, testData, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;prob&#34;</span>)[, <span style="color:#e6db74">&#34;B&#34;</span>]
+</span></span><span style="display:flex;"><span>results<span style="color:#f92672">$</span>GBM <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">predict</span>(model_GBM, testData, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;prob&#34;</span>)[, <span style="color:#e6db74">&#34;B&#34;</span>]
+</span></span><span style="display:flex;"><span>results<span style="color:#f92672">$</span>PAM <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">predict</span>(model_PAM, testData, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;prob&#34;</span>)[, <span style="color:#e6db74">&#34;B&#34;</span>]
+</span></span><span style="display:flex;"><span>results<span style="color:#f92672">$</span>NB <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">predict</span>(model_NB, testData, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;prob&#34;</span>)[, <span style="color:#e6db74">&#34;B&#34;</span>]
+</span></span><span style="display:flex;"><span>results<span style="color:#f92672">$</span>NNET <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">predict</span>(model_NNET, testData, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;prob&#34;</span>)[, <span style="color:#e6db74">&#34;B&#34;</span>]
+</span></span><span style="display:flex;"><span>results<span style="color:#f92672">$</span>BaggedCART <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">predict</span>(model_BCART, testData, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;prob&#34;</span>)[, <span style="color:#e6db74">&#34;B&#34;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(results)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   Diagnosis    RF   adaboost   LogitBoost        GBM          PAM           NB</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1         M 0.008 0.03767170 0.0066928509 0.01809233 1.538730e-02 4.991767e-14</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2         M 0.232 0.23080168 0.0474258732 0.08444066 6.673408e-05 5.224971e-07</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3         M 0.786 0.73120191 0.7310585786 0.58123387 9.392887e-01 9.999959e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 4         M 0.038 0.06663126 0.0009110512 0.01792707 1.155797e-01 4.615765e-09</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 5         M 0.190 0.23191784 0.0066928509 0.02085581 4.748940e-03 9.490869e-13</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 6         M 0.062 0.16372403 0.0474258732 0.05115349 9.553552e-03 1.255993e-11</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##           NNET BaggedCART</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1 0.0002086345       0.00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2 0.0214382430       0.28</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3 0.1396975039       0.48</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 4 0.0013018679       0.00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 5 0.8918220960       0.00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 6 0.0003457715       0.00</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">trellis.par.set</span>(<span style="color:#a6e22e">caretTheme</span>())
+</span></span><span style="display:flex;"><span>cal_obj <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">calibration</span>(Diagnosis <span style="color:#f92672">~</span> RF <span style="color:#f92672">+</span> adaboost <span style="color:#f92672">+</span> LogitBoost <span style="color:#f92672">+</span> GBM <span style="color:#f92672">+</span> PAM <span style="color:#f92672">+</span> NB <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>    NNET <span style="color:#f92672">+</span> BaggedCART, data <span style="color:#f92672">=</span> results, cuts <span style="color:#f92672">=</span> <span style="color:#ae81ff">13</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(cal_obj, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, auto.key <span style="color:#f92672">=</span> <span style="color:#a6e22e">list</span>(columns <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>, lines <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>, points <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>))
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/bcart/6477.png"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(cal_obj)
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/bcart/648.png"></p>
+    </div>
+
+    
+    
+
+
+
+    
+    
+
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="http://localhost:45315/blog/tags/bagged-cart/">Bagged CART</a>
+            
+        </div>
+
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/blog/post/en/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">Elastic Net</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/blog/post/ab/">
+            <span class="next-text nav-default">AdaBoost</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+
+  
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+  
+
+    
+
+  
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:lyqglyqg@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+  
+    <a href="http://lyqg.github.io/" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+
+
+<a href="http://localhost:45315/blog/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2023 -
+    2024
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        lyqg
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/blog/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/blog/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/blog/js/main.fe83e11b4fbc9193d67e2c9db78bad21f8dc59fca0cacd8c1c3bb071bb16a852.js" integrity="sha256-/oPhG0&#43;8kZPWfiydt4utIfjcWfygys2MHDuwcbsWqFI=" crossorigin="anonymous"></script>
+
+
+
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

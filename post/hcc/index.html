@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=45239&amp;path=blog/livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>A single-cell atlas of the multicellular ecosystem of primary and metastatic hepatocellular carcinoma - Example R codes for BIOS 850 &amp; 880</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="LYQG" />
+  <meta name="description" content="A single-cell atlas of the multicellular ecosystem of primary and metastatic hepatocellular carcinoma
+" />
+<meta name="keywords" content="hepatocellular carcinoma, R, scRNAseq" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.126.1" />
+
+
+<link rel="canonical" href="http://localhost:45239/blog/post/hcc/" />
+
+
+
+
+
+<link rel="icon" href="/blog/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/sass/jane.min.de22abc00de44766eebd1054fd9e0b254b071f89d5019044f893c484a9249a8d.css" integrity="sha256-3iKrwA3kR2buvRBU/Z4LJUsHH4nVAZBE&#43;JPEhKkkmo0=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:url" content="http://localhost:45239/blog/post/hcc/">
+  <meta property="og:site_name" content="Example R codes for BIOS 850 &amp; 880">
+  <meta property="og:title" content="A single-cell atlas of the multicellular ecosystem of primary and metastatic hepatocellular carcinoma">
+  <meta property="og:description" content="A single-cell atlas of the multicellular ecosystem of primary and metastatic hepatocellular carcinoma">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-02-27T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-02-27T00:00:00+00:00">
+    <meta property="article:tag" content="Hepatocellular Carcinoma">
+    <meta property="article:tag" content="R">
+    <meta property="article:tag" content="ScRNAseq">
+
+  <meta itemprop="name" content="A single-cell atlas of the multicellular ecosystem of primary and metastatic hepatocellular carcinoma">
+  <meta itemprop="description" content="A single-cell atlas of the multicellular ecosystem of primary and metastatic hepatocellular carcinoma">
+  <meta itemprop="datePublished" content="2023-02-27T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2023-02-27T00:00:00+00:00">
+  <meta itemprop="wordCount" content="1637">
+  <meta itemprop="keywords" content="hepatocellular carcinoma,R,scRNAseq">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="A single-cell atlas of the multicellular ecosystem of primary and metastatic hepatocellular carcinoma">
+  <meta name="twitter:description" content="A single-cell atlas of the multicellular ecosystem of primary and metastatic hepatocellular carcinoma">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Example R codes for BIOS 850 & 880</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45239/blog/">Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45239/blog/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45239/blog/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45239/blog/categories/">Categories</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45239/blog/about/">About</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45239/blog/">external-link</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          <div class="mobile-menu-parent">
+            <span class="mobile-submenu-open"></span>
+            <a href="http://localhost:45239/blog/">
+              docs
+            </a>
+          </div>
+          <ul class="mobile-submenu-list">
+            
+              <li>
+                <a href="http://localhost:45239/blog/post/wk11/">Analyzing neuroimaging data using ML/DL methods in R</a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      Example R codes for BIOS 850 & 880
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45239/blog/">Home</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45239/blog/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45239/blog/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45239/blog/categories/">Categories</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45239/blog/about/">About</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45239/blog/">external-link</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          <a class="menu-item-link menu-parent" href="http://localhost:45239/blog/">docs</a>
+          <ul class="submenu">
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45239/blog/post/wk11/">Analyzing neuroimaging data using ML/DL methods in R</a>
+              </li>
+            
+          </ul>
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight wallpaper">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">A single-cell atlas of the multicellular ecosystem of primary and metastatic hepatocellular carcinoma</h1>
+      
+
+      <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      LYQG
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-02-27">
+      2023-02-27
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    
+
+    <div class="post-meta-category">
+        <a href="http://localhost:45239/blog/categories/ahepatocellular-carcinoma/"> Ahepatocellular carcinoma </a>
+          <a href="http://localhost:45239/blog/categories/r/"> R </a>
+          <a href="http://localhost:45239/blog/categories/scrnaseq/"> scRNAseq </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+    </header>
+
+    
+    
+
+
+    
+    <div class="post-content">
+      <p>A single-cell atlas of the multicellular ecosystem of primary and metastatic hepatocellular carcinoma</p>
+<p><img alt="paper_header" src="/blog/post/hcc/NCpaper.png"></p>
+<h2 id="文献背景">文献背景：</h2>
+<p>文章中招募了 10 名患有原发性和/或转移性肿瘤的 HCC 患者， 不同肿瘤淋巴结转移（TNM）的代表阶段和肝炎病毒感染状态。在这些患者的四种相关组织类型中进行单细胞转录组测序，包括非肿瘤肝 (NTL)、原发性肿瘤 (PT)、门静脉癌栓 (PVTT) 和转移性淋巴结（MLN）组织。最终获得了 71,915 个单细胞的转录组数据，其中每个细胞平均检测到 1979 个基因。</p>
+<h2 id="数据集gse149614">数据集：GSE149614</h2>
+<p><img alt="GEO data" src="/blog/post/hcc/GEO.png"></p>
+<h2 id="数据集分组">数据集分组：</h2>
+<p>NTL non-tumor liver：非肿瘤肝脏</p>
+<p>PT primary tumor：原发肿瘤</p>
+<p>PVTT portalvein tumor thrombus：门静脉癌栓</p>
+<p>MLN metastatic lymph node：转移淋巴结</p>
+<h2 id="要复现的图">要复现的图</h2>
+<p><img alt="paper_figure" src="/blog/post/hcc/Figure2Rep.png">
+<img alt="paper_figure" src="/blog/post/hcc/Figure2Rep1.png"></p>
+<h2 id="step-1-导入数据">Step 1: 导入数据</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(Seurat)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(dplyr)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Read in entire file</span>
+</span></span><span style="display:flex;"><span>tirosh <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read.delim</span>(<span style="color:#e6db74">&#34;GSE149614_HCC.scRNAseq.S71915.count.txt.gz&#34;</span>, header <span style="color:#f92672">=</span> T, stringsAsFactors <span style="color:#f92672">=</span> F)   <span style="color:#75715e">### 用很长时间</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tirosh_genes <span style="color:#f92672">&lt;-</span> tirosh
+</span></span><span style="display:flex;"><span>rnams <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rownames</span>(tirosh_genes)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">rownames</span>(tirosh_genes) <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">make.names</span>(rnams, unique<span style="color:#f92672">=</span><span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tirosh_meta <span style="color:#f92672">&lt;-</span> tirosh_genes
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Transpose meta data as Seurat expects meta data to have cell names as rows and meta data values as columns</span>
+</span></span><span style="display:flex;"><span>tirosh_meta_transpose <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(<span style="color:#a6e22e">t</span>(tirosh_meta))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create Seurat Object</span>
+</span></span><span style="display:flex;"><span>sce <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">CreateSeuratObject</span>(counts <span style="color:#f92672">=</span> tirosh_genes, meta.data <span style="color:#f92672">=</span> tirosh_meta_transpose,
+</span></span><span style="display:flex;"><span>                          min.cells <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>                          min.features <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span> )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#View(tirosh_seurat@meta.data)</span>
+</span></span></code></pre></div><h2 id="step-2-导入qc后数据降维分群">Step 2: 导入QC后数据，降维分群</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(Seurat)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggplot2)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(clustree)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(cowplot)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(dplyr)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dir.create</span>(<span style="color:#e6db74">&#34;./2-harmony&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">getwd</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setwd</span>(<span style="color:#e6db74">&#34;./2-harmony&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sce <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">NormalizeData</span>(sce, 
+</span></span><span style="display:flex;"><span>                         normalization.method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;LogNormalize&#34;</span>,
+</span></span><span style="display:flex;"><span>                         scale.factor <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e4</span>) 
+</span></span><span style="display:flex;"><span>sce <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">FindVariableFeatures</span>(sce)
+</span></span><span style="display:flex;"><span>sce <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ScaleData</span>(sce)
+</span></span><span style="display:flex;"><span>sce <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">RunPCA</span>(sce, features <span style="color:#f92672">=</span> <span style="color:#a6e22e">VariableFeatures</span>(object <span style="color:#f92672">=</span> sce))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(harmony)
+</span></span><span style="display:flex;"><span>seuratObj <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">RunHarmony</span>(sce, <span style="color:#e6db74">&#34;orig.ident&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">names</span>(seuratObj<span style="color:#f92672">@</span>reductions)
+</span></span><span style="display:flex;"><span>seuratObj <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">RunUMAP</span>(seuratObj,  dims <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">15</span>, 
+</span></span><span style="display:flex;"><span>                     reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;harmony&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">DimPlot</span>(seuratObj,reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;umap&#34;</span>,label<span style="color:#f92672">=</span>T ) 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sce<span style="color:#f92672">=</span>seuratObj
+</span></span><span style="display:flex;"><span>sce <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">FindNeighbors</span>(sce, reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;harmony&#34;</span>,
+</span></span><span style="display:flex;"><span>                     dims <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">15</span>) 
+</span></span><span style="display:flex;"><span>sce.all<span style="color:#f92672">=</span>sce
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#设置不同的分辨率，观察分群效果(选择哪一个？)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (res <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.01</span>, <span style="color:#ae81ff">0.05</span>, <span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.3</span>, <span style="color:#ae81ff">0.5</span>,<span style="color:#ae81ff">0.8</span>,<span style="color:#ae81ff">1</span>)) {
+</span></span><span style="display:flex;"><span>  sce.all<span style="color:#f92672">=</span><span style="color:#a6e22e">FindClusters</span>(sce.all, <span style="color:#75715e">#graph.name = &#34;CCA_snn&#34;,</span>
+</span></span><span style="display:flex;"><span>                       resolution <span style="color:#f92672">=</span> res, algorithm <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(<span style="color:#a6e22e">colnames</span>(sce.all))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(sce.all<span style="color:#f92672">$</span>orig.ident)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#table(sce.all$group)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(sce.all<span style="color:#f92672">@</span>active.ident) 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">1</span>     <span style="color:#ae81ff">2</span>     <span style="color:#ae81ff">3</span>     <span style="color:#ae81ff">4</span>     <span style="color:#ae81ff">5</span>     <span style="color:#ae81ff">6</span>     <span style="color:#ae81ff">7</span>     <span style="color:#ae81ff">8</span>     <span style="color:#ae81ff">9</span>    <span style="color:#ae81ff">10</span>    <span style="color:#ae81ff">11</span>    <span style="color:#ae81ff">12</span> 
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">20983</span>  <span style="color:#ae81ff">6285</span>  <span style="color:#ae81ff">4506</span>  <span style="color:#ae81ff">4391</span>  <span style="color:#ae81ff">4272</span>  <span style="color:#ae81ff">3608</span>  <span style="color:#ae81ff">3490</span>  <span style="color:#ae81ff">3067</span>  <span style="color:#ae81ff">2921</span>  <span style="color:#ae81ff">2443</span>  <span style="color:#ae81ff">2041</span>  <span style="color:#ae81ff">1600</span>  <span style="color:#ae81ff">1200</span> 
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">13</span>    <span style="color:#ae81ff">14</span>    <span style="color:#ae81ff">15</span>    <span style="color:#ae81ff">16</span>    <span style="color:#ae81ff">17</span>    <span style="color:#ae81ff">18</span>    <span style="color:#ae81ff">19</span>    <span style="color:#ae81ff">20</span>    <span style="color:#ae81ff">21</span>    <span style="color:#ae81ff">22</span>    <span style="color:#ae81ff">23</span>    <span style="color:#ae81ff">24</span>    <span style="color:#ae81ff">25</span> 
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">1170</span>  <span style="color:#ae81ff">1134</span>  <span style="color:#ae81ff">1041</span>  <span style="color:#ae81ff">1036</span>   <span style="color:#ae81ff">928</span>   <span style="color:#ae81ff">760</span>   <span style="color:#ae81ff">640</span>   <span style="color:#ae81ff">639</span>   <span style="color:#ae81ff">614</span>   <span style="color:#ae81ff">591</span>   <span style="color:#ae81ff">463</span>   <span style="color:#ae81ff">455</span>   <span style="color:#ae81ff">438</span> 
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">26</span>    <span style="color:#ae81ff">27</span>    <span style="color:#ae81ff">28</span>    <span style="color:#ae81ff">29</span>    <span style="color:#ae81ff">30</span>    <span style="color:#ae81ff">31</span>    <span style="color:#ae81ff">32</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">313</span>   <span style="color:#ae81ff">242</span>   <span style="color:#ae81ff">224</span>   <span style="color:#ae81ff">129</span>   <span style="color:#ae81ff">117</span>   <span style="color:#ae81ff">117</span>    <span style="color:#ae81ff">56</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#接下来分析，按照分辨率为0.5进行 </span>
+</span></span><span style="display:flex;"><span>sel.clust <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;RNA_snn_res.0.5&#34;</span>
+</span></span><span style="display:flex;"><span>sce.all <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">SetIdent</span>(sce.all, value <span style="color:#f92672">=</span> sel.clust)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(sce.all<span style="color:#f92672">@</span>active.ident) 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">saveRDS</span>(sce.all, <span style="color:#e6db74">&#34;sce.all_int_0.5.rds&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setwd</span>(<span style="color:#e6db74">&#39;../&#39;</span>)
+</span></span></code></pre></div><p><img alt="dimPlot" src="/blog/post/hcc/dimPlot.png"></p>
+<h2 id="step-3检查常见分群情况">Step 3:检查常见分群情况</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">###### step3:检查常见分群情况  ######</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">getwd</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dir.create</span>(<span style="color:#e6db74">&#34;./3-cell&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setwd</span>(<span style="color:#e6db74">&#34;./3-cell&#34;</span>)  
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#sce.all&lt;-readRDS(&#34;../2-harmony/sce.all_int_0.5.rds&#34;)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">DimPlot</span>(sce.all, reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;umap&#34;</span>, group.by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;seurat_clusters&#34;</span>,label <span style="color:#f92672">=</span> T) 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">DimPlot</span>(sce.all, reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;umap&#34;</span>, group.by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;RNA_snn_res.0.5&#34;</span>,label <span style="color:#f92672">=</span> T,label.box <span style="color:#f92672">=</span> T) 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggsave</span>(<span style="color:#e6db74">&#39;umap_by_RNA_snn_res.0.5.pdf&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pumap <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">DimPlot</span>(sce.all, reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;umap&#34;</span>, group.by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;RNA_snn_res.0.5&#34;</span>,label <span style="color:#f92672">=</span> T,label.box <span style="color:#f92672">=</span> T) 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#marker gene</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#metadata &lt;- read.csv(&#34;../GSE146409-paper_marker.csv&#34;, header = T)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#a&lt;-metadata$gene</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#head(a)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##[1] &#34;FXYD3&#34;   &#34;CLDN4&#34;   &#34;CEACAM6&#34; &#34;CEACAM5&#34; &#34;ELF&#34;     &#34;CLDN10&#34; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#genes_to_check&lt;-a</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#a</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#[1] &#34;FXYD3&#34;      &#34;CLDN4&#34;      &#34;CEACAM6&#34;    &#34;CEACAM5&#34;    &#34;ELF&#34;       </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#[6] &#34;CLDN10&#34;     &#34;SLC22A10&#34;   &#34;FETUB&#34;      &#34;LBP&#34;        &#34;HPR&#34;       </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>genes_to_check <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;FXYD3&#34;</span>,      <span style="color:#e6db74">&#34;CLDN4&#34;</span>,      <span style="color:#e6db74">&#34;CEACAM6&#34;</span>,    <span style="color:#e6db74">&#34;CEACAM5&#34;</span>,    <span style="color:#e6db74">&#34;ELF&#34;</span>,       
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;CLDN10&#34;</span>,     <span style="color:#e6db74">&#34;SLC22A10&#34;</span>,   <span style="color:#e6db74">&#34;FETUB&#34;</span>,      <span style="color:#e6db74">&#34;LBP&#34;</span>,        <span style="color:#e6db74">&#34;HPR&#34;</span>,       
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;LECT2&#34;</span>,      <span style="color:#e6db74">&#34;SERPINA10&#34;</span>,  <span style="color:#e6db74">&#34;CD5L&#34;</span>,       <span style="color:#e6db74">&#34;VCAM1&#34;</span>,      <span style="color:#e6db74">&#34;CETP&#34;</span>,      
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;LILRB5&#34;</span>,     <span style="color:#e6db74">&#34;MARCO&#34;</span>,      <span style="color:#e6db74">&#34;SDC3&#34;</span>,       <span style="color:#e6db74">&#34;TREM2&#34;</span>,      <span style="color:#e6db74">&#34;GPNMB&#34;</span>,     
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;CAPG&#34;</span>,       <span style="color:#e6db74">&#34;FCER1A&#34;</span>,     <span style="color:#e6db74">&#34;CD1C&#34;</span>,       <span style="color:#e6db74">&#34;CLEC10A&#34;</span>,    <span style="color:#e6db74">&#34;JAML&#34;</span>,      
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;S100A9&#34;</span>,     <span style="color:#e6db74">&#34;FCN1&#34;</span>,       <span style="color:#e6db74">&#34;S100A8&#34;</span>,     <span style="color:#e6db74">&#34;FGR&#34;</span>,        <span style="color:#e6db74">&#34;XCR1&#34;</span>,      
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;CLEC9A&#34;</span>,     <span style="color:#e6db74">&#34;IDO1&#34;</span>,       <span style="color:#e6db74">&#34;WDFY4&#34;</span>,      <span style="color:#e6db74">&#34;FLT3&#34;</span>,       <span style="color:#e6db74">&#34;CPNE3&#34;</span>,     
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;GZMA&#34;</span>,       <span style="color:#e6db74">&#34;CD3E&#34;</span>,      <span style="color:#e6db74">&#34;KLRB1&#34;</span>,      <span style="color:#e6db74">&#34;NKG7&#34;</span>,      <span style="color:#e6db74">&#34;CD7&#34;</span>,       
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;CCL5&#34;</span>,       <span style="color:#e6db74">&#34;IGLL5&#34;</span>,      <span style="color:#e6db74">&#34;FCRL5&#34;</span>,      <span style="color:#e6db74">&#34;TNFRSF17&#34;</span>,   <span style="color:#e6db74">&#34;DERL3&#34;</span>,     
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;JCHAIN&#34;</span>,     <span style="color:#e6db74">&#34;MZB1&#34;</span>,       <span style="color:#e6db74">&#34;CPE&#34;</span>,        <span style="color:#e6db74">&#34;SLCO2A1&#34;</span>,    <span style="color:#e6db74">&#34;CLEC14A&#34;</span>,   
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;TGM2&#34;</span>,       <span style="color:#e6db74">&#34;PODXL&#34;</span>,      <span style="color:#e6db74">&#34;VWA1&#34;</span>,       <span style="color:#e6db74">&#34;SOX18&#34;</span>,      <span style="color:#e6db74">&#34;PLVAP&#34;</span>,     
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;CD34&#34;</span>,       <span style="color:#e6db74">&#34;ICAM2&#34;</span>,      <span style="color:#e6db74">&#34;RELN&#34;</span>,       <span style="color:#e6db74">&#34;CLEC4M&#34;</span>,     <span style="color:#e6db74">&#34;CLEC1B&#34;</span>,    
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;CLEC4G&#34;</span>,     <span style="color:#e6db74">&#34;FCN2&#34;</span>,       <span style="color:#e6db74">&#34;OIT3&#34;</span>,       <span style="color:#e6db74">&#34;RERGL&#34;</span>,      <span style="color:#e6db74">&#34;AC006254.1&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;MYH11&#34;</span>,      <span style="color:#e6db74">&#34;ITGA8&#34;</span>,      <span style="color:#e6db74">&#34;PLN&#34;</span>,        <span style="color:#e6db74">&#34;ADIRF&#34;</span>,     <span style="color:#e6db74">&#34;OLFML2A&#34;</span>,   
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;NDUFA4L2&#34;</span>,   <span style="color:#e6db74">&#34;RGS5&#34;</span>,       <span style="color:#e6db74">&#34;TPPP3&#34;</span>,      <span style="color:#e6db74">&#34;PLXDC1&#34;</span>,     <span style="color:#e6db74">&#34;FRZB&#34;</span>,      
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;MMP11&#34;</span>,      <span style="color:#e6db74">&#34;CTHRC1&#34;</span>,     <span style="color:#e6db74">&#34;INHBA&#34;</span>,      <span style="color:#e6db74">&#34;HOPX&#34;</span>,       <span style="color:#e6db74">&#34;POSTN&#34;</span>,     
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;LTBP2&#34;</span>,      <span style="color:#e6db74">&#34;CXCL12&#34;</span>,     <span style="color:#e6db74">&#34;PTGDS&#34;</span>,      <span style="color:#e6db74">&#34;MASP1&#34;</span>,      <span style="color:#e6db74">&#34;FBLN1&#34;</span>,     
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;C7&#34;</span>,         <span style="color:#e6db74">&#34;HGF&#34;</span>,        <span style="color:#e6db74">&#34;TPX2&#34;</span>,       <span style="color:#e6db74">&#34;MKi67&#34;</span>,      <span style="color:#e6db74">&#34;UBE2C&#34;</span>,     
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;ASPM&#34;</span>,       <span style="color:#e6db74">&#34;TOP2A&#34;</span>,      <span style="color:#e6db74">&#34;RRM2&#34;</span>,       <span style="color:#e6db74">&#34;EPCAM&#34;</span>,      <span style="color:#e6db74">&#34;KRT19&#34;</span>,     
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;KRT18&#34;</span>,      <span style="color:#e6db74">&#34;PROM1&#34;</span>,      <span style="color:#e6db74">&#34;ALDH1A1&#34;</span>,    <span style="color:#e6db74">&#34;CD24&#34;</span>) 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(stringr)  
+</span></span><span style="display:flex;"><span>genes_to_check<span style="color:#f92672">=</span><span style="color:#a6e22e">str_to_upper</span>(<span style="color:#a6e22e">unique</span>(genes_to_check))
+</span></span><span style="display:flex;"><span>genes_to_check
+</span></span><span style="display:flex;"><span>p_all_markers <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">DotPlot</span>(sce.all, features <span style="color:#f92672">=</span> genes_to_check,
+</span></span><span style="display:flex;"><span>                         assay<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;RNA&#39;</span>)  <span style="color:#f92672">+</span> <span style="color:#a6e22e">coord_flip</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p_all_markers
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggsave</span>(plot<span style="color:#f92672">=</span>p_all_markers, filename<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;check_paper_zeng_marker_by_seurat_cluster0.5_2.pdf&#34;</span>
+</span></span><span style="display:flex;"><span>       ,width <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>,height <span style="color:#f92672">=</span> <span style="color:#ae81ff">14</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#拼图</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(patchwork)
+</span></span><span style="display:flex;"><span>p_all_markers<span style="color:#f92672">+</span>pumap
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggsave</span>(<span style="color:#e6db74">&#39;markers_umap0.5.pdf&#39;</span>,width <span style="color:#f92672">=</span> <span style="color:#ae81ff">18</span>,height <span style="color:#f92672">=</span> <span style="color:#ae81ff">14</span>)
+</span></span></code></pre></div><p><img alt="UMAP" src="/blog/post/hcc/markers_umap0.5.png"></p>
+<h2 id="step3-细胞亚群生物学命名">Step3: 细胞亚群生物学命名</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>  <span style="color:#75715e">#细胞分群命名</span>
+</span></span><span style="display:flex;"><span>  celltype<span style="color:#f92672">=</span><span style="color:#a6e22e">data.frame</span>(ClusterID<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>,
+</span></span><span style="display:flex;"><span>                      celltype<span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>) 
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#定义细胞亚群  </span>
+</span></span><span style="display:flex;"><span>  celltype[celltype<span style="color:#f92672">$</span>ClusterID <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">19</span>),<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Hepatocyte&#39;</span>
+</span></span><span style="display:flex;"><span>  celltype[celltype<span style="color:#f92672">$</span>ClusterID <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">4</span>),<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;tumor&#39;</span>
+</span></span><span style="display:flex;"><span>  celltype[celltype<span style="color:#f92672">$</span>ClusterID <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">5</span>),<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cycling&#39;</span>
+</span></span><span style="display:flex;"><span>  celltype[celltype<span style="color:#f92672">$</span>ClusterID <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">13</span>,<span style="color:#ae81ff">16</span>),<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;T/NK&#39;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  celltype[celltype<span style="color:#f92672">$</span>ClusterID <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">11</span>,<span style="color:#ae81ff">17</span>),<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;myeloid&#39;</span>
+</span></span><span style="display:flex;"><span>  celltype[celltype<span style="color:#f92672">$</span>ClusterID <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">12</span>),<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;B cells&#39;</span>
+</span></span><span style="display:flex;"><span>  celltype[celltype<span style="color:#f92672">$</span>ClusterID <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">20</span>),<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Endo&#39;</span>
+</span></span><span style="display:flex;"><span>  celltype[celltype<span style="color:#f92672">$</span>ClusterID <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">8</span>),<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Fibo&#39;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">head</span>(celltype)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  celltype
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">table</span>(celltype<span style="color:#f92672">$</span>celltype)
+</span></span><span style="display:flex;"><span>  sce.all<span style="color:#f92672">@</span>meta.data<span style="color:#f92672">$</span>celltype <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;NA&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span>(i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">nrow</span>(celltype)){
+</span></span><span style="display:flex;"><span>    sce.all<span style="color:#f92672">@</span>meta.data<span style="color:#a6e22e">[which</span>(sce.all<span style="color:#f92672">@</span>meta.data<span style="color:#f92672">$</span>RNA_snn_res.0.5 <span style="color:#f92672">==</span> celltype<span style="color:#f92672">$</span>ClusterID[i]),<span style="color:#e6db74">&#39;celltype&#39;</span>] <span style="color:#f92672">&lt;-</span> celltype<span style="color:#f92672">$</span>celltype[i]}
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">table</span>(sce.all<span style="color:#f92672">@</span>meta.data<span style="color:#f92672">$</span>celltype)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   ClusterID   celltype</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#1          0       T/NK</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#2          1    myeloid</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#3          2 Hepatocyte</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#4          3    myeloid</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#5          4      tumor</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#6          5    cycling</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#7          6       Endo</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#8          7 Hepatocyte</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#9          8       Fibo</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#10         9    B cells</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#11        10 Hepatocyte</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#12        11    myeloid</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#13        12    B cells</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#14        13       T/NK</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#15        14 Hepatocyte</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#16        15 Hepatocyte</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#17        16       T/NK</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#18        17    myeloid</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#19        18       Endo</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#20        19 Hepatocyte</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#21        20       Endo</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   B cells    cycling       Endo       Fibo Hepatocyte    myeloid       T/NK </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#      2708       3829       4184       1839      14083      16222      24353 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     tumor </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#      4696 </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">DimPlot</span>(sce.all, reduction <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;umap&#34;</span>, group.by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;celltype&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">#cols = color,</span>
+</span></span><span style="display:flex;"><span>          pt.size <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>,
+</span></span><span style="display:flex;"><span>          label <span style="color:#f92672">=</span> T,label.box <span style="color:#f92672">=</span> T
+</span></span><span style="display:flex;"><span>  ) 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggsave</span>(<span style="color:#e6db74">&#39;./celltype-umap.pdf&#39;</span>,height <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>,width <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>) 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">saveRDS</span>(sce.all, <span style="color:#e6db74">&#34;sce.all_int_celltype.rds&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setwd</span>(<span style="color:#e6db74">&#34;../&#34;</span>)
+</span></span></code></pre></div><p><img alt="celltype-UMAP" src="/blog/post/hcc/celltype-umap.png"></p>
+<h2 id="step4-细胞比例">step4: 细胞比例</h2>
+<h3 id="免疫细胞">免疫细胞</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># 1.加载R包 ----</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#rm(list=ls()) </span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggplot2) 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(cowplot) 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(paletteer)  
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(gplots)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggpubr)    
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggsci) 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(stringr)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2.设置工作路径 ----</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#在meta信息中添加分组信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">getwd</span>() 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dir.create</span>(<span style="color:#e6db74">&#34;../4_group1&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setwd</span>(<span style="color:#e6db74">&#34;../4_group1/&#34;</span>)
+</span></span><span style="display:flex;"><span>sce0<span style="color:#f92672">=</span><span style="color:#a6e22e">readRDS</span>(<span style="color:#e6db74">&#34;../3-cell/sce.all_int_celltype.rds&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(sce0<span style="color:#f92672">@</span>meta.data<span style="color:#f92672">$</span>group)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&lt; table of extent 0 &gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(sce0<span style="color:#f92672">@</span>meta.data<span style="color:#f92672">$</span>celltype)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   B cells    cycling       Endo       Fibo Hepatocyte    myeloid       T<span style="color:#f92672">/</span>NK 
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">2708</span>       <span style="color:#ae81ff">3829</span>       <span style="color:#ae81ff">4184</span>       <span style="color:#ae81ff">1839</span>      <span style="color:#ae81ff">14083</span>      <span style="color:#ae81ff">16222</span>      <span style="color:#ae81ff">24353</span> 
+</span></span><span style="display:flex;"><span>     tumor 
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">4696</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sce.all<span style="color:#f92672">=</span>sce0[,sce0<span style="color:#f92672">@</span>meta.data<span style="color:#f92672">$</span>celltype<span style="color:#f92672">%in%</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;T/NK&#34;</span>,<span style="color:#e6db74">&#34;B cells&#34;</span>,<span style="color:#e6db74">&#34;myeloid&#34;</span>,<span style="color:#e6db74">&#34;cycling&#34;</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(sce.all<span style="color:#f92672">@</span>meta.data<span style="color:#f92672">$</span>celltype)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>B cells cycling myeloid    T<span style="color:#f92672">/</span>NK 
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">2708</span>    <span style="color:#ae81ff">3829</span>   <span style="color:#ae81ff">16222</span>   <span style="color:#ae81ff">24353</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sce<span style="color:#f92672">=</span>sce.all
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 4.可视化 ----</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 4.1 每种细胞类型中，分组所占比例 ----</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(tidyr)<span style="color:#75715e"># 使用的gather &amp; spread</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(reshape2) <span style="color:#75715e"># 使用的函数 melt &amp; dcast </span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(dplyr)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggplot2)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(gplots)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tb<span style="color:#f92672">=</span><span style="color:#a6e22e">table</span>(sce<span style="color:#f92672">@</span>meta.data<span style="color:#f92672">$</span>celltype,
+</span></span><span style="display:flex;"><span>         sce<span style="color:#f92672">@</span>meta.data<span style="color:#f92672">$</span>orig.ident)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">balloonplot</span>(tb)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(tb)
+</span></span><span style="display:flex;"><span>bar_data <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.data.frame</span>(tb)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(bar_data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#         HCC01T HCC02T HCC03N HCC03T HCC04N HCC04T HCC05N HCC05T HCC06N HCC06T</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  B cells     10    546     43     37    140     74    144     33    134    274</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  cycling     28    329     49    303     30    370     34     31     28     71</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  myeloid     52   1664    934   3129    431   1985    120   1320    321    316</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  T/NK       974    636    306    102   1411     59   3087    248   2629   1557</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#         </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#          HCC07N HCC07P HCC07T HCC08N HCC08P HCC08T HCC09N HCC09T HCC10L HCC10N</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  B cells    166     58     26    163     71    139    200     92    184     63</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  cycling     34     69      8     49    986    358     59    295    381     68</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  myeloid     99    200     78     54   1604   1050    174    941    902    110</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  T/NK      2386    280     99   4001    407   1346    897    547    430   2258</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#         </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#          HCC10T</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  B cells    111</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  cycling    249</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  myeloid    738</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  T/NK       693</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     Var1   Var2 Freq</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#1 B cells HCC01T   10</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#2 cycling HCC01T   28</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#3 myeloid HCC01T   52</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#4    T/NK HCC01T  974</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#5 B cells HCC02T  546</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#6 cycling HCC02T  329</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bar_per <span style="color:#f92672">&lt;-</span> bar_data <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">group_by</span>(Var1) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mutate</span>(<span style="color:#a6e22e">sum</span>(Freq)) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mutate</span>(percent <span style="color:#f92672">=</span> Freq <span style="color:#f92672">/</span> <span style="color:#a6e22e">`sum</span>(Freq)`)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(bar_per) 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">write.csv</span>(bar_per,file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;celltype_by_group_percent.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#可视化</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#celltypebygroup</span>
+</span></span><span style="display:flex;"><span>bar_per<span style="color:#f92672">$</span>Var2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bar_per<span style="color:#f92672">$</span>Var2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">factor</span>(bar_per<span style="color:#f92672">$</span>Var2,levels<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;HCC01T&#39;</span>,<span style="color:#e6db74">&#39;HCC02T&#39;</span>,<span style="color:#e6db74">&#39;HCC03T&#39;</span>,
+</span></span><span style="display:flex;"><span>                       <span style="color:#e6db74">&#39;HCC04T&#39;</span>,<span style="color:#e6db74">&#39;HCC05T&#39;</span>,<span style="color:#e6db74">&#39;HCC06T&#39;</span>,<span style="color:#e6db74">&#39;HCC07T&#39;</span>,<span style="color:#e6db74">&#39;HCC08T&#39;</span>,<span style="color:#e6db74">&#39;HCC09T&#39;</span>,
+</span></span><span style="display:flex;"><span>                       <span style="color:#e6db74">&#39;HCC10T&#39;</span>,<span style="color:#e6db74">&#39;HCC03N&#39;</span>,<span style="color:#e6db74">&#39;HCC04N&#39;</span>,<span style="color:#e6db74">&#39;HCC05N&#39;</span>,<span style="color:#e6db74">&#39;HCC06N&#39;</span>,
+</span></span><span style="display:flex;"><span>                         <span style="color:#e6db74">&#39;HCC07N&#39;</span>,<span style="color:#e6db74">&#39;HCC08N&#39;</span>,<span style="color:#e6db74">&#39;HCC09N&#39;</span>,<span style="color:#e6db74">&#39;HCC10N&#39;</span>,<span style="color:#e6db74">&#34;HCC07P&#34;</span>,<span style="color:#e6db74">&#34;HCC08P&#34;</span>,<span style="color:#e6db74">&#34;HCC10L&#34;</span>),ordered <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggalluvial)
+</span></span><span style="display:flex;"><span>mycolor <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;#E64B3599&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;#4DBBD599&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;#00A08799&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;#3C548899&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;#F39B7F99&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(bar_per, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span>Var2, y<span style="color:#f92672">=</span> percent, fill <span style="color:#f92672">=</span> Var1,
+</span></span><span style="display:flex;"><span>                    stratum<span style="color:#f92672">=</span>Var1, alluvium<span style="color:#f92672">=</span>Var1)) <span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># guides(color=guide_legend(title = &#34;ABC&#34;))+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_col</span>(width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>)<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_flow</span>(width<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>,alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.4</span>, knot.pos<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">theme_classic</span>() <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">labs</span>(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sample&#39;</span>,y <span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Ratio&#39;</span>,title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;by group&#34;</span>
+</span></span><span style="display:flex;"><span>  )<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">coord_flip</span>()<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">scale_fill_manual</span>(values <span style="color:#f92672">=</span> mycolor)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggsave</span>(<span style="color:#e6db74">&#34;celltypebyorigent_percent_immune.pdf&#34;</span>)
+</span></span></code></pre></div><p><img alt="cell-percent-immuneCell" src="/blog/post/hcc/celltypebyorigent_percent_immune.png"></p>
+<h3 id="非免疫细胞">非免疫细胞</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">#同样的输入数据格式，提取非免疫细胞的子集</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sce0<span style="color:#f92672">=</span><span style="color:#a6e22e">readRDS</span>(<span style="color:#e6db74">&#34;../3-cell/sce.all_int_celltype.rds&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(sce0<span style="color:#f92672">@</span>meta.data<span style="color:#f92672">$</span>celltype)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sce.all<span style="color:#f92672">=</span>sce0[,sce0<span style="color:#f92672">@</span>meta.data<span style="color:#f92672">$</span>celltype<span style="color:#f92672">%in%</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Endo&#34;</span>,<span style="color:#e6db74">&#34;Hepatocyte&#34;</span>,<span style="color:#e6db74">&#34;Fibo&#34;</span>,<span style="color:#e6db74">&#34;tumor&#34;</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(sce.all<span style="color:#f92672">@</span>meta.data<span style="color:#f92672">$</span>celltype)
+</span></span><span style="display:flex;"><span>      Endo       Fibo Hepatocyte      tumor 
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">4184</span>       <span style="color:#ae81ff">1839</span>      <span style="color:#ae81ff">14083</span>       <span style="color:#ae81ff">4696</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sce<span style="color:#f92672">=</span>sce.all
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tb<span style="color:#f92672">=</span><span style="color:#a6e22e">table</span>(sce<span style="color:#f92672">@</span>meta.data<span style="color:#f92672">$</span>celltype,
+</span></span><span style="display:flex;"><span>         sce<span style="color:#f92672">@</span>meta.data<span style="color:#f92672">$</span>orig.ident)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">balloonplot</span>(tb)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(tb)
+</span></span><span style="display:flex;"><span>bar_data <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.data.frame</span>(tb)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(bar_data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#             HCC01T HCC02T HCC03N HCC03T HCC04N HCC04T HCC05N HCC05T HCC06N</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  Endo          572     14    233     14    535     32    401    595    270</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  Fibo           10    320     10    213      2    251      0     15      1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  Hepatocyte   1351    497    720    865    459    633    710    909    829</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  tumor         371     95    305    162    388     97    160    202    253</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#             HCC06T HCC07N HCC07P HCC07T HCC08N HCC08P HCC08T HCC09N HCC09T</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  Endo          619    215     27      0    151     54     48    159     54</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  Fibo           15      0     18      1      0    114     41      1    319</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  Hepatocyte   1181    523    717    207    219    792   1488    285    469</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  tumor         275    317    460     91    158    114    363    187     99</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#             HCC10L HCC10N HCC10T</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  Endo           34    147     10</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  Fibo          302      2    204</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  Hepatocyte    451    232    546</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  tumor         159    192    248</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#        Var1   Var2 Freq</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#1       Endo HCC01T  572</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#2       Fibo HCC01T   10</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#3 Hepatocyte HCC01T 1351</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#4      tumor HCC01T  371</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#5       Endo HCC02T   14</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#6       Fibo HCC02T  320</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bar_per <span style="color:#f92672">&lt;-</span> bar_data <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">group_by</span>(Var1) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mutate</span>(<span style="color:#a6e22e">sum</span>(Freq)) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mutate</span>(percent <span style="color:#f92672">=</span> Freq <span style="color:#f92672">/</span> <span style="color:#a6e22e">`sum</span>(Freq)`)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(bar_per) 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">write.csv</span>(bar_per,file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;celltype_by_group_percent_noninmune.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#可视化</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#celltypebygroup</span>
+</span></span><span style="display:flex;"><span>bar_per<span style="color:#f92672">$</span>Var2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bar_per<span style="color:#f92672">$</span>Var2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">factor</span>(bar_per<span style="color:#f92672">$</span>Var2,levels<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;HCC01T&#39;</span>,<span style="color:#e6db74">&#39;HCC02T&#39;</span>,<span style="color:#e6db74">&#39;HCC03T&#39;</span>,
+</span></span><span style="display:flex;"><span>                       <span style="color:#e6db74">&#39;HCC04T&#39;</span>,<span style="color:#e6db74">&#39;HCC05T&#39;</span>,<span style="color:#e6db74">&#39;HCC06T&#39;</span>,<span style="color:#e6db74">&#39;HCC07T&#39;</span>,<span style="color:#e6db74">&#39;HCC08T&#39;</span>,<span style="color:#e6db74">&#39;HCC09T&#39;</span>,
+</span></span><span style="display:flex;"><span>                       <span style="color:#e6db74">&#39;HCC10T&#39;</span>,<span style="color:#e6db74">&#39;HCC03N&#39;</span>,<span style="color:#e6db74">&#39;HCC04N&#39;</span>,<span style="color:#e6db74">&#39;HCC05N&#39;</span>,<span style="color:#e6db74">&#39;HCC06N&#39;</span>,
+</span></span><span style="display:flex;"><span>                         <span style="color:#e6db74">&#39;HCC07N&#39;</span>,<span style="color:#e6db74">&#39;HCC08N&#39;</span>,<span style="color:#e6db74">&#39;HCC09N&#39;</span>,<span style="color:#e6db74">&#39;HCC10N&#39;</span>,<span style="color:#e6db74">&#34;HCC07P&#34;</span>,<span style="color:#e6db74">&#34;HCC08P&#34;</span>,<span style="color:#e6db74">&#34;HCC10L&#34;</span>),ordered <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggalluvial)
+</span></span><span style="display:flex;"><span>mycolor <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;#efb306&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;#7db954&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;#852f88&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;#4e54ac&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;#0f8096&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(bar_per, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span>Var2, y<span style="color:#f92672">=</span> percent, fill <span style="color:#f92672">=</span> Var1,
+</span></span><span style="display:flex;"><span>                    stratum<span style="color:#f92672">=</span>Var1, alluvium<span style="color:#f92672">=</span>Var1)) <span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_col</span>(width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>)<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_flow</span>(width<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>,alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.4</span>, knot.pos<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">theme_classic</span>() <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">labs</span>(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sample&#39;</span>,y <span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Ratio&#39;</span>,title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;by group&#34;</span>
+</span></span><span style="display:flex;"><span>  )<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">coord_flip</span>()<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">scale_fill_manual</span>(values <span style="color:#f92672">=</span> mycolor)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggsave</span>(<span style="color:#e6db74">&#34;celltypebyorigent_percent_nonimmune.pdf&#34;</span>)
+</span></span></code></pre></div><p><img alt="cell-percent-nonimmuneCell" src="/blog/post/hcc/celltypebyorigent_percent_nonimmune.png"></p>
+    </div>
+
+    
+    
+
+
+
+    
+    
+
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="http://localhost:45239/blog/tags/hepatocellular-carcinoma/">hepatocellular carcinoma</a>
+            <a href="http://localhost:45239/blog/tags/r/">R</a>
+            <a href="http://localhost:45239/blog/tags/scrnaseq/">scRNAseq</a>
+            
+        </div>
+
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/blog/post/pca/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">PCA</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/blog/post/immunead/">
+            <span class="next-text nav-default">scRNAseq analysis reveals Immune Cell Signatures in Alzheimer’s Disease</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+
+  
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:lyqglyqg@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+  
+    <a href="http://lyqg.github.io/" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+
+
+<a href="http://localhost:45239/blog/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2023 -
+    2024
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        lyqg
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/blog/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/blog/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/blog/js/main.fe83e11b4fbc9193d67e2c9db78bad21f8dc59fca0cacd8c1c3bb071bb16a852.js" integrity="sha256-/oPhG0&#43;8kZPWfiydt4utIfjcWfygys2MHDuwcbsWqFI=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

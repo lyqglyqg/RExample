@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=45315&amp;path=blog/livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Neural network - Example R codes for BIOS 850 &amp; 880</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="yli8" />
+  <meta name="description" content="" />
+
+  <meta name="keywords" content="R codes, BIOS 850, BIOS 880" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.126.1" />
+
+
+<link rel="canonical" href="http://localhost:45315/blog/post/nn/" />
+
+
+
+
+
+<link rel="icon" href="/blog/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/sass/jane.min.de22abc00de44766eebd1054fd9e0b254b071f89d5019044f893c484a9249a8d.css" integrity="sha256-3iKrwA3kR2buvRBU/Z4LJUsHH4nVAZBE&#43;JPEhKkkmo0=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:url" content="http://localhost:45315/blog/post/nn/">
+  <meta property="og:site_name" content="Example R codes for BIOS 850 &amp; 880">
+  <meta property="og:title" content="Neural network">
+  <meta property="og:description" content="Example R codes for BIOS 850 &amp; 880">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-04-15T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-04-15T00:00:00+00:00">
+    <meta property="article:tag" content="Neural Network">
+
+  <meta itemprop="name" content="Neural network">
+  <meta itemprop="description" content="Example R codes for BIOS 850 &amp; 880">
+  <meta itemprop="datePublished" content="2024-04-15T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2024-04-15T00:00:00+00:00">
+  <meta itemprop="wordCount" content="2227">
+  <meta itemprop="keywords" content="Neural Network">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Neural network">
+  <meta name="twitter:description" content="Example R codes for BIOS 850 &amp; 880">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Example R codes for BIOS 850 & 880</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/categories/">Categories</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/about/">About</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">external-link</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          <div class="mobile-menu-parent">
+            <span class="mobile-submenu-open"></span>
+            <a href="http://localhost:45315/blog/">
+              docs
+            </a>
+          </div>
+          <ul class="mobile-submenu-list">
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/ab/">AdaBoost</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/bcart/">Bagged Classification And Regression Trees（Bagged CART)</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/ct/">Classification trees</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/ca/">Cluster analysis</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/en/">Elastic Net</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/gb/">Gradient boosting</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/gbm/">Gradient Boosting Machine（GBM)</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/knn/">K Nearest Neighbors (KNN)</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/nb/">Naive Bayes</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/nn/">Neural network</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/rf/">Random forest</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/rt/">Regression trees</a>
+              </li>
+            
+              <li>
+                <a href="http://localhost:45315/blog/post/svm/">Support vector machine (SVM)</a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      Example R codes for BIOS 850 & 880
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">Home</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/categories/">Categories</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/about/">About</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://localhost:45315/blog/">external-link</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          <a class="menu-item-link menu-parent" href="http://localhost:45315/blog/">docs</a>
+          <ul class="submenu">
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/ab/">AdaBoost</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/bcart/">Bagged Classification And Regression Trees（Bagged CART)</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/ct/">Classification trees</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/ca/">Cluster analysis</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/en/">Elastic Net</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/gb/">Gradient boosting</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/gbm/">Gradient Boosting Machine（GBM)</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/knn/">K Nearest Neighbors (KNN)</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/nb/">Naive Bayes</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/nn/">Neural network</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/rf/">Random forest</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/rt/">Regression trees</a>
+              </li>
+            
+              <li class="submenu-item">
+                <a href="http://localhost:45315/blog/post/svm/">Support vector machine (SVM)</a>
+              </li>
+            
+          </ul>
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight wallpaper">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">Neural network</h1>
+      
+
+      <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      yli8
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2024-04-15">
+      2024-04-15
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    
+
+    <div class="post-meta-category">
+        <a href="http://localhost:45315/blog/categories/neural-network/"> Neural network </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-package-installation">1. Package installation</a></li>
+    <li><a href="#data-reading-and-processing">Data Reading and processing</a></li>
+    <li><a href="#neural-network">Neural network</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+
+    
+    <div class="post-content">
+      <h2 id="1-package-installation">1. Package installation</h2>
+<p>We&rsquo;re using the package <code>neuralnet</code>, which comes with functions for plotting, among others. Additionally, we have <code>caret</code>, a very convenient package for machine learning.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(neuralnet)) <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;neuralnet&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(vcd)) <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;vcd&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(caret)) <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;caret&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(caret)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(neuralnet)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(vcd)
+</span></span></code></pre></div><h2 id="data-reading-and-processing">Data Reading and processing</h2>
+<p>The data can be downloaded at wbdc.data and wbdc.names from the following address: <a href="http://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/">http://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/</a></p>
+<p>The data has been processed into panel data format. Upon inspection of the data structure, it was found that the first column is an ID column with no meaningful features and thus needs to be removed. The second column, &ldquo;diagnosis,&rdquo; is the response variable and is categorical. In R, for classification tasks, response variables are typically required to be of factor type, so data type conversion is needed. The remaining columns are predictor variables and are of numeric type.</p>
+<p>The data has dimensions of 568 samples and 32 features (including the response feature).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>BreastCancer <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read.csv</span>(<span style="color:#e6db74">&#34;wisc_bc_data.csv&#34;</span>, stringsAsFactors <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dim</span>(BreastCancer)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [1] 568  32</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">table</span>(BreastCancer<span style="color:#f92672">$</span>diagnosis)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   B   M </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 357 211</span>
+</span></span></code></pre></div><p>Comparing the distribution of malignant and benign cases.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(reshape2)
+</span></span><span style="display:flex;"><span>bc <span style="color:#f92672">&lt;-</span> BreastCancer[, <span style="color:#ae81ff">-1</span>]
+</span></span><span style="display:flex;"><span>bc.melt <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">melt</span>(bc, id.var <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;diagnosis&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(bc.melt)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   diagnosis    variable value</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1         M radius_mean 20.57</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2         M radius_mean 19.69</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3         M radius_mean 11.42</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 4         M radius_mean 20.29</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 5         M radius_mean 12.45</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 6         M radius_mean 18.25</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(data <span style="color:#f92672">=</span> bc.melt, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> diagnosis, y <span style="color:#f92672">=</span> <span style="color:#a6e22e">log</span>(value <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>), fill <span style="color:#f92672">=</span> diagnosis)) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">geom_boxplot</span>() <span style="color:#f92672">+</span> <span style="color:#a6e22e">theme_bw</span>() <span style="color:#f92672">+</span> <span style="color:#a6e22e">facet_wrap</span>(<span style="color:#f92672">~</span>variable, ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>)
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/nn/640.webp"></p>
+<p>The correlation between variables in the data.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(tidyverse)
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">select</span>(BreastCancer, <span style="color:#ae81ff">-1</span>) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mutate_at</span>(<span style="color:#e6db74">&#34;diagnosis&#34;</span>, as.factor)
+</span></span><span style="display:flex;"><span>data[1<span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>]
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   diagnosis radius_mean texture_mean perimeter_mean area_mean</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1         M       20.57        17.77         132.90    1326.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2         M       19.69        21.25         130.00    1203.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 3         M       11.42        20.38          77.58     386.1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 4         M       20.29        14.34         135.10    1297.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 5         M       12.45        15.70          82.57     477.1</span>
+</span></span><span style="display:flex;"><span>corrplot<span style="color:#f92672">::</span><span style="color:#a6e22e">corrplot</span>(<span style="color:#a6e22e">cor</span>(data[, <span style="color:#ae81ff">-1</span>]))
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/nn/641.webp"></p>
+<p>Histogram of the Breast Cancer Dataset Distribution.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(tidyverse)
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">select</span>(BreastCancer, <span style="color:#ae81ff">-1</span>) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mutate_at</span>(<span style="color:#e6db74">&#34;diagnosis&#34;</span>, as.factor)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>n <span style="color:#f92672">=</span> <span style="color:#a6e22e">names</span>(data[, <span style="color:#ae81ff">2</span><span style="color:#f92672">:</span><span style="color:#ae81ff">31</span>])
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">pdf</span>(<span style="color:#e6db74">&#34;hist.pdf&#34;</span>, width <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>, height <span style="color:#f92672">=</span> <span style="color:#ae81ff">45</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (i in1<span style="color:#f92672">:</span><span style="color:#ae81ff">30</span>) {
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> <span style="color:#a6e22e">unlist</span>(<span style="color:#a6e22e">data.frame</span>(data[n[i]]))
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">hist</span>(x, main <span style="color:#f92672">=</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#34;Histogram of &#34;</span>, n[i], sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>), xlab <span style="color:#f92672">=</span> n[i])
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dev.off</span>()
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/nn/642.png"></p>
+<p><strong>Add a Grouping Column</strong></p>
+<p>Create new columns in the dataset named CancerB and CancerM based on the different values in the diagnosis column.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>Cancer <span style="color:#f92672">&lt;-</span> data<span style="color:#f92672">$</span>diagnosis
+</span></span><span style="display:flex;"><span>Cancer <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.data.frame</span>(Cancer)
+</span></span><span style="display:flex;"><span>Cancer <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">with</span>(Cancer, <span style="color:#a6e22e">data.frame</span>(<span style="color:#a6e22e">model.matrix</span>(<span style="color:#f92672">~</span>Cancer <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>)))
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.data.frame</span>(<span style="color:#a6e22e">cbind</span>(data, Cancer))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(data, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   diagnosis radius_mean texture_mean perimeter_mean area_mean smoothness_mean</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1         M       20.57        17.77          132.9      1326         0.08474</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2         M       19.69        21.25          130.0      1203         0.10960</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   compactne_mean concavity_mean concave_points_mean symmetry_mean</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1        0.07864         0.0869             0.07017        0.1812</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2        0.15990         0.1974             0.12790        0.2069</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   fractal_dimension_mean radius_se texture_se perimeter_se area_se</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1                0.05667    0.5435     0.7339        3.398   74.08</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2                0.05999    0.7456     0.7869        4.585   94.03</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   smoothness_se compactne_se concavity_se concave_points_se symmetry_se</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1      0.005225      0.01308      0.01860           0.01340     0.01389</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2      0.006150      0.04006      0.03832           0.02058     0.02250</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   fractal_dimension_se radius_worst texture_worst perimeter_worst area_worst</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1             0.003532        24.99         23.41           158.8       1956</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2             0.004571        23.57         25.53           152.5       1709</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   smoothness_worst compactne_worst concavity_worst concave_points_worst</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1           0.1238          0.1866          0.2416                0.186</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2           0.1444          0.4245          0.4504                0.243</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   symmetry_worst fractal_dimension_worst CancerB CancerM</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1         0.2750                 0.08902       0       1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2         0.3613                 0.08758       0       1</span>
+</span></span></code></pre></div><p>Split the raw data into training and testing datasets.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># install.packages(&#39;sampling&#39;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(sampling)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># </span>
+</span></span><span style="display:flex;"><span>train_id <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">strata</span>(data, <span style="color:#e6db74">&#34;diagnosis&#34;</span>, size <span style="color:#f92672">=</span> <span style="color:#a6e22e">rev</span>(<span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">table</span>(data<span style="color:#f92672">$</span>diagnosis) <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.7</span>)))<span style="color:#f92672">$</span>ID_unit
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># training data</span>
+</span></span><span style="display:flex;"><span>train_data <span style="color:#f92672">&lt;-</span> data[train_id, <span style="color:#ae81ff">-1</span>]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># test data</span>
+</span></span><span style="display:flex;"><span>test_data <span style="color:#f92672">&lt;-</span> data[<span style="color:#f92672">-</span>train_id, <span style="color:#ae81ff">-1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># check proportions</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">prop.table</span>(<span style="color:#a6e22e">table</span>(train_data<span style="color:#f92672">$</span>CancerB))
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##         0         1 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 0.3718593 0.6281407</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">prop.table</span>(<span style="color:#a6e22e">table</span>(test_data<span style="color:#f92672">$</span>CancerB))
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##         0         1 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 0.3705882 0.6294118</span>
+</span></span></code></pre></div><h2 id="neural-network">Neural network</h2>
+<p>We use the segmented breast cancer dataset to construct a neural network model and validate its results, then plot the neural network diagram.</p>
+<p>Building the neural network:</p>
+<p>Call the neuralnet function to create a neural network with 3 hidden layers. The training results may vary randomly, so specifying a seed value to return the same result each time can be helpful.</p>
+<p>Explanation of neuralnet function parameters:</p>
+<p>formula: The formula.
+data: The data for modeling.
+hidden: The number of units in each hidden layer.
+threshold: The threshold for stopping the error function.
+stepmax: The maximum number of iterations.
+rep: The number of repetitions for neural network training.
+startweights: The initial weights, which will not be randomly initialized.
+learningrate.limit: The upper and lower limits of the learning rate, only for RPROP and GRPROP learning functions.
+learningrate.factor: Similar to above, but can be for multiple.
+learningrate: The learning rate of the algorithm, only for BP algorithm.
+lifesign: How often to print during the neural network calculation {none, minimal, full}.
+algorithm: The algorithm used to calculate the neural network {backprop, rprop+, rprop-, sag, slr}.
+err.fct: The error calculation, {sse, se}.
+act.fct: The activation function, {logistic, tanh}.
+linear.output: Whether the output is linear, i.e., regression or classification.
+exclude: A vector or matrix specifying the weights to be excluded from the calculation. If a vector is given, the position of the weights is clear. If it is an n*3 matrix, then n weights will be excluded, where the first column indicates the layer number, and the second and third columns indicate the input and output units of the weight, respectively.
+constant.weights: Specify the weights that do not need to be trained during the training process as fixed values.
+likelihood: Logical value. If the loss function is the negative log-likelihood function, then the information criteria AIC and BIC will be calculated.
+Here, we use the neuralnet function to build the neural network. The variable names on the left, and the values on each line represent the weight values. The hidden layers consist of 3 units.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span>Col <span style="color:#f92672">=</span> <span style="color:#a6e22e">names</span>(train_data[, <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>(<span style="color:#a6e22e">ncol</span>(train_data) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>)])
+</span></span><span style="display:flex;"><span>f <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.formula</span>(<span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#34;CancerB + CancerM ~&#34;</span>, <span style="color:#a6e22e">paste</span>(Col, collapse <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34; + &#34;</span>)))
+</span></span><span style="display:flex;"><span>net <span style="color:#f92672">=</span> <span style="color:#a6e22e">neuralnet</span>(f, data <span style="color:#f92672">=</span> train_data, hidden <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>, linear.output <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(net)
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/nn/643.webp"></p>
+<p>The output of the constructed neural network model is the result matrix result.matrix, where we observe that the residual error is 1.347026e+01, which is very small, indicating good results.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>net<span style="color:#f92672">$</span>result.matrix
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                                              [,1]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## error                                1.347026e+01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## reached.threshold                    9.215291e-03</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## steps                                1.788000e+03</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Intercept.to.1layhid1                6.643849e+01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## radius_mean.to.1layhid1              6.627828e-02</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## texture_mean.to.1layhid1             1.861271e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## perimeter_mean.to.1layhid1           3.667256e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## area_mean.to.1layhid1                3.571613e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## smoothness_mean.to.1layhid1          3.079611e+01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## compactne_mean.to.1layhid1          -2.002705e+01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concavity_mean.to.1layhid1          -1.142198e+02</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concave_points_mean.to.1layhid1     -1.348972e+02</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## symmetry_mean.to.1layhid1            3.074433e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## fractal_dimension_mean.to.1layhid1   4.820844e+01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## radius_se.to.1layhid1                3.712372e+01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## texture_se.to.1layhid1              -2.441092e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## perimeter_se.to.1layhid1             6.886018e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## area_se.to.1layhid1                 -2.337285e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## smoothness_se.to.1layhid1           -4.393309e+01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## compactne_se.to.1layhid1             2.297421e+01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concavity_se.to.1layhid1             3.673323e+01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concave_points_se.to.1layhid1        1.129134e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## symmetry_se.to.1layhid1             -2.355318e+01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## fractal_dimension_se.to.1layhid1     6.458040e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## radius_worst.to.1layhid1             7.848375e-02</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## texture_worst.to.1layhid1           -8.395178e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## perimeter_worst.to.1layhid1         -4.326636e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## area_worst.to.1layhid1              -3.348451e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## smoothness_worst.to.1layhid1         1.194755e+01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## compactne_worst.to.1layhid1         -1.978799e+01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concavity_worst.to.1layhid1         -4.216651e+01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concave_points_worst.to.1layhid1    -2.935827e+01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## symmetry_worst.to.1layhid1          -2.536716e+01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## fractal_dimension_worst.to.1layhid1  6.234373e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Intercept.to.1layhid2               -2.950715e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## radius_mean.to.1layhid2              8.951257e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## texture_mean.to.1layhid2             8.781335e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## perimeter_mean.to.1layhid2           8.215811e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## area_mean.to.1layhid2                6.886403e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## smoothness_mean.to.1layhid2          5.539177e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## compactne_mean.to.1layhid2          -6.191171e-02</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concavity_mean.to.1layhid2          -3.059627e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concave_points_mean.to.1layhid2     -3.804710e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## symmetry_mean.to.1layhid2           -6.947070e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## fractal_dimension_mean.to.1layhid2  -2.079173e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## radius_se.to.1layhid2               -1.265396e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## texture_se.to.1layhid2               2.168956e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## perimeter_se.to.1layhid2             1.207962e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## area_se.to.1layhid2                 -1.123109e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## smoothness_se.to.1layhid2           -4.028848e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## compactne_se.to.1layhid2            -4.666554e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concavity_se.to.1layhid2             7.799651e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concave_points_se.to.1layhid2       -8.336907e-02</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## symmetry_se.to.1layhid2              2.533185e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## fractal_dimension_se.to.1layhid2    -2.854676e-02</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## radius_worst.to.1layhid2            -4.287046e-02</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## texture_worst.to.1layhid2            1.368602e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## perimeter_worst.to.1layhid2         -2.257710e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## area_worst.to.1layhid2               1.516471e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## smoothness_worst.to.1layhid2        -1.548753e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## compactne_worst.to.1layhid2          5.846137e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concavity_worst.to.1layhid2          1.238542e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concave_points_worst.to.1layhid2     2.159416e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## symmetry_worst.to.1layhid2           3.796395e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## fractal_dimension_worst.to.1layhid2 -5.023235e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Intercept.to.1layhid3               -3.332074e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## radius_mean.to.1layhid3             -1.018575e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## texture_mean.to.1layhid3            -1.071791e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## perimeter_mean.to.1layhid3           3.035286e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## area_mean.to.1layhid3                4.482098e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## smoothness_mean.to.1layhid3          5.300423e-02</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## compactne_mean.to.1layhid3           9.222675e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concavity_mean.to.1layhid3           2.050085e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concave_points_mean.to.1layhid3     -4.910312e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## symmetry_mean.to.1layhid3           -2.309169e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## fractal_dimension_mean.to.1layhid3   1.005739e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## radius_se.to.1layhid3               -7.092008e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## texture_se.to.1layhid3              -6.880086e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## perimeter_se.to.1layhid3             1.025571e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## area_se.to.1layhid3                 -2.847730e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## smoothness_se.to.1layhid3           -1.220718e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## compactne_se.to.1layhid3             1.813035e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concavity_se.to.1layhid3            -1.388914e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concave_points_se.to.1layhid3        5.764186e-03</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## symmetry_se.to.1layhid3              3.852804e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## fractal_dimension_se.to.1layhid3    -3.706600e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## radius_worst.to.1layhid3             6.443765e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## texture_worst.to.1layhid3           -2.204866e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## perimeter_worst.to.1layhid3          3.317820e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## area_worst.to.1layhid3               1.096839e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## smoothness_worst.to.1layhid3         4.351815e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## compactne_worst.to.1layhid3         -3.259316e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concavity_worst.to.1layhid3          1.148808e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concave_points_worst.to.1layhid3     9.935039e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## symmetry_worst.to.1layhid3           5.483970e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## fractal_dimension_worst.to.1layhid3  2.387317e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Intercept.to.1layhid4               -6.279061e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## radius_mean.to.1layhid4              1.360652e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## texture_mean.to.1layhid4            -6.002596e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## perimeter_mean.to.1layhid4           2.187333e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## area_mean.to.1layhid4                1.532611e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## smoothness_mean.to.1layhid4         -2.357004e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## compactne_mean.to.1layhid4          -1.026421e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concavity_mean.to.1layhid4          -7.104066e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concave_points_mean.to.1layhid4      2.568837e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## symmetry_mean.to.1layhid4           -2.466919e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## fractal_dimension_mean.to.1layhid4  -3.475426e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## radius_se.to.1layhid4               -9.516186e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## texture_se.to.1layhid4              -4.502772e-02</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## perimeter_se.to.1layhid4            -7.849045e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## area_se.to.1layhid4                 -1.667942e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## smoothness_se.to.1layhid4           -3.802265e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## compactne_se.to.1layhid4             9.189966e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concavity_se.to.1layhid4            -5.753470e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concave_points_se.to.1layhid4        6.079643e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## symmetry_se.to.1layhid4             -1.617883e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## fractal_dimension_se.to.1layhid4    -5.556197e-02</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## radius_worst.to.1layhid4             5.194072e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## texture_worst.to.1layhid4            3.011534e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## perimeter_worst.to.1layhid4          1.056762e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## area_worst.to.1layhid4              -6.407060e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## smoothness_worst.to.1layhid4        -8.497043e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## compactne_worst.to.1layhid4         -1.024129e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concavity_worst.to.1layhid4          1.176466e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concave_points_worst.to.1layhid4    -9.474746e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## symmetry_worst.to.1layhid4          -4.905574e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## fractal_dimension_worst.to.1layhid4 -2.560922e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Intercept.to.1layhid5                1.843862e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## radius_mean.to.1layhid5             -6.519499e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## texture_mean.to.1layhid5             2.353866e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## perimeter_mean.to.1layhid5           7.796085e-02</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## area_mean.to.1layhid5               -9.618566e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## smoothness_mean.to.1layhid5         -7.130809e-02</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## compactne_mean.to.1layhid5           1.444551e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concavity_mean.to.1layhid5           4.515041e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concave_points_mean.to.1layhid5      4.123292e-02</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## symmetry_mean.to.1layhid5           -4.224968e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## fractal_dimension_mean.to.1layhid5  -2.053247e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## radius_se.to.1layhid5                1.131337e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## texture_se.to.1layhid5              -1.460640e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## perimeter_se.to.1layhid5             7.399475e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## area_se.to.1layhid5                  1.909104e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## smoothness_se.to.1layhid5           -1.443893e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## compactne_se.to.1layhid5             7.017843e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concavity_se.to.1layhid5            -2.621975e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concave_points_se.to.1layhid5       -1.572144e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## symmetry_se.to.1layhid5             -1.514668e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## fractal_dimension_se.to.1layhid5    -1.601536e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## radius_worst.to.1layhid5            -5.309065e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## texture_worst.to.1layhid5           -1.461756e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## perimeter_worst.to.1layhid5          6.879168e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## area_worst.to.1layhid5               2.100109e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## smoothness_worst.to.1layhid5        -1.287030e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## compactne_worst.to.1layhid5          7.877388e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concavity_worst.to.1layhid5          7.690422e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## concave_points_worst.to.1layhid5     3.322026e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## symmetry_worst.to.1layhid5          -1.008377e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## fractal_dimension_worst.to.1layhid5 -1.194526e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Intercept.to.CancerB                -1.249642e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1layhid1.to.CancerB                  6.959205e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1layhid2.to.CancerB                 -1.341685e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1layhid3.to.CancerB                  7.726790e-03</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1layhid4.to.CancerB                 -1.343827e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1layhid5.to.CancerB                  8.346487e-02</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Intercept.to.CancerM                -8.225165e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1layhid1.to.CancerM                 -6.957986e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1layhid2.to.CancerM                  3.467700e+00</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1layhid3.to.CancerM                 -1.901970e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1layhid4.to.CancerM                  5.248881e-01</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1layhid5.to.CancerM                  8.632302e-01</span>
+</span></span></code></pre></div><p>Call the head function to return the first item of the network model. In neural networks, neurons are interconnected, and the strength of the connections between different neurons is referred to as the weights of the nodes.</p>
+<p>The more hidden neurons, the smaller the error value, and the better the calculation, but it becomes more complex.</p>
+<p>From the output, we can see that the entire training executed 398*60 steps, and the termination condition was that the absolute derivative of the error function was less than 0.01 (reached.threshold), and the error was still calculated using the AIC criterion.</p>
+<p>From the output, we can see that the model&rsquo;s weight ranges from -58 to 58; the intercepts of the first hidden layer of the network are -66.4, -0.3, -0.33, -0.63, 1.84.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">dim</span>(net<span style="color:#f92672">$</span>generalized.weights[[1]])
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [1] 398  60</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">max</span>(net<span style="color:#f92672">$</span>generalized.weights[[1]])
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [1] 57.94401</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">min</span>(net<span style="color:#f92672">$</span>generalized.weights[[1]])
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [1] -57.95416</span>
+</span></span></code></pre></div><p>Next, call the gwplot function to visualize the generalized weights. Its principle is to display the generalized weight plot of network$generalized.weights, where four subplots show the response of 30 covariates to the diagnosis. If all the generalized values shown in the plot are close to 0, it indicates that the covariates have little impact on the classification result. Then, if the overall variance is greater than 1, it implies that the covariates have a nonlinear impact on the classification result.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (i in1<span style="color:#f92672">:</span><span style="color:#ae81ff">30</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">gwplot</span>(net, selected.covariate <span style="color:#f92672">=</span> n[i])
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/nn/644.webp"></p>
+<p>** Validation on test dataset **</p>
+<p>To implement class label prediction based on the neuralnet package, you can use a trained neural network model and a test dataset (test_data) to generate the corresponding probability matrix. Then, by finding the column with the highest probability, you can determine the predicted class label. Finally, you can generate a classification table based on the predicted class labels and the actual class labels from the test dataset.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>predict_net_test <span style="color:#f92672">&lt;-</span> neuralnet<span style="color:#f92672">::</span><span style="color:#a6e22e">compute</span>(net, test_data)
+</span></span><span style="display:flex;"><span>predict_result <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">round</span>(predict_net_test<span style="color:#f92672">$</span>net.result, digits <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>net.prediction <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;B&#34;</span>, <span style="color:#e6db74">&#34;M&#34;</span>)<span style="color:#a6e22e">[apply</span>(predict_result, <span style="color:#ae81ff">1</span>, which.max)]
+</span></span><span style="display:flex;"><span>net.prediction
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   [1] &#34;M&#34; &#34;M&#34; &#34;M&#34; &#34;M&#34; &#34;B&#34; &#34;M&#34; &#34;M&#34; &#34;B&#34; &#34;B&#34; &#34;M&#34; &#34;M&#34; &#34;M&#34; &#34;M&#34; &#34;M&#34; &#34;M&#34; &#34;B&#34; &#34;M&#34; &#34;M&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [19] &#34;B&#34; &#34;B&#34; &#34;M&#34; &#34;M&#34; &#34;B&#34; &#34;B&#34; &#34;M&#34; &#34;B&#34; &#34;M&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;M&#34; &#34;B&#34; &#34;B&#34; &#34;M&#34; &#34;B&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [37] &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;M&#34; &#34;M&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;M&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [55] &#34;B&#34; &#34;B&#34; &#34;M&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;M&#34; &#34;M&#34; &#34;M&#34; &#34;B&#34; &#34;M&#34; &#34;B&#34; &#34;M&#34; &#34;M&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [73] &#34;B&#34; &#34;M&#34; &#34;B&#34; &#34;B&#34; &#34;M&#34; &#34;M&#34; &#34;M&#34; &#34;M&#34; &#34;M&#34; &#34;M&#34; &#34;M&#34; &#34;M&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;M&#34; &#34;M&#34; &#34;B&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  [91] &#34;B&#34; &#34;M&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;M&#34; &#34;B&#34; &#34;M&#34; &#34;B&#34; &#34;B&#34; &#34;M&#34; &#34;M&#34; &#34;M&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [109] &#34;B&#34; &#34;M&#34; &#34;M&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;M&#34; &#34;M&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;M&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [127] &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;M&#34; &#34;B&#34; &#34;M&#34; &#34;M&#34; &#34;M&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [145] &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;M&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;M&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [163] &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;B&#34; &#34;M&#34;</span>
+</span></span><span style="display:flex;"><span>predict.table <span style="color:#f92672">=</span> <span style="color:#a6e22e">table</span>(data<span style="color:#f92672">$</span>diagnosis[<span style="color:#f92672">-</span>train_id], net.prediction)
+</span></span><span style="display:flex;"><span>predict.table
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    net.prediction</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##       B   M</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   B 103   4</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##   M   8  55</span>
+</span></span></code></pre></div><p>Or</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(gmodels)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">CrossTable</span>(x <span style="color:#f92672">=</span> data<span style="color:#f92672">$</span>diagnosis[<span style="color:#f92672">-</span>train_id], y <span style="color:#f92672">=</span> net.prediction, prop.chisq <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    Cell Contents</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## |-------------------------|</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## |                       N |</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## |           N / Row Total |</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## |           N / Col Total |</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## |         N / Table Total |</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## |-------------------------|</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Total Observations in Table:  170 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                           | net.prediction </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## data$diagnosis[-train_id] |         B |         M | Row Total | </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## --------------------------|-----------|-----------|-----------|</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                         B |       103 |         4 |       107 | </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                           |     0.963 |     0.037 |     0.629 | </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                           |     0.928 |     0.068 |           | </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                           |     0.606 |     0.024 |           | </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## --------------------------|-----------|-----------|-----------|</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                         M |         8 |        55 |        63 | </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                           |     0.127 |     0.873 |     0.371 | </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                           |     0.072 |     0.932 |           | </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                           |     0.047 |     0.324 |           | </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## --------------------------|-----------|-----------|-----------|</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##              Column Total |       111 |        59 |       170 | </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##                           |     0.653 |     0.347 |           | </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## --------------------------|-----------|-----------|-----------|</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##</span>
+</span></span></code></pre></div><p><strong>ROC curves</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ROSE)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">roc.curve</span>(net.prediction, data<span style="color:#f92672">$</span>diagnosis[<span style="color:#f92672">-</span>train_id], main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ROC curve of neuralNet&#34;</span>,
+</span></span><span style="display:flex;"><span>    col <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, lty <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Area under the curve (AUC): 0.930</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">legend</span>(<span style="color:#e6db74">&#34;bottomright&#34;</span>, <span style="color:#e6db74">&#34;AUC:0.970&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, bty <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;n&#34;</span>)
+</span></span></code></pre></div><p><img alt="Fig1" src="/blog/post/nn/645.webp"></p>
+    </div>
+
+    
+    
+
+
+
+    
+    
+
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="http://localhost:45315/blog/tags/neural-network/">Neural network</a>
+            
+        </div>
+
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/blog/post/nb/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">Naive Bayes</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/blog/post/gb/">
+            <span class="next-text nav-default">Gradient boosting</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+
+  
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+  
+
+    
+
+  
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:lyqglyqg@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+  
+    <a href="http://lyqg.github.io/" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+
+
+<a href="http://localhost:45315/blog/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2023 -
+    2024
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        lyqg
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/blog/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/blog/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/blog/js/main.fe83e11b4fbc9193d67e2c9db78bad21f8dc59fca0cacd8c1c3bb071bb16a852.js" integrity="sha256-/oPhG0&#43;8kZPWfiydt4utIfjcWfygys2MHDuwcbsWqFI=" crossorigin="anonymous"></script>
+
+
+
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
